@@ -6,7 +6,7 @@ If use demo,please change your hosts file，add this line to change 302 jump:
 Don't use VPN when click 【咕咕镇】（not 【线路2】）at kfxxx/index.php to login. Or you can use plugin [HeaderEditor](https://github.com/FirefoxBar/HeaderEditor) to change 302 location.     
 If you want to use demo on your phone,please set hosts file:   
 `127.0.0.1 www.momozhen.com`    
-then the access of momozhen.com will fail（如果本地搭了反代则可能需要暂时关闭nginx）   
+then the access of momozhen.com will fail. if local proxy is deployed, you may need stop Nginx temporary.       
 This time you can get what follows momozhen.com / copy it(include / ) and paste it after momo.inari.site ,then access the url. 
 The List of Useful Plugins:   
 [GuguTown Themepack Manager](https://greasyfork.org/scripts/450204)   
