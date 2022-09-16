@@ -26,10 +26,6 @@ If you like Peach(momo) Town, you can click the below Vultr links and use it.
 [Refer Vultr.com and earn $10 per paid signup](https://www.vultr.com/?ref=7365869)  
 [Tell A Friend about Vultr and Earn up to $35 for referring clients!](https://www.vultr.com/?ref=9023177-8H)  
 
-## Functions
-
-![image](https://user-images.githubusercontent.com/35645329/188587101-412da1d5-847f-487d-8432-b47612ec6083.png)![image](https://user-images.githubusercontent.com/35645329/188587287-845ee909-c236-4b7a-9331-15e63a15160d.png)
-
 ## Changelogs
 0.4.1 optimized Proxy config;   
 0.4.0 Greatly optimized the CSS style of the mobile view;      
