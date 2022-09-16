@@ -885,7 +885,7 @@ function fyg_pk_html() {
     color: black;
     cursor:pointer;
     }
- </style><style>@import url(https://sticker.inari.site/js/dateTime.css) </style>`);
+ </style>`);
     function initgoxpanel(){
         $("body")[0].appendChild(goxpanel);
         $("body")[0].appendChild(goxpanelExtend);
