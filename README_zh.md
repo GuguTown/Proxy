@@ -26,6 +26,7 @@
 [Tell A Friend about Vultr and Earn up to $35 for referring clients!](https://www.vultr.com/?ref=9023177-8H)  
 
 ## 更新记录  
+0.4.2 现在，可以在mkf kf.inari.site点击【咕咕镇】直接跳转了;   
 0.4.1 优化了反代设置，之后实用脚本代码的问题修复不再写入主页更新记录;   
 0.4.0 大量优化了手机视图的CSS样式;   
 0.3.2 修复了实用脚本代码的一些问题;    
