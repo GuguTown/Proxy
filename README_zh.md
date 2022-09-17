@@ -1,13 +1,12 @@
 [英文](README.md) | 中文  
 # 咕咕镇反代——桃子镇
 咕咕镇非官方反代，集成了各种实用脚本。演示地址：https://momo.inari.site   
+要使用反代演示地址，请在 https://kf.inari.site 或 https://mkf.inari.site 登录账号，然后点击首页最下角的【咕咕镇】即可。   
 使用演示地址请修改hosts文件，增加这行（为了劫持跳转）    
-`149.28.60.240 www.momozhen.com`    
-注意此过程不要挂梯子，然后从首页下方咕咕镇（非线路2）点击登入。或者使用浏览器插件[HeaderEditor](https://github.com/FirefoxBar/HeaderEditor)来更改302重定向的location。  
-手机使用请在电脑上将hosts设置为   
+使用自建反代请在电脑上将hosts设置为   
 `127.0.0.1 www.momozhen.com`    
 这样访问momozhen.com会出错（如果本地搭了反代则可能需要暂时关闭nginx）   
-这时可在地址栏获取 momozhen.com / 后的内容，复制此内容（含 / ）粘贴到 momo.inari.site 后面并访问即可。    
+这时可在地址栏获取 momozhen.com / 后的内容，复制此内容（含 / ）粘贴到你的自建反代地址后面并访问即可。    
 已集成的实用脚本列表：   
 [咕咕镇主题包管理器](https://greasyfork.org/scripts/450204)   
 [咕咕镇数据采集](https://greasyfork.org/scripts/445173)   
