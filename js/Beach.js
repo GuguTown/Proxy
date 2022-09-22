@@ -39,7 +39,7 @@ function FLASHbeach() {
 
 
 
-    var mydiv = document.querySelector('body > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div.col-md-9 > div:nth-child(2) > div.panel-heading > span')
+    var mydiv =$(".row>.row>.col-md-12>.panel>.panel-heading>.pull-right")[0];
     var text = mydiv.textContent
     if(!text.startsWith("距离下次随机装备")){
         alert("咕咕镇沙滩自动刷新脚本未获取到时间！");
