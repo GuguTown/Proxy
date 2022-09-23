@@ -7,7 +7,7 @@ function gudaq() {
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const g_modificationVersion = '2022-09-23 09:00:00';
+    const g_modificationVersion = '2022-09-23 22:00:00';
 
     const g_navigatorSelector = 'div.panel > div.panel-body > div.row > div.col-md-10 > div > ';
     let kfUserSpan = document.querySelector(g_navigatorSelector + 'span.fyg_colpz06.fyg_f24');
@@ -791,22 +791,22 @@ function gudaq() {
         });
 
         this.fromNode = ((node) => {
-            if ((node?.className?.endsWith('fyg_mp3') || node.className?.endsWith('fyg_mp3 fyg_tc')) && node.innerText.indexOf('+') >= 0) {
+            let typeName = (node.getAttribute('data-original-title') ?? node.getAttribute('title'));
+            if (!/Lv.+?>\d+</.test(typeName) && node?.className?.indexOf('fyg_mp3') >= 0) {
                 let id = node.getAttribute('onclick');
-                let typeName = (node.getAttribute('data-original-title') ?? node.getAttribute('title'));
                 let content = node.getAttribute('data-content');
-                if (id != null && typeName?.length > 4 && content?.length > 0 &&
+                if (id != null && content?.length > 0 &&
                     !isNaN(this.type = (g_amuletTypeIds[typeName.slice(g_amuletTypeIds.start, g_amuletTypeIds.end)] ??
                                         g_amuletDefaultTypeIds[typeName.slice(g_amuletDefaultTypeIds.start, g_amuletDefaultTypeIds.end)])) &&
                     !isNaN(this.level = (g_amuletLevelIds[typeName.slice(g_amuletLevelIds.start, g_amuletLevelIds.end)] ??
                                          g_amuletDefaultLevelIds[typeName.slice(g_amuletDefaultLevelIds.start, g_amuletDefaultLevelIds.end)])) &&
                     !isNaN(this.id = parseInt(id.match(/\d+/)[0])) &&
-                    !isNaN(this.enhancement = parseInt(node.innerText.match(/\d+/)[0]))) {
+                    !isNaN(this.enhancement = parseInt(node.innerHTML.match(/>(\d+)</)[1]))) {
 
                     this.buffCode = 0;
                     this.text = '';
                     let attr = null;
-                    let regex = /<p[^>]*>([^<]+)<[^>]*>\+(\d+)[^<]*<\/span><\/p>/g;
+                    let regex = /<p.*?>(.+?)<.*?>\+(\d+).*?<\/span><\/p>/g;
                     while ((attr = regex.exec(content))?.length == 3) {
                         let buffMeta = g_amuletBuffMap.get(attr[1]);
                         if (buffMeta != null) {
@@ -1435,23 +1435,20 @@ function gudaq() {
     const g_equipmentLevelTipClass = [ 'popover-primary', 'popover-info', 'popover-success', 'popover-warning', 'popover-danger' ];
     var g_equipmentLevelName = g_equipmentDefaultLevelName;
     function equipmentInfoParseNode(node) {
-        if (node?.className?.split(' ').length > 2 && node.innerText.indexOf('+') < 0 &&
-            (node.className.endsWith('fyg_mp3') || node.className.endsWith('fyg_mp3 fyg_tc'))) {
-            let title = (node.getAttribute('data-original-title') ?? node.getAttribute('title'));
-            if (title?.length > 0) {
-                let name = title?.substring(title.lastIndexOf('>') + 1).trim();
-                name = (g_equipMap.get(name)?.shortMark ?? g_equipMap.get(name.substring(g_equipmentLevelName[0].length))?.shortMark);
-                if (name?.length > 0) {
-                    let attr = node.getAttribute('data-content')?.match(/>\s*\d+\s?%\s*</g);
-                    let lv = title.match(/>(\d+)</);
-                    if (attr?.length > 0 && lv?.length > 0) {
-                        let mys = (node.getAttribute('data-content')?.match(/\[神秘属性\]/) == null ? 0 : 1);
-                        let id = node.getAttribute('onclick')?.match(/\d+/)[0];
-                        return [ name, lv[1],
-                                 attr[0].match(/\d+/)[0], attr[1].match(/\d+/)[0],
-                                 attr[2].match(/\d+/)[0], attr[3].match(/\d+/)[0],
-                                 mys, id ];
-                    }
+        let typeName = (node.getAttribute('data-original-title') ?? node.getAttribute('title'));
+        if (/Lv.+?>\d+</.test(typeName) && node?.className?.split(' ')?.length >= 2 && node.className.indexOf('fyg_mp3') >= 0) {
+            let name = typeName.substring(typeName.lastIndexOf('>') + 1).trim();
+            name = (g_equipMap.get(name)?.shortMark ?? g_equipMap.get(name.substring(g_equipmentLevelName[0].length))?.shortMark);
+            if (name?.length > 0) {
+                let attr = node.getAttribute('data-content')?.match(/>\s*\d+\s?%\s*</g);
+                let lv = typeName.match(/>(\d+)</);
+                if (attr?.length > 0 && lv?.length > 0) {
+                    let mys = (node.getAttribute('data-content')?.match(/\[神秘属性\]/) == null ? 0 : 1);
+                    let id = node.getAttribute('onclick')?.match(/\d+/)[0];
+                    return [ name, lv[1],
+                            attr[0].match(/\d+/)[0], attr[1].match(/\d+/)[0],
+                            attr[2].match(/\d+/)[0], attr[3].match(/\d+/)[0],
+                            mys, id ];
                 }
             }
         }
@@ -1512,7 +1509,7 @@ function gudaq() {
     }
 
     function objectIsEmptyNode(node) {
-        return (node?.innerText == '空');
+        return (/空/.test(node?.innerText));
     }
 
     function objectEmptyNodesCount(nodes) {
@@ -3465,31 +3462,19 @@ function gudaq() {
                                 clearInterval(waitForBtn);
 
                                 let eqstore = document.querySelectorAll(storeObjectsQueryString);
-                                eqstore.forEach((item) => {
-                                    if (item.className?.split(' ').length > 2 && (item.className.endsWith('fyg_mp3') ||
-                                                                                  item.className.endsWith('fyg_mp3 fyg_tc'))) {
-                                        item.dataset.instore = 1;
-                                    }
-                                });
+                                eqstore.forEach((item) => { item.dataset.instore = 1; });
 
                                 eqbtns =
                                     Array.from(eqbtns).concat(
-                                    Array.from(document.querySelectorAll(bagObjectsQueryString))
-                                         .sort(objectNodeComparer)).concat(
-                                    Array.from(eqstore).sort(objectNodeComparer));
+                                    Array.from(document.querySelectorAll(bagObjectsQueryString))).concat(
+                                    Array.from(eqstore)).sort(objectNodeComparer);
 
-                                for (let i = eqbtns.length - 1; i >= 0; i--) {
-                                    if (!(eqbtns.className?.split(' ').length > 2 || (eqbtns[i].className?.endsWith('fyg_mp3') ||
-                                                                                      eqbtns[i].className?.endsWith('fyg_mp3 fyg_tc')))) {
-                                        eqbtns.splice(i, 1);
-                                    }
-                                }
                                 if (!(document.getElementsByClassName('collapsed')?.length > 0)) {
                                     let backpacks = document.getElementById('backpacks');
                                     backpacks.insertBefore(equipmentDiv, backpacks.firstElementChild);
                                 }
                                 for (let i = eqbtns.length - 1; i >= 0; i--) {
-                                    if (eqbtns[i].className.split(' ')[0] == 'popover') {
+                                    if (objectIsEmptyNode(eqbtns[i]) || eqbtns[i].className?.indexOf('popover') >= 0) {
                                         eqbtns.splice(i, 1);
                                         break;
                                     }
@@ -3507,10 +3492,6 @@ function gudaq() {
                                 let ineq = 0;
 
                                 eqbtns.forEach((btn) => {
-                                    if (objectIsEmptyNode(btn)) {
-                                        return;
-                                    }
-
                                     let btn0 = document.createElement('button');
                                     btn0.className = `btn btn-light ${g_equipmentLevelTipClass[equipmentGetLevel(btn)]}`;
                                     btn0.style.minWidth = '200px';
@@ -3527,8 +3508,9 @@ function gudaq() {
                                         storeText = '【仓】';
                                     }
 
-                                    let enhancements = btn.innerText;
-                                    if (enhancements.indexOf('+') < 0) {
+                                    let enhancements = ' +' + btn.innerText.trim();
+                                    let typeName = (btn.getAttribute('data-original-title') ?? btn.getAttribute('title'));
+                                    if (/Lv.+?>\d+</.test(typeName)) {
                                         enhancements = '';
                                     }
 
@@ -3537,11 +3519,11 @@ function gudaq() {
                                          ${storeText}${btn.dataset.originalTitle}${enhancements}</h3>
                                          <div class="popover-content-show" style="padding:10px 10px 0px 10px;">${btn.dataset.content}</div>`;
 
-                                    if (btn0.children[1].lastChild.nodeType == 3) { //清除背景介绍文本
+                                    if (btn0.children[1].lastChild?.nodeType == 3) { //清除背景介绍文本
                                         btn0.children[1].lastChild.remove();
                                     }
 
-                                    if (btn.innerText.indexOf('+') >= 0) {
+                                    if (enhancements.length > 0) {
                                         ineq = 4;
                                     }
                                     else {
@@ -6917,10 +6899,10 @@ function gudaq() {
                                     'min-width:180px;padding:10px 5px 0px 5px;text-align:left;box-shadow:none;background-color:none;' +
                                     'line-height:120%;border-width:3px;border-style:double;margin-right:5px;margin-bottom:5px;';
                                 btn1.innerHTML = eqbtn.dataset.content;
-                                if (btn1.lastChild.nodeType == 3) { //清除背景介绍文本
+                                if (btn1.lastChild?.nodeType == 3) { //清除背景介绍文本
                                     btn1.lastChild.remove();
                                 }
-                                if (btn1.lastChild.className.indexOf('bg-danger') != -1) {
+                                if (btn1.lastChild?.className.indexOf('bg-danger') != -1) {
                                     btn1.lastChild.style.cssText = 'max-width:180px;padding:3px;white-space:pre-line;word-break:break-all;';
                                 }
                                 popover.appendChild(btn1);
@@ -7018,7 +7000,7 @@ function gudaq() {
         pkConfigDiv.style.className = 'panel-heading';
         pkConfigDiv.style.float = 'right';
         pkConfigDiv.innerHTML =
-            `<label for="forgeAutoCheckbox" style="margin-right:5px;cursor:pointer;">满进度自动跳转</label>
+            `<label for="forgeAutoCheckbox" style="margin-right:5px;cursor:pointer;">满进度提示时跳转</label>
              <input type="checkbox" id="forgeAutoCheckbox" style="margin-right:15px;" />
              <label for="indexRallyCheckbox" style="margin-right:5px;cursor:pointer;">为攻击回合加注索引</label>
              <input type="checkbox" id="indexRallyCheckbox" style="margin-right:15px;" />
