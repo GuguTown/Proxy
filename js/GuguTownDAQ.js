@@ -7,7 +7,7 @@ function gudaq() {
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const g_modificationVersion = '2022-09-15 19:22:22';
+    const g_modificationVersion = '2022-09-23 09:00:00';
 
     const g_navigatorSelector = 'div.panel > div.panel-body > div.row > div.col-md-10 > div > ';
     let kfUserSpan = document.querySelector(g_navigatorSelector + 'span.fyg_colpz06.fyg_f24');
@@ -21,6 +21,7 @@ function gudaq() {
     const g_guguzhenGift = '/fyg_gift.php';
     const g_guguzhenShop = '/fyg_shop.php';
 
+    const g_forgeAutoStorageKey = g_kfUser + '_forgeAuto';
     const g_autoTaskEnabledStorageKey = g_kfUser + '_autoTaskEnabled';
     const g_autoTaskCheckStoneProgressStorageKey = g_kfUser + '_autoTaskCheckStoneProgress';
     const g_indexRallyStorageKey = g_kfUser + '_indexRally';
@@ -29,32 +30,23 @@ function gudaq() {
     const g_equipmentExpandStorageKey = g_kfUser + '_equipment_Expand';
     const g_equipmentStoreExpandStorageKey = g_kfUser + '_equipment_StoreExpand';
     const g_equipmentBGStorageKey = g_kfUser + '_equipment_BG';
-    const g_stoneProgressEquipTipStorageKey = g_kfUser + '_stone_ProgressEquipTip';
-    const g_stoneProgressCardTipStorageKey = g_kfUser + '_stone_ProgressCardTip';
-    const g_stoneProgressHaloTipStorageKey = g_kfUser + '_stone_ProgressHaloTip';
-    const g_forgeAutoStorageKey = g_kfUser + '_forgeAuto';
-    const g_stoneAuto1StorageKey = g_kfUser + '_stoneAuto1';
-    const g_stoneAuto2StorageKey = g_kfUser + '_stoneAuto2';
-    const g_stoneAuto3StorageKey = g_kfUser + '_stoneAuto3';
-    const g_stoneAuto4StorageKey = g_kfUser + '_stoneAuto4';
-    const g_stoneAuto5StorageKey = g_kfUser + '_stoneAuto5';
-    const g_stoneAuto6StorageKey = g_kfUser + '_stoneAuto6';
+    const g_stoneOperationStorageKey = g_kfUser + '_stoneOperation';
     const g_ignoreWishpoolExpirationStorageKey = g_kfUser + '_ignoreWishpoolExpiration';
     const g_beachForceExpandStorageKey = g_kfUser + '_beach_forceExpand';
     const g_beachBGStorageKey = g_kfUser + '_beach_BG';
 
-    const g_userDataStorageKeyConfig = [ g_kfUser, g_autoTaskEnabledStorageKey, g_autoTaskCheckStoneProgressStorageKey,
-                                         g_indexRallyStorageKey, g_keepPkRecordStorageKey, g_amuletGroupsStorageKey,g_forgeAutoStorageKey,
-                                         g_stoneAuto1StorageKey,g_stoneAuto2StorageKey,g_stoneAuto3StorageKey,
-                                         g_stoneAuto4StorageKey,g_stoneAuto5StorageKey,g_stoneAuto6StorageKey,
-                                         g_equipmentExpandStorageKey, g_equipmentStoreExpandStorageKey, g_equipmentBGStorageKey,
-                                         g_stoneProgressEquipTipStorageKey, g_stoneProgressCardTipStorageKey,
-                                         g_stoneProgressHaloTipStorageKey, g_ignoreWishpoolExpirationStorageKey,
-                                         g_beachForceExpandStorageKey, g_beachBGStorageKey ];
+    const g_userDataStorageKeyConfig = [ g_kfUser, g_autoTaskEnabledStorageKey, g_autoTaskCheckStoneProgressStorageKey, g_indexRallyStorageKey,
+                                         g_keepPkRecordStorageKey, g_amuletGroupsStorageKey, g_equipmentExpandStorageKey,g_forgeAutoStorageKey,
+                                         g_equipmentStoreExpandStorageKey, g_equipmentBGStorageKey, g_stoneOperationStorageKey,
+                                         g_ignoreWishpoolExpirationStorageKey, g_beachForceExpandStorageKey, g_beachBGStorageKey ];
 
+    const g_stoneProgressEquipTipStorageKey = g_kfUser + '_stone_ProgressEquipTip';
+    const g_stoneProgressCardTipStorageKey = g_kfUser + '_stone_ProgressCardTip';
+    const g_stoneProgressHaloTipStorageKey = g_kfUser + '_stone_ProgressHaloTip';
     const g_beachIgnoreStoreMysEquipStorageKey = g_kfUser + '_beach_ignoreStoreMysEquip';
-    const g_userDataStorageKeyExtra = [ g_beachIgnoreStoreMysEquipStorageKey, 'attribute', 'cardName',
-                                       'title', 'over', 'halo_max', 'beachcheck', 'dataReward', 'keepcheck' ];
+    const g_userDataStorageKeyExtra = [ g_stoneProgressEquipTipStorageKey, g_stoneProgressCardTipStorageKey,
+                                        g_stoneProgressHaloTipStorageKey, g_beachIgnoreStoreMysEquipStorageKey,
+                                       'attribute', 'cardName', 'title', 'over', 'halo_max', 'beachcheck', 'dataReward', 'keepcheck' ];
 
     const USER_STORAGE_RESERVED_SEPARATORS = /[:;,|=+*%!#$&?<>{}^`"\\\/\[\]\r\n\t\v\s]/;
     const USER_STORAGE_KEY_VALUE_SEPARATOR = ':';
@@ -63,6 +55,63 @@ function gudaq() {
     kfUserSpan.onclick = (() => { window.location.href = g_guguzhenHome; });
 
     console.log(g_kfUser)
+
+    const g_userMessageDivId = 'user-message-div';
+    const g_userMessageBtnId = 'user-message-btn';
+    function createUserMessageArea(msgs) {
+        if (msgs?.length > 0) {
+            let div = document.getElementById(g_userMessageDivId);
+            if (div == null) {
+                let div_row = document.createElement('div');
+                div_row.className = 'row';
+                document.querySelector('div.row.fyg_lh60.fyg_tc').parentNode.appendChild(div_row);
+
+                let div_pan = document.createElement('div');
+                div_pan.className = 'panel panel-info';
+                div_row.appendChild(div_pan);
+
+                let div_head = document.createElement('div');
+                div_head.className = 'panel-heading';
+                div_head.innerText = '页面消息';
+                div_pan.appendChild(div_head);
+
+                let link_top = document.createElement('a');
+                link_top.style.float = 'right';
+                link_top.innerText = '回到页首 ▲';
+                link_top.href = '#';
+                link_top.onclick = (() => { document.body.scrollIntoView(true); });
+                div_head.appendChild(link_top);
+
+                div = document.createElement('div');
+                div.className = 'panel-body';
+                div.id = g_userMessageDivId;
+                div_pan.appendChild(div);
+            }
+
+            let btn = document.getElementById(g_userMessageBtnId);
+            if (btn == null) {
+                let navBar = document.querySelectorAll(g_navigatorSelector + 'div.btn-group');
+                navBar = navBar[navBar.length - 1];
+                btn = navBar.firstElementChild.cloneNode(true);
+                btn.id = g_userMessageBtnId;
+                btn.className += ' btn-danger';
+                btn.innerText = '查看消息';
+                btn.setAttribute('onclick', `window.location.href='#${g_userMessageDivId}'`);
+                navBar.appendChild(btn);
+            }
+
+            let alt = !(div.lastElementChild?.className?.length > 0);
+            msgs.forEach((msg) => {
+                let div_info = document.createElement('div');
+                div_info.className = (alt ? 'alt' : '');
+                div_info.style.backgroundColor = (alt ? '#f0f0f0' : '');
+                div_info.style.padding = '5px';
+                div_info.innerHTML = `<b>${msg.name}：</b>${msg.info}`;
+                div.appendChild(div_info);
+                alt = !alt;
+            });
+        }
+    }
 
     // perform a binary search. array must be sorted, but no matter in ascending or descending order.
     // in this manner, you must pass in a proper comparer function for it works properly, aka, if the
@@ -129,9 +178,14 @@ function gudaq() {
     // implemented as return 0 whenever parameter a equals any of values that should be ignored.
     function findNewObjects(newArray, oldArray, fnComparer, findIndices) {
         let newObjects = [];
+        oldArray = oldArray?.slice();
         for (let i = (newArray?.length ?? 0) - 1; i >= 0; i--) {
-            if (searchElement(oldArray, newArray[i], fnComparer) < 0) {
+            let index = searchElement(oldArray, newArray[i], fnComparer);
+            if (index < 0) {
                 newObjects.unshift(findIndices ? i : newArray[i]);
+            }
+            else {
+                oldArray.splice(index, 1);
             }
         }
         return newObjects;
@@ -156,31 +210,67 @@ function gudaq() {
         return null;
     }
 
+    function getPostDataSafeId() {
+        let sc = document.getElementsByTagName('script');
+        for (let i = (sc?.length ?? 0) - 1; i >= 0 ; i--) {
+            let index = sc[i].innerText.indexOf('&safeid=');
+            if (index >= 0) {
+                return sc[i].innerText.substring(index + 8, index + 14);
+            }
+        }
+        return null;
+    }
+
     // generic configuration items represented using checkboxes
-    const g_configCheckboxMap = new Map();
     function setupConfigCheckbox(checkbox, configKey, fnPostProcess, fnParams) {
-        g_configCheckboxMap.set(configKey, { postProcess : fnPostProcess , params : fnParams });
-        checkbox.setAttribute('config-key', configKey);
         checkbox.checked = (localStorage.getItem(configKey) == 'true');
         checkbox.onchange = ((e) => {
-            let key = e.target.getAttribute('config-key');
-            let cfg = g_configCheckboxMap.get(key);
-            if (cfg != null) {
-                localStorage.setItem(key, e.target.checked);
-                if (cfg.postProcess != null) {
-                    cfg.postProcess(e.target.checked, cfg.params);
-                }
+            localStorage.setItem(configKey, e.target.checked);
+            if (fnPostProcess != null) {
+                fnPostProcess(e.target.checked, fnParams);
             }
         });
         return checkbox.checked;
     }
 
     // HTTP requests
+    const g_postMethod = 'POST'
+    const g_readUrl = window.location.origin + '/fyg_read.php'
+    const g_postUrl = window.location.origin + '/fyg_click.php'
+    const g_postHeader = { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8' /*, 'Cookie' : document.cookie*/ };
+    const g_networkTimeoutMS = 120 * 1000;
     var g_httpRequests = [];
-    function httpRequestRegister(request) {
-        if (request != null) {
-            g_httpRequests.push(request);
+    function httpRequestBegin(isRead, queryString, fnLoad, fnError, fnTimeout) {
+        let request;
+        request = new XMLHttpRequest();
+        request.onload = request.onerror = request.ontimeout = httpRequestEventHandler;
+        request.open(g_postMethod, isRead ? g_readUrl : g_postUrl);
+        for (let name in g_postHeader) {
+            request.setRequestHeader(name, g_postHeader[name]);
         }
+        request.send(queryString);
+
+        function httpRequestEventHandler(e) {
+            switch (e.type) {
+                case 'load':
+                    if (fnLoad != undefined) {
+                        fnLoad(e.currentTarget);
+                    }
+                    break;
+                case 'error':
+                    if (fnError != undefined) {
+                        fnError(e.currentTarget);
+                    }
+                    break;
+                case 'timeout':
+                    if (fnTimeout != undefined) {
+                        fnTimeout(e.currentTarget);
+                    }
+                    break;
+            }
+        }
+        g_httpRequests.push(request);
+        return request;
     }
 
     function httpRequestAbortAll() {
@@ -195,37 +285,33 @@ function gudaq() {
     }
 
     // read objects from bag and store with title filter
-    const g_postMethod = 'POST'
-    const g_readUrl = window.location.origin+'/fyg_read.php'
-    const g_postUrl = window.location.origin+'/fyg_click.php'
-    const g_postHeader = { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'  };
-    const g_networkTimeoutMS = 120 * 1000;
-    function beginReadObjects(bag, store, fnFurtherProcess, fnParams) {
+    function beginReadObjects(bag, store, fnPostProcess, fnParams) {
         if (bag != null || store != null) {
-            let request = $.ajax({ url: g_readUrl, type: g_postMethod, headers: g_postHeader,data: 'f=7', processData: false, })
-            .done(response => {
-                let div = document.createElement('div');
-                    div.innerHTML = response;
+            httpRequestBegin(
+                true,
+                'f=7',
+                (response) => {
+                    let div = document.createElement('div');
+                    div.innerHTML = response.responseText;
 
                     if (bag != null) {
-                        div.querySelectorAll('div.alert-danger > div.content > button.fyg_mp3')?.forEach((e) => { bag.push(e); });
+                        div.querySelectorAll('div.alert-danger > button.fyg_mp3')?.forEach((e) => { bag.push(e); });
                     }
                     if (store != null) {
-                        div.querySelectorAll('div.alert-success > div.content > button.fyg_mp3')?.forEach((e) => { store.push(e); });
+                        div.querySelectorAll('div.alert-success > button.fyg_mp3')?.forEach((e) => { store.push(e); });
                     }
 
-                    if (fnFurtherProcess != null) {
-                        fnFurtherProcess(fnParams);
+                    if (fnPostProcess != null) {
+                        fnPostProcess(fnParams);
                     }
-            });
-            httpRequestRegister(request);
+                });
         }
-        else if (fnFurtherProcess != null) {
-            fnFurtherProcess(fnParams);
+        else if (fnPostProcess != null) {
+            fnPostProcess(fnParams);
         }
     }
 
-    function beginReadObjectIds(bagIds, storeIds, key, ignoreEmptyCell, fnFurtherProcess, fnParams) {
+    function beginReadObjectIds(bagIds, storeIds, key, ignoreEmptyCell, fnPostProcess, fnParams) {
         function parseObjectIds() {
             if (bagIds != null) {
                 objectIdParseNodes(bag, bagIds, key, ignoreEmptyCell);
@@ -233,8 +319,8 @@ function gudaq() {
             if (storeIds != null) {
                 objectIdParseNodes(store, storeIds, key, ignoreEmptyCell);
             }
-            if (fnFurtherProcess != null) {
-                fnFurtherProcess(fnParams);
+            if (fnPostProcess != null) {
+                fnPostProcess(fnParams);
             }
         }
 
@@ -242,8 +328,8 @@ function gudaq() {
         if (bagIds != null || storeIds != null) {
             beginReadObjects(bag = [], store = [], parseObjectIds, null);
         }
-        else if (fnFurtherProcess != null) {
-            fnFurtherProcess(fnParams);
+        else if (fnPostProcess != null) {
+            fnPostProcess(fnParams);
         }
     }
 
@@ -274,17 +360,17 @@ function gudaq() {
     // to returns http status 503: Service Temporarily Unavailable
     // * caution * the parameter 'objects' is required been sorted by their indices in ascending order
     const g_ConcurrentRequestCount = { min : 1 , max : 8 , default : 4 };
-    const g_object_move_path = { bag2store : 0 , store2bag : 1 , bag2beach : 2 , beach2bag : 3 };
+    const g_object_move_path = { bag2store : 0 , store2bag : 1 , store2beach : 2 , beach2store : 3 };
     const g_object_move_data = [ null, null, null, null ];
     var g_maxConcurrentRequests = g_ConcurrentRequestCount.default;
     var g_objectMoveRequestsCount = 0;
     var g_objectMoveTargetSiteFull = false;
-    function beginMoveObjects(objects, path, fnFurtherProcess, fnParams) {
+    function beginMoveObjects(objects, path, fnPostProcess, fnParams) {
         if (!g_objectMoveTargetSiteFull && objects?.length > 0) {
             g_object_move_data[g_object_move_path.bag2store] ??= (getPostData(/puti\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*"/)?.slice(7, -1) ?? '');
             g_object_move_data[g_object_move_path.store2bag] ??= (getPostData(/puto\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*"/)?.slice(7, -1) ?? '');
-            g_object_move_data[g_object_move_path.bag2beach] ??= (getPostData(/stdel\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*"/)?.slice(7, -1) ?? '');
-            g_object_move_data[g_object_move_path.beach2bag] ??= (getPostData(/stpick\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*"/)?.slice(7, -1) ?? '');
+            g_object_move_data[g_object_move_path.store2beach] ??= (getPostData(/stdel\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*"/)?.slice(7, -1) ?? '');
+            g_object_move_data[g_object_move_path.beach2store] ??= (getPostData(/stpick\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*"/)?.slice(7, -1) ?? '');
 
             if (!(g_object_move_data[path]?.length > 0)) {
                 if (!(g_object_move_data[g_object_move_path.store2bag]?.length > 0) &&
@@ -297,15 +383,15 @@ function gudaq() {
                     g_object_move_data[g_object_move_path.bag2store] =
                         g_object_move_data[g_object_move_path.store2bag].replace('c=22&', 'c=21&');
                 }
-                if (!(g_object_move_data[g_object_move_path.bag2beach]?.length > 0) &&
-                      g_object_move_data[g_object_move_path.beach2bag]?.length > 0) {
-                    g_object_move_data[g_object_move_path.bag2beach] =
-                        g_object_move_data[g_object_move_path.beach2bag].replace('c=1&', 'c=7&');
+                if (!(g_object_move_data[g_object_move_path.store2beach]?.length > 0) &&
+                      g_object_move_data[g_object_move_path.beach2store]?.length > 0) {
+                    g_object_move_data[g_object_move_path.store2beach] =
+                        g_object_move_data[g_object_move_path.beach2store].replace('c=1&', 'c=7&');
                 }
-                if (!(g_object_move_data[g_object_move_path.beach2bag]?.length > 0) &&
-                      g_object_move_data[g_object_move_path.bag2beach]?.length > 0) {
-                    g_object_move_data[g_object_move_path.beach2bag] =
-                        g_object_move_data[g_object_move_path.bag2beach].replace('c=7&', 'c=1&');
+                if (!(g_object_move_data[g_object_move_path.beach2store]?.length > 0) &&
+                      g_object_move_data[g_object_move_path.store2beach]?.length > 0) {
+                    g_object_move_data[g_object_move_path.beach2store] =
+                        g_object_move_data[g_object_move_path.store2beach].replace('c=7&', 'c=1&');
                 }
             }
 
@@ -319,32 +405,33 @@ function gudaq() {
                 }
                 if ((g_objectMoveRequestsCount = ids.length) > 0) {
                     while (ids.length > 0) {
-                        let request =$.ajax({ url: g_postUrl , type: g_postMethod, headers: g_postHeader,data: g_object_move_data[path].replace('"+id+"', ids.shift()), processData: false, })
-                            .done(response => {
-                            if (path != g_object_move_path.bag2beach && response != 'ok') {
+                        httpRequestBegin(
+                            false,
+                            g_object_move_data[path].replace('"+id+"', ids.shift()),
+                            (response) => {
+                                if (path != g_object_move_path.store2beach && response.responseText != 'ok') {
                                     g_objectMoveTargetSiteFull = true;
-                                    console.log(response);
+                                    console.log(response.responseText);
                                 }
                                 if (--g_objectMoveRequestsCount == 0) {
-                                    beginMoveObjects(objects, path, fnFurtherProcess, fnParams);
+                                    beginMoveObjects(objects, path, fnPostProcess, fnParams);
                                 }
                             });
-                        httpRequestRegister(request);
                     }
                     return;
                 }
             }
         }
         g_objectMoveTargetSiteFull = false;
-        if (fnFurtherProcess != null) {
-            fnFurtherProcess(fnParams);
+        if (fnPostProcess != null) {
+            fnPostProcess(fnParams);
         }
     }
 
     const g_pirl_verify_data = '124';
     var g_pirl_data = null;
     var g_objectPirlRequestsCount = 0;
-    function beginPirlObjects(objects, fnFurtherProcess, fnParams) {
+    function beginPirlObjects(objects, fnPostProcess, fnParams) {
         if (objects?.length > 0) {
             g_pirl_data ??= (getPostData(/pirl\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*\+pirlyz\+.*"/)?.
                              slice(7, -1).replace('"+pirlyz+"', g_pirl_verify_data) ?? '');
@@ -355,30 +442,36 @@ function gudaq() {
                 }
                 if ((g_objectPirlRequestsCount = ids.length) > 0) {
                     while (ids.length > 0) {
-                        let request =$.ajax({ url: g_postUrl , type: g_postMethod, headers: g_postHeader,data: g_pirl_data.replace('"+id+"', ids.shift()), processData: false, })
-                            .done(response => {
-                                if (!/\d+/.test(response.trim()) && response.indexOf('果核') < 0) {
-                                    console.log(response);
+                        httpRequestBegin(
+                            false,
+                            g_pirl_data.replace('"+id+"', ids.shift()),
+                            (response) => {
+                                if (!/\d+/.test(response.responseText.trim()) && response.responseText.indexOf('果核') < 0) {
+                                    console.log(response.responseText);
                                 }
                                 if (--g_objectPirlRequestsCount == 0) {
-                                    beginPirlObjects(objects, fnFurtherProcess, fnParams);
+                                    beginPirlObjects(objects, fnPostProcess, fnParams);
                                 }
                             });
-                        httpRequestRegister(request);
                     }
                     return;
                 }
             }
         }
-        if (fnFurtherProcess != null) {
-            fnFurtherProcess(fnParams);
+        if (fnPostProcess != null) {
+            fnPostProcess(fnParams);
         }
     }
 
     // read currently mounted role card and halo informations
     // roleInfo = [ roleId, roleName ]
     // haloInfo = [ haloPoints, haloSlots, [ haloItem1, haloItem2, ... ] ]
-    function beginReadRoleAndHalo(roleInfo, haloInfo, fnFurtherProcess, fnParams) {
+    function beginReadRoleAndHalo(roleInfo, haloInfo, fnPostProcess, fnParams) {
+        function onError() {
+            error++;
+            asyncOperations--;
+        }
+
         let asyncOperations = 0;
         let error = 0;
         let requestRole;
@@ -386,24 +479,30 @@ function gudaq() {
 
         if (roleInfo != null) {
             asyncOperations++;
-            requestRole = $.ajax({ url: g_postUrl , type: g_postMethod, headers: g_postHeader,data: 'f=9', processData: false, })
-                .done(response => {
+            requestRole = httpRequestBegin(
+                true,
+                'f=9',
+                (response) => {
                     let div = document.createElement('div');
-                    div.innerHTML = response;
+                    div.innerHTML = response.responseText;
                     let role = g_roleMap.get(div.querySelector('div.text-info.fyg_f24.fyg_lh60')?.children[0]?.innerText);
                     if (role != undefined) {
                         roleInfo.push(role.id);
                         roleInfo.push(role.name);
                     }
                     asyncOperations--;
-                }).fail(err => { error++;asyncOperations--;});
+                },
+                onError,
+                onError);
         }
 
         if (haloInfo != null) {
             asyncOperations++;
-            requestHalo = $.ajax({ url: g_readUrl , type: g_postMethod, headers: g_postHeader,data: 'f=5', processData: false, })
-                .done(response => {
-                    let haloPS = response.match(/<h3>[^\d]*(\d+)[^\d]*(\d+)[^<]+<\/h3>/);
+            requestHalo = httpRequestBegin(
+                true,
+                'f=5',
+                (response) => {
+                    let haloPS = response.responseText.match(/<h3>[^\d]*(\d+)[^\d]*(\d+)[^<]+<\/h3>/);
                     if (haloPS?.length == 3) {
                         haloInfo.push(parseInt(haloPS[1]));
                         haloInfo.push(parseInt(haloPS[2]));
@@ -414,12 +513,14 @@ function gudaq() {
                     }
 
                     let halo = [];
-                    for (let item of response.matchAll(/halotfzt2\((\d+)\)/g)) {
+                    for (let item of response.responseText.matchAll(/halotfzt2\((\d+)\)/g)) {
                         halo.push(item[1]);
                     }
                     haloInfo.push(halo);
                     asyncOperations--;
-                }).fail(err => { error++;asyncOperations--;});
+                },
+                onError,
+                onError);
         }
 
         let timeout = 0;
@@ -430,63 +531,122 @@ function gudaq() {
                     requestRole?.abort();
                     requestHalo?.abort();
                 }
-                if (fnFurtherProcess != null) {
-                    fnFurtherProcess(fnParams);
+                if (fnPostProcess != null) {
+                    fnPostProcess(fnParams);
                 }
             }
         }, 200);
     }
 
-    function beginReadWishpool(points, misc, fnFurtherProcess, fnParams) {
-        $.ajax({ url: g_readUrl , type: g_postMethod, headers: g_postHeader,data: 'f=19', processData: false, })
-            .done(response => {
-                    let a = response.split('#');
-                    if (misc != null) {
-                        misc[0] = a[0];
-                        misc[1] = a[1];
-                        misc[2] = a[2];
+    function beginReadWishpool(points, misc, fnPostProcess, fnParams) {
+        httpRequestBegin(
+            true,
+            'f=19',
+            (response) => {
+                let a = response.responseText.split('#');
+                if (misc != null) {
+                    misc[0] = a[0];
+                    misc[1] = a[1];
+                    misc[2] = a[2];
+                }
+                if (points != null) {
+                    for (let i = a.length - 1; i >= 3; i--) {
+                        points[i - 3] = a[i];
                     }
-                    if (points != null) {
-                        for (let i = a.length - 1; i >= 3; i--) {
-                            points[i - 3] = a[i];
-                        }
-                    }
-                    if (fnFurtherProcess != null) {
-                        fnFurtherProcess(fnParams);
-                    }
-                });
+                }
+                if (fnPostProcess != null) {
+                    fnPostProcess(fnParams);
+                }
+            });
     }
 
-    function beginReadStoneProgress(progresses, stones, fnFurtherProcess, fnParams) {
-        $.ajax({ url: g_readUrl , type: g_postMethod, headers: g_postHeader,data: 'f=21', processData: false, })
-                .done(response => {
-                    let div = document.createElement('div');
-                    div.innerHTML = response;
+    function beginReadStoneProgress(progresses, stones, fnPostProcess, fnParams) {
+        httpRequestBegin(
+            true,
+            'f=21',
+            (response) => {
+                let div = document.createElement('div');
+                div.innerHTML = response.responseText;
 
-                    if (progresses != null) {
-                        let equipProgresses = div.querySelectorAll('span.fyg_f24');
-                        if (equipProgresses?.length == 3) {
-                            for (let prog of equipProgresses) {
-                                progresses.push(prog.innerText ?? '');
+                if (progresses != null) {
+                    let equipProgresses = div.querySelectorAll('span.fyg_f24');
+                    if (equipProgresses?.length == 3) {
+                        for (let prog of equipProgresses) {
+                            progresses.push(prog.innerText ?? '');
+                        }
+                    }
+                }
+                if (stones != null) {
+                    let stoneInfos = div.querySelectorAll('div.col-sm-2.fyg_tc > button.btn');
+                    if (stoneInfos?.length == 6) {
+                        for (let stone of stoneInfos) {
+                            let type = (stone.getAttribute('onclick')?.match(/\d+/)?.[0] ?? '0');
+                            let infos = stone.innerHTML?.match(/(.石)（上限(\d+)）.+?>(\d+)</m);
+                            if (infos?.length == 4) {
+                                stones.push({ type : parseInt(type), name : infos[1], max : parseInt(infos[2]), current : parseInt(infos[3]) });
                             }
                         }
                     }
-                    if (stones != null) {
-                        let stoneInfos = div.querySelectorAll('div.col-sm-2.fyg_tc > button.btn');
-                        if (stoneInfos?.length == 6) {
-                            for (let stone of stoneInfos) {
-                                let type = (stone.getAttribute('onclick')?.match(/\d+/)?.[0] ?? '0');
-                                let infos = stone.innerHTML?.match(/(.石)（上限(\d+)）.+?>(\d+)</m);
-                                if (infos?.length == 4) {
-                                    stones.push({ type : parseInt(type), name : infos[1], max : parseInt(infos[2]), current : parseInt(infos[3]) });
-                                }
-                            }
-                        }
-                    }
-                    if (fnFurtherProcess != null) {
-                        fnFurtherProcess(fnParams);
+                }
+
+                if (fnPostProcess != null) {
+                    fnPostProcess(fnParams);
+                }
+            });
+    }
+
+    var g_safeid = null;
+    var g_stoneFunctionParams = [ { index : 0, name : '锻造装备', action : false, fnId : '25', param : 'undefined' },
+                                  { index : 1, name : '生成卡片', action : false, fnId : '26', param : 'undefined' },
+                                  { index : 2, name : '宝石收集', action : false, fnId : '27', param : '0' } ];
+    function stoneGenerationRequest(preSucceeded, fnPostProcess)
+    {
+        if (!((g_safeid ??= getPostDataSafeId())?.length > 0)) {
+            if (fnPostProcess != null) {
+                fnPostProcess(false, [ { name : '宝石收藏' , info : '无法获取 “safeid” 元素' } ]);
+            }
+            return;
+        }
+
+        function beginStoneGenerationRequest(fnParam, fnPostProc) {
+            httpRequestBegin(
+                false,
+                `c=${fnParam.fnId}&xs=${fnParam.param}&safeid=${g_safeid}`,
+                (response) => {
+                    if (fnPostProc != null) {
+                        fnPostProc(true, fnParam, response.responseText);
                     }
                 });
+        }
+
+        let infos = [];
+        let error = 0;
+        let requestsCount = 0;
+        function stoneGenPostProc(succeeded, fnParam, info) {
+            if (!succeeded) {
+                error++;
+            }
+            infos.push({ name : fnParam.name , info : info });
+            if (--requestsCount == 0 && fnPostProcess != null) {
+                fnPostProcess(error == 0 && preSucceeded, infos);
+            }
+        }
+
+        let requests = [];
+        g_stoneFunctionParams.forEach((e, i) => {
+            if (e.action) {
+                requests.push(e);
+                e.action = false;
+            }
+        });
+        if ((requestsCount = requests.length) > 0) {
+            while (requests.length > 0) {
+                beginStoneGenerationRequest(requests.shift(), stoneGenPostProc);
+            }
+        }
+        else if (fnPostProcess != null) {
+            fnPostProcess(preSucceeded);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -512,13 +672,13 @@ function gudaq() {
     };
     const g_amuletDefaultTypeIds = {
         start : 2,
-        end : 4,
-        苹果 : 0,
-        葡萄 : 1,
-        樱桃 : 2
+        end : 6,
+        星铜苹果 : 0,
+        蓝银葡萄 : 1,
+        紫晶樱桃 : 2
     };
     const g_amuletDefaultLevelNames = [ '稀有', '史诗', '传奇' ];
-    const g_amuletDefaultTypeNames = [ '苹果', '葡萄', '樱桃' ];
+    const g_amuletDefaultTypeNames = [ '星铜苹果', '蓝银葡萄', '紫晶樱桃' ];
     const g_amuletBuffs = [
         { index : -1 , name : '力量' , type : 0 , maxValue : 80 , unit : '点' , shortMark : 'STR' },
         { index : -1 , name : '敏捷' , type : 0 , maxValue : 80 , unit : '点' , shortMark : 'AGI' },
@@ -1206,7 +1366,7 @@ function gudaq() {
         return array;
     }
 
-    function beginReadAmulets(bagAmulets, storeAmulets, key, fnFurtherProcess, fnParams) {
+    function beginReadAmulets(bagAmulets, storeAmulets, key, fnPostProcess, fnParams) {
         function parseAmulets() {
             if (bagAmulets != null) {
                 amuletNodesToArray(bag, bagAmulets, key);
@@ -1214,8 +1374,8 @@ function gudaq() {
             if (storeAmulets != null) {
                 amuletNodesToArray(store, storeAmulets, key);
             }
-            if (fnFurtherProcess != null) {
-                fnFurtherProcess(fnParams);
+            if (fnPostProcess != null) {
+                fnPostProcess(fnParams);
             }
         }
 
@@ -1223,8 +1383,8 @@ function gudaq() {
         if (bagAmulets != null || storeAmulets != null) {
             beginReadObjects(bag = [], store = [], parseAmulets, null);
         }
-        else if (fnFurtherProcess != null) {
-            fnFurtherProcess(fnParams);
+        else if (fnPostProcess != null) {
+            fnPostProcess(fnParams);
         }
     }
 
@@ -1237,29 +1397,29 @@ function gudaq() {
         beginMoveObjects(ids, path, proc, params);
     }
 
-    function beginLoadAmuletGroupFromStore(amulets, groupName, fnFurtherProcess, fnParams) {
+    function beginLoadAmuletGroupFromStore(amulets, groupName, fnPostProcess, fnParams) {
         if (amulets?.length > 0) {
             let store = amuletNodesToArray(amulets);
             beginMoveAmulets({ groupName : groupName, amulets : store, path : g_object_move_path.store2bag,
-                               proc : fnFurtherProcess, params : fnParams });
+                               proc : fnPostProcess, params : fnParams });
         }
         else {
             beginReadAmulets(null, amulets = [], null, beginMoveAmulets,
                              { groupName : groupName, amulets : amulets, path : g_object_move_path.store2bag,
-                               proc : fnFurtherProcess, params : fnParams });
+                               proc : fnPostProcess, params : fnParams });
         }
     }
 
-    function beginUnloadAmuletGroupFromBag(amulets, groupName, fnFurtherProcess, fnParams) {
+    function beginUnloadAmuletGroupFromBag(amulets, groupName, fnPostProcess, fnParams) {
         if (amulets?.length > 0) {
             let bag = amuletNodesToArray(amulets);
             beginMoveAmulets({ groupName : groupName, amulets : bag, path : g_object_move_path.bag2store,
-                               proc : fnFurtherProcess, params : fnParams });
+                               proc : fnPostProcess, params : fnParams });
         }
         else {
             beginReadAmulets(amulets, null, null, beginMoveAmulets,
                              { groupName : groupName, amulets : amulets, path : g_object_move_path.bag2store,
-                               proc : fnFurtherProcess, params : fnParams });
+                               proc : fnPostProcess, params : fnParams });
         }
     }
 
@@ -1405,9 +1565,9 @@ function gudaq() {
         return ids;
     }
 
-    function beginClearBag(bag, key, fnFurtherProcess, fnParams) {
+    function beginClearBag(bag, key, fnPostProcess, fnParams) {
         function beginClearBagObjects(objects) {
-            beginMoveObjects(objects, g_object_move_path.bag2store, fnFurtherProcess, fnParams);
+            beginMoveObjects(objects, g_object_move_path.bag2store, fnPostProcess, fnParams);
         }
 
         let objects = [];
@@ -1420,9 +1580,9 @@ function gudaq() {
         }
     }
 
-    function beginRestoreObjects(store, amulets, equips, fnFurtherProcess, fnParams) {
+    function beginRestoreObjects(store, amulets, equips, fnPostProcess, fnParams) {
         function readStoreCompletion() {
-            beginRestoreObjects(store, amulets, equips, fnFurtherProcess, fnParams);
+            beginRestoreObjects(store, amulets, equips, fnPostProcess, fnParams);
         }
 
         if (store == null) {
@@ -1431,7 +1591,7 @@ function gudaq() {
         else {
             let ids = findAmuletIds(store, amulets);
             findEquipmentIds(store, equips, ids);
-            beginMoveObjects(ids, g_object_move_path.store2bag, fnFurtherProcess, fnParams);
+            beginMoveObjects(ids, g_object_move_path.store2bag, fnPostProcess, fnParams);
         }
     }
 
@@ -1794,7 +1954,9 @@ function gudaq() {
         { index : 20 , type : 1 , name : '魔法减伤' },
         { index : 21 , type : 0 , name : '生命偷取' },
         { index : 22 , type : 0 , name : '伤害反弹' },
-        { index : 23 , type : 1 , name : '附加魔穿' }
+        { index : 23 , type : 1 , name : '附加魔穿' },
+        { index : 24 , type : 1 , name : '技能概率' },
+        { index : 25 , type : 1 , name : '暴击概率' }
     ];
 
     const g_equipments = [
@@ -1929,6 +2091,17 @@ function gudaq() {
                            { attribute : g_equipAttributes[7] , factor : 2 , additive : 0 } ],
             merge : [ [ 0, 1, 2 ], [ 3 ] ],
             shortMark : 'VULTURE'
+        },
+        {
+            index : -1,
+            name : '海星戒指',
+            type : 1,
+            attributes : [ { attribute : g_equipAttributes[16] , factor : 1 / 2 , additive : 0 },
+                           { attribute : g_equipAttributes[23] , factor : 1 / 2 , additive : 0 },
+                           { attribute : g_equipAttributes[24] , factor : 4 / 5 , additive : 0 },
+                           { attribute : g_equipAttributes[25] , factor : 4 / 5 , additive : 0 } ],
+            merge : null,
+            shortMark : 'RING'
         },
         {
             index : -1,
@@ -2358,7 +2531,6 @@ function gudaq() {
 
     function stoneProgressTip(fnPostProcess) {
         function setTips(tips) {
-            let tip = false;
             let navButtons = document.querySelectorAll(g_navigatorSelector + 'div.btn-group > button.btn.btn-lg');
             for (let btn of navButtons) {
                 if (btn.innerText.indexOf('我的角色') >= 0) {
@@ -2368,26 +2540,8 @@ function gudaq() {
                             window.open('fyg_equip.php', '_blank'); btn.innerText = `我的角色`;
                         };
                         if (btn.className.indexOf('btn-danger') < 0) {
-                            btn.className += ' btn-danger';let onck=false;
-                            if(tips.indexOf('装备')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forge(']")[0].click();} });onck=false;btn.innerText = `我的角色`;
-                            };
-                            if(tips.indexOf('卡片')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forca(']")[0].click();} });onck=false;btn.innerText = `我的角色`;
-                            };
-                            if(tips.indexOf('宝石')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4);$(document).ajaxSuccess(function(){
-                                    if(onck==false){
-                                       onck=true;if(localStorage.getItem(g_stoneAuto1StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto2StorageKey)=='true'){$("button[onclick*='b_forcbs(2']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto3StorageKey)=='true'){$("button[onclick*='b_forcbs(3']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto4StorageKey)=='true'){$("button[onclick*='b_forcbs(4']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto5StorageKey)=='true'){$("button[onclick*='b_forcbs(5']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto6StorageKey)=='true'){$("button[onclick*='b_forcbs(6']")[0].click();};
-                                    };});onck=false;btn.innerText = `我的角色`;
-                            };
+                            btn.className += ' btn-danger';
                         }
-                        tip = true;
                     }
                     else {
                         btn.innerText = `我的角色`;
@@ -2396,59 +2550,95 @@ function gudaq() {
                     break;
                 }
             }
-            if (fnPostProcess != null) {
-                fnPostProcess(tip);
+            return !(tips?.length > 0);
+        }
+
+        let stoneOpCfg = localStorage.getItem(g_stoneOperationStorageKey)?.split(',');
+        if (!(stoneOpCfg?.length == 3)) {
+            stoneOpCfg = [ '1', '1', '1' ];
+            localStorage.setItem(g_stoneOperationStorageKey, '1,1,1');
+        }
+        for (var oper of stoneOpCfg) {
+            if (oper != '0') {
+                break;
             }
         }
 
-        let storageKeys = [ g_stoneProgressEquipTipStorageKey, g_stoneProgressCardTipStorageKey, g_stoneProgressHaloTipStorageKey,
-                            g_stoneAuto1StorageKey,g_stoneAuto2StorageKey,g_stoneAuto3StorageKey,g_stoneAuto4StorageKey,g_stoneAuto5StorageKey,g_stoneAuto6StorageKey];
-        let tipEnabled = [];
-        storageKeys.forEach((e) => {
-            if (localStorage.getItem(e) == 'true') {
-                tipEnabled.push(e);
-            }
-        });
-
-        if (tipEnabled.length > 0) {
+        if (oper != '0') {
             let progresses;
+            let stones;
             beginReadStoneProgress(
                 progresses = [],
-                null,
+                stones = [],
                 () => {
-                    if (progresses.length == 3) {
+                    if (progresses.length == 3 && stones.length == 6) {
+                        let forge = 0;
                         let tips = '';
                         let sp = '';
                         progresses.forEach((e, i) => {
-                            if (tipEnabled.indexOf(storageKeys[i]) >= 0 && /100%/.test(e)) {
-                                tips += (sp + e);
-                                sp = ', ';
+                            if (i == '2' && stoneOpCfg[i] != '0') {
+                                g_stoneFunctionParams[i].param = '0';
+                                for (let stone of stones) {
+                                    if (stone.current != stone.max) {
+                                        g_stoneFunctionParams[i].param = stone.type.toString();
+                                        break;
+                                    }
+                                }
+                                if (g_stoneFunctionParams[i].param == '0') {
+                                    stoneOpCfg[i] = '0';
+                                    localStorage.setItem(g_stoneOperationStorageKey, stoneOpCfg.join(','));
+                                }
+                            }
+                            if (/100%/.test(e)) {
+                                if (stoneOpCfg[i] == '1') {
+                                    tips += (sp + g_stoneFunctionParams[i].name);
+                                    sp = ', ';
+                                }
+                                else if (stoneOpCfg[i] != '0') {
+                                    if (i == 2) {
+                                        if (stoneOpCfg[i].startsWith('-')) {
+                                            let type = stoneOpCfg[i].substring(1);
+                                            let stone = stones[parseInt(type) - 1];
+                                            if (stone.current != stone.max) {
+                                                g_stoneFunctionParams[i].param = type;
+                                            }
+                                        }
+                                    }
+                                    g_stoneFunctionParams[i].action = true;
+                                    forge++;
+                                }
                             }
                         });
-                        setTips(tips);
+                        let succeeded = setTips(tips);
+                        if (forge > 0) {
+                            stoneGenerationRequest(succeeded, fnPostProcess);
+                        }
+                        else if (fnPostProcess != null) {
+                            fnPostProcess(succeeded);
+                        }
                     }
                     else if (fnPostProcess != null) {
-                        fnPostProcess(false);
+                        fnPostProcess(false, [{ name : '宝石收藏' , info : '信息读取失败' }]);
                     }
                 },
                 null);
         }
-        else {
-            setTips();
+        else if (fnPostProcess != null) {
+            fnPostProcess(setTips());
         }
     }
 
     initiatizeConfig();
     wishExpireTip();
-    stoneProgressTip();
+    stoneProgressTip((succeeded, msgs) => { createUserMessageArea(msgs); });
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // page add-ins
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    console.log(window.location.pathname)
-    if (window.location.pathname == g_guguzhenHome||window.location.pathname=='/%E5%92%95%E5%92%95%E9%95%87.html') {
+
+    if (window.location.pathname == g_guguzhenHome) {
         function doConfig() {
             let fixedContent =
                 '<div style="padding:20px 10px 10px 0px;color:blue;font-size:15px;"><b>请勿随意修改配置项，' +
@@ -2551,16 +2741,36 @@ function gudaq() {
             genericPopupShowModal(true);
         }
 
+        const USER_DATA_xPORT_GM_KEY = g_kfUser + '_export_string';
         const USER_DATA_xPORT_SEPARATOR = '\n';
 
         function importUserConfigData() {
             genericPopupSetContent(
                 '导入内容',
-                `<b><div style="color:#0000c0;padding:15px 0px 10px;">
+                `<b><div id="user_data_import_tip" style="color:#0000c0;padding:15px 0px 10px;">
                  请将从其它系统中使用同一帐号导出的内容填入文本框中并执行导入操作</div></b>
                  <div style="height:330px;"><textarea id="user_data_persistence_string"
                  style="height:100%;width:100%;resize:none;"></textarea></div>`);
 
+            genericPopupAddButton(
+                '从全局存储中读取',
+                0,
+                ((e) => {
+                    e.target.disabled = 'disabled';
+                    genericPopupQuerySelector('#user_data_persistence_string').value = GM_getValue(USER_DATA_xPORT_GM_KEY, '');
+                    let tipContainer = genericPopupQuerySelector('#user_data_import_tip');
+                    let tipColor = tipContainer.style.color;
+                    let tipString = tipContainer.innerText;
+                    tipContainer.style.color = '#ff0000';
+                    tipContainer.innerText = (genericPopupQuerySelector('#user_data_persistence_string').value.length > g_kfUser.length ?
+                                              '已从全局存储中读取成功' : '未能读取导出数据，请确保已在“数据导出”功能中写入全局存储');
+                    setTimeout((() => {
+                        tipContainer.style.color = tipColor;
+                        tipContainer.innerText = tipString;
+                        e.target.disabled = '';
+                    }), 3000);
+                }),
+                true);
             genericPopupAddButton(
                 '执行导入',
                 0,
@@ -2629,6 +2839,24 @@ function gudaq() {
                  <div style="height:330px;"><textarea id="user_data_persistence_string" readonly="true"
                  style="height:100%;width:100%;resize:none;"></textarea></div>`);
 
+            genericPopupAddButton(
+                '写入全局存储',
+                0,
+                ((e) => {
+                    e.target.disabled = 'disabled';
+                    GM_setValue(USER_DATA_xPORT_GM_KEY, genericPopupQuerySelector('#user_data_persistence_string').value);
+                    let tipContainer = genericPopupQuerySelector('#user_data_export_tip');
+                    let tipColor = tipContainer.style.color;
+                    let tipString = tipContainer.innerText;
+                    tipContainer.style.color = '#ff0000';
+                    tipContainer.innerText = '导出内容已写入全局存储';
+                    setTimeout((() => {
+                        tipContainer.style.color = tipColor;
+                        tipContainer.innerText = tipString;
+                        e.target.disabled = '';
+                    }), 3000);
+                }),
+                true);
             genericPopupAddButton(
                 '复制导出内容至剪贴板',
                 0,
@@ -2774,23 +3002,25 @@ function gudaq() {
                 panel.insertBefore(calcBtn, panel.children[0]);
                 panel.insertBefore(calcDiv, calcBtn);
 
+                const bagQueryString = '#backpacks > div.alert-danger';
+                const storeQueryString = '#backpacks > div.alert-success';
                 const cardingObjectsQueryString = '#carding > div.row > div.fyg_tc > button.fyg_mp3';
-                const bagObjectsQueryString = '#backpacks > div.alert-danger > div.content > button.fyg_mp3';
-                const storeObjectsQueryString = '#backpacks > div.alert-success > div.content > button.fyg_mp3';
-                const storeQueryString = '#backpacks > div.alert.alert-success.with-icon';
+                const bagObjectsQueryString = '#backpacks > div.alert-danger > button.fyg_mp3';
+                const storeObjectsQueryString = '#backpacks > div.alert-success > button.fyg_mp3';
                 const storeButtonId = 'collapse-backpacks-store';
 
                 let equipmentDiv = document.createElement('div');
                 equipmentDiv.id = 'equipmentDiv';
+                equipmentDiv.style.width = '100%';
                 equipmentDiv.innerHTML =
-                    `<p><div style="padding:0px 0px 10px 30px;float:right;">
-                        <label for="equipment_StoreExpand" style="margin-right:5px;cursor:pointer;">仅显示背包和仓库</label>
+                    `<div style="padding:10px 0px;text-align:right;">
+                        <label for="equipment_StoreExpand" style="margin-right:5px;cursor:pointer;">仅显示饰品栏和仓库</label>
                         <input type="checkbox" id="equipment_StoreExpand" style="margin-right:15px;" />
                         <label for="equipment_BG" style="margin-right:5px;cursor:pointer;">使用深色背景</label>
                         <input type="checkbox" id="equipment_BG" style="margin-right:15px;" />
                         <label for="equipment_Expand" style="margin-right:5px;cursor:pointer;">全部展开</label>
                         <input type="checkbox" id="equipment_Expand" style="margin-right:15px;" />
-                        <button type="button" id="objects_Cleanup">清理库存</button></div></p>
+                        <button type="button" id="objects_Cleanup">清理库存</button></div>
                      <div id="equipment_ObjectContainer" style="display:block;height:0px;">
                      <p><button type="button" class="btn btn-block collapsed" data-toggle="collapse" data-target="#eq4">护符 ▼</button></p>
                         <div class="in" id="eq4"></div>
@@ -2804,7 +3034,7 @@ function gudaq() {
                         <div class="in" id="eq3"></div>
                      <p><button type="button" class="btn btn-block collapsed" id="${storeButtonId}">仓库 ▼</button></p></div>`;
 
-                function refreshEquipmentPage(fnFurtherProcess) {
+                function refreshEquipmentPage(fnPostProcess) {
                     let asyncOperations = 3;
                     let asyncObserver = new MutationObserver(() => {
                         if (--asyncOperations == 1) {
@@ -2821,8 +3051,8 @@ function gudaq() {
                     let timer = setInterval(() => {
                         if (asyncOperations == 0) {
                             clearInterval(timer);
-                            if (fnFurtherProcess != null) {
-                                fnFurtherProcess();
+                            if (fnPostProcess != null) {
+                                fnPostProcess();
                             }
                         }
                     }, 200);
@@ -2839,120 +3069,37 @@ function gudaq() {
                         refreshEquipmentPage(() => { genericPopupClose(true); });
                     }
 
-                    let bagObjects = document.querySelectorAll(bagObjectsQueryString);
-                    let storeObjects = document.querySelectorAll(storeObjectsQueryString);
-                    function refreshContainer(fnFurtherProcess) {
-                        beginReadObjects(bagObjects = [], storeObjects = [], fnFurtherProcess, null);
-                    }
-
-                    let scheduledObjects = { equips : [] , amulets : [] };
-                    function beginScheduleBag() {
-                        genericPopupQuerySelectorAll('table.bag-list input.equip-checkbox.equip-item').forEach((e) => {
-                            if (e.checked) {
-                                scheduledObjects.equips.push(e.getAttribute('original-item').split(','));
-                            }
-                        });
-                        genericPopupQuerySelectorAll('table.bag-list input.equip-checkbox.amulet-item').forEach((e) => {
-                            if (e.checked) {
-                                scheduledObjects.amulets.push((new Amulet()).fromBuffText(e.getAttribute('original-item')));
-                            }
-                        });
-
-                        if (objectEmptyNodesCount(bagObjects) + scheduledObjects.equips.length + scheduledObjects.amulets.length == 0) {
-                            operationEnabler(true);
-                            genericPopupQuerySelector('#disclaimer-check').disabled = '';
-                            alert('背包空闲空间不足，请重新选择！');
-                            return;
-                        }
-
-                        if (scheduledObjects.equips.length + scheduledObjects.amulets.length > 0) {
-                            let ids = findAmuletIds(bagObjects, scheduledObjects.amulets.slice());
-                            findEquipmentIds(bagObjects, scheduledObjects.equips.slice(), ids);
-                            if (ids.length > 0) {
-                                genericPopupShowInformationTips('调整背包空间...', 0);
-                                beginMoveObjects(ids, g_object_move_path.bag2store, refreshContainer, processAmulets);
-                                return;
-                            }
-                        }
-                        processAmulets();
-                    }
-
-                    function beginRestoreBag(closeCountDown) {
-                        function restoreCompletion() {
-                            if (scheduledObjects.amulets.length > 0 || scheduledObjects.equips.length > 0) {
-                                alert('部分背包内容无法恢复，请手动处理！');
-                                console.log(scheduledObjects.equips);
-                                console.log(scheduledObjects.amulets);
-                                scheduledObjects.equips = [];
-                                scheduledObjects.amulets = [];
-                            }
-
-                            if (closeCountDown > 0) {
-                                let timer = setInterval(() => {
-                                    if (cancelled || --closeCountDown == 0) {
-                                        clearInterval(timer);
-                                        if (!cancelled) {
-                                            cancelProcess();
-                                        }
-                                    }
-                                    else {
-                                        genericPopupShowInformationTips(`所有操作已完成，窗口将在 ${closeCountDown} 秒后关闭`, 0);
-                                    }
-                                }, 1000);
-                            }
-                            else {
-                                cancelProcess();
-                            }
-                        }
-
-                        if (scheduledObjects.equips.length == 0 && scheduledObjects.amulets.length == 0) {
-                            restoreCompletion();
-                        }
-                        else {
-                            genericPopupShowInformationTips('恢复背包内容...', 0);
-                            beginRestoreObjects(null, scheduledObjects.amulets, scheduledObjects.equips, restoreCompletion, null);
-                        }
-                    }
-
-                    function processAmulets() {
-                        let amulets = [];
-                        genericPopupQuerySelectorAll('table.amulet-list input.equip-checkbox.amulet-item').forEach((e) => {
-                            if (e.checked) {
-                                amulets.push((new Amulet()).fromBuffText(e.getAttribute('original-item')));
-                            }
-                        });
-
-                        pirlAmulets();
-
-                        function pirlAmulets() {
-                            if (amulets.length > 0) {
-                                genericPopupShowInformationTips(`转换果核...（${amulets.length}）`, 0);
-                                let ids = findAmuletIds(bagObjects, amulets);
-                                if (ids.length > 0) {
-                                    beginPirlObjects(ids, refreshContainer, pirlAmulets);
-                                }
-                                else {
-                                    let freecell = objectEmptyNodesCount(bagObjects);
-                                    if (freecell > 0) {
-                                        let ids = findAmuletIds(storeObjects, amulets.slice(), null, freecell);
-                                        if (ids.length > 0) {
-                                            beginMoveObjects(ids, g_object_move_path.store2bag, refreshContainer, pirlAmulets);
-                                        }
-                                        else {
-                                            console.log(amulets);
-                                            processEquips();
-                                        }
-                                    }
-                                    else {
-                                        alert('调整背包空间失败，请检查！');
+                    function postProcess(closeCountDown) {
+                        if (closeCountDown > 0) {
+                            let timer = setInterval(() => {
+                                if (cancelled || --closeCountDown == 0) {
+                                    clearInterval(timer);
+                                    if (!cancelled) {
                                         cancelProcess();
                                     }
                                 }
-                            }
-                            else {
-                                processEquips();
+                                else {
+                                    genericPopupShowInformationTips(`所有操作已完成，窗口将在 ${closeCountDown} 秒后关闭`, 0);
+                                }
+                            }, 1000);
+                        }
+                        else {
+                            cancelProcess();
+                        }
+                    }
+
+                    let bagObjects = document.querySelectorAll(bagObjectsQueryString);
+                    let storeObjects = document.querySelectorAll(storeObjectsQueryString);
+                    function refreshContainer(fnPostProcess) {
+                        function queryObjects() {
+                            bagObjects = document.querySelectorAll(bagObjectsQueryString);
+                            storeObjects = document.querySelectorAll(storeObjectsQueryString);
+                            if (fnPostProcess != null) {
+                                fnPostProcess();
                             }
                         }
+
+                        refreshEquipmentPage(queryObjects);
                     }
 
                     function processEquips() {
@@ -2963,43 +3110,76 @@ function gudaq() {
                             }
                         });
 
-                        equipToBeach();
-
-                        function equipToBeach() {
-                            if (equips.length > 0) {
-                                genericPopupShowInformationTips(`丢弃装备...（${equips.length}）`, 0);
-                                let ids = findEquipmentIds(bagObjects, equips);
-                                if (ids.length > 0) {
-                                    beginMoveObjects(ids, g_object_move_path.bag2beach, refreshContainer, equipToBeach);
-                                }
-                                else {
-                                    let freecell = objectEmptyNodesCount(bagObjects);
-                                    if (freecell > 0) {
-                                        let ids = findEquipmentIds(storeObjects, equips.slice(), null, freecell);
-                                        if (ids.length > 0) {
-                                            beginMoveObjects(ids, g_object_move_path.store2bag, refreshContainer, equipToBeach);
-                                        }
-                                        else {
-                                            console.log(equips);
-                                            beginRestoreBag(15);
-                                        }
-                                    }
-                                    else {
-                                        alert('调整背包空间失败，请检查！');
-                                        cancelProcess();
-                                    }
-                                }
+                        if (equips.length > 0) {
+                            genericPopupShowInformationTips(`丢弃装备...（${equips.length}）`, 0);
+                            let ids = findEquipmentIds(storeObjects, equips);
+                            if (ids.length > 0) {
+                                beginMoveObjects(ids, g_object_move_path.store2beach, refreshContainer, processAmulets);
+                                return;
                             }
                             else {
-                                beginRestoreBag(15);
+                                alert('有装备不存在，请在清理结束后检查！');
+                                console.log(equips);
                             }
+                        }
+                        processAmulets();
+                    }
+
+                    function processAmulets() {
+                        let amulets = [];
+                        genericPopupQuerySelectorAll('table.amulet-list input.equip-checkbox.amulet-item').forEach((e) => {
+                            if (e.checked) {
+                                amulets.push((new Amulet()).fromBuffText(e.getAttribute('original-item')));
+                            }
+                        });
+
+                        let bag = 0;
+                        pirlAmulets();
+
+                        function pirlAmulets() {
+                            if (amulets.length > 0) {
+                                genericPopupShowInformationTips(`转换果核...（${amulets.length}）`, 0);
+                                if ((bag & 1) == 0) {
+                                    bag++;
+                                    let ids = findAmuletIds(storeObjects, amulets);
+                                    if (ids.length > 0) {
+                                        beginPirlObjects(ids, refreshContainer, pirlAmulets);
+                                        return;
+                                    }
+                                }
+                                if (bag == 1) {
+                                    bag++;
+                                    let ids = findAmuletIds(bagObjects, amulets.slice());
+                                    if (ids.length > 0) {
+                                        let emptyCells = parseInt(document.querySelector(storeQueryString + ' > p.fyg_lh40.fyg_tc.text-gray')
+                                                                         ?.innerText?.match(/\d+/));
+                                        if (emptyCells >= ids.length) {
+                                            beginMoveObjects(ids, g_object_move_path.bag2store, refreshContainer, pirlAmulets);
+                                        }
+                                        else {
+                                            alert('仓库空间不足，清理无法继续，请检查！');
+                                            cancelProcess();
+                                        }
+                                        return;
+                                    }
+                                    else {
+                                        alert('有护符不存在，请在清理结束后检查！');
+                                        console.log(amulets);
+                                    }
+                                }
+                                else {
+                                    alert('有护符不存在，请在清理结束后检查！');
+                                    console.log(amulets);
+                                }
+                            }
+                            postProcess(15);
                         }
                     }
 
                     let fixedContent =
-                        '<div style="padding:20px 10px 10px 0px;color:blue;font-size:15px;"><b><ul>' +
-                          '<li>背包表中被选中的项将在操作过程中暂时移入仓库，操作完成后未被丢弃或转换为果核的项会恢复回背包</li>' +
+                        '<div style="padding:20px 10px 10px 0px;color:blue;font-size:16px;"><b><ul>' +
                           '<li>护符表中被选中的护符会被销毁并转换为果核，此操作不可逆，请谨慎使用</li>' +
+                          '<li>如果饰品栏有您欲销毁的护符，请确保仓库中届时有足够的空间容纳它们（饰品栏护符会在最后一个步骤销毁）</li>' +
                           '<li>装备表中被选中的装备会被丢弃，丢弃后的装备将出现在海滩上，并在24小时后消失，在它消失前您可随时捡回</li>' +
                           '<li>正在使用的装备不会出现在装备表中，如果您想要丢弃正在使用的装备，请首先将它替换下来</li>' +
                           `<li id="${g_genericPopupInformationTipsId}" style="color:red;">` +
@@ -3028,9 +3208,6 @@ function gudaq() {
                                   '.group-menu-items .group-menu-item:hover { background-color:#bbddff; } ' +
                               'b > span { color:purple; } ' +
                               'button.btn-group-selection { width:80px; float:right; } ' +
-                              'table.bag-list { width:100%; } ' +
-                                  'table.bag-list th.object-name { width:35%; text-align:left; } ' +
-                                  'table.bag-list th.object-property { width:65%; text-align:left; } ' +
                               'table.amulet-list { width:100%; } ' +
                                   'table.amulet-list th.object-name { width:20%; text-align:left; } ' +
                                   'table.amulet-list th.object-property { width:80%; text-align:left; } ' +
@@ -3041,15 +3218,12 @@ function gudaq() {
                           '</style>';
                     const menuItems =
                           '<div class="group-menu-items"><ul>' +
-                              '<li class="group-menu-item"><a href="#bag-div">背包</a></li>' +
                               '<li class="group-menu-item"><a href="#amulets-div">护符</a></li>' +
                               '<li class="group-menu-item"><a href="#equips1-div">武器装备</a></li>' +
                               '<li class="group-menu-item"><a href="#equips2-div">手臂装备</a></li>' +
                               '<li class="group-menu-item"><a href="#equips3-div">身体装备</a></li>' +
                               '<li class="group-menu-item"><a href="#equips4-div">头部装备</a></li>' +
                           '</ul></div>';
-                    const bagTable =
-                          '<table class="bag-list"><tr class="alt"><th class="object-name">内容</th><th class="object-property">属性</th></tr></table>';
                     const amuletTable =
                           '<table class="amulet-list"><tr class="alt"><th class="object-name">护符</th><th class="object-property">属性</th></tr></table>';
                     const equipTable =
@@ -3061,8 +3235,6 @@ function gudaq() {
                           '<button type="button" class="btn-group-selection" select-type="0">全选</button>';
                     const mainContent =
                         `${mainStyle}
-                         <div class="${g_genericPopupTopLineDivClass} bag-div" id="bag-div">
-                           <b class="group-menu">背包 （选中 <span>0</span>，空闲 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${bagTable}</div>
                          <div class="${g_genericPopupTopLineDivClass}" id="amulets-div">
                            <b class="group-menu">护符 （选中 <span>0</span>）（★：已加入护符组） ▼${menuItems}</b>${btnGroup}<p />${amuletTable}</div>
                          <div class="${g_genericPopupTopLineDivClass}" id="equips1-div">
@@ -3077,9 +3249,6 @@ function gudaq() {
                     genericPopupSetFixedContent(fixedContent);
                     genericPopupSetContent('清理库存', mainContent);
 
-                    genericPopupQuerySelector('div.bag-div').firstElementChild.firstElementChild
-                        .nextElementSibling.innerText = objectEmptyNodesCount(bagObjects);
-
                     genericPopupQuerySelectorAll('button.btn-group-selection').forEach((btn) => { btn.onclick = batchSelection; });
                     function batchSelection(e) {
                         let selType = parseInt(e.target.getAttribute('select-type'));
@@ -3093,33 +3262,7 @@ function gudaq() {
                     }
 
                     const objectTypeColor = [ '#e0fff0', '#ffe0ff', '#fff0e0', '#d0f0ff' ];
-                    let bag_selector = genericPopupQuerySelector('table.bag-list');
-                    let bagEquips = equipmentNodesToInfoArray(document.querySelectorAll(bagObjectsQueryString));
                     let bagAmulets = amuletNodesToArray(document.querySelectorAll(bagObjectsQueryString));
-                    bagEquips.slice().sort(equipmentInfoComparer).forEach((item) => {
-                        let eqMeta = g_equipMap.get(item[0]);
-                        let tr = document.createElement('tr');
-                        tr.style.backgroundColor = objectTypeColor[3];
-                        tr.innerHTML =
-                            `<td><input type="checkbox" class="equip-checkbox equip-item" id="bag-${item[7]}"
-                                        original-item="${item.join(',')}" />
-                                 <label for="bag-${item[7]}" style="margin-left:5px;cursor:pointer;">
-                                        ${eqMeta.alias} - Lv.${item[1]}${item[6] == 1 ? ' - [ 神秘 ]' : ''}</label></td>
-                             <td>${formatEquipmentAttributes(item, ', ')}</td>`;
-                        bag_selector.appendChild(tr);
-                    });
-                    bagAmulets.slice().sort((a , b) => a.compareTo(b, true)).forEach((item) => {
-                        let tr = document.createElement('tr');
-                        tr.style.backgroundColor = objectTypeColor[item.type];
-                        tr.innerHTML =
-                            `<td><input type="checkbox" class="equip-checkbox amulet-item" id="bag-${item.id}"
-                                        original-item="${item.formatBuffText()}" />
-                                 <label for="bag-${item.id}" style="margin-left:5px;cursor:pointer;">
-                                        ${item.formatName()}</label></td>
-                             <td>${item.formatBuff()}</td>`;
-                        bag_selector.appendChild(tr);
-                    });
-
                     let groupAmulets = [];
                     amuletLoadGroups().toArray().forEach((group) => { groupAmulets.push(group.items); });
                     groupAmulets = groupAmulets.flat().sort((a , b) => a.compareMatch(b));
@@ -3144,7 +3287,7 @@ function gudaq() {
                     let eqIndex = 0;
                     let eq_selectors = genericPopupQuerySelectorAll('table.equip-list');
                     let storeEquips = equipmentNodesToInfoArray(document.querySelectorAll(storeObjectsQueryString));
-                    storeEquips.concat(bagEquips).sort((e1, e2) => {
+                    storeEquips.sort((e1, e2) => {
                         if (e1[0] != e2[0]) {
                             return (g_equipMap.get(e1[0]).index - g_equipMap.get(e2[0]).index);
                         }
@@ -3172,7 +3315,7 @@ function gudaq() {
                     let btnGo = genericPopupAddButton('开始', 80, (() => {
                         operationEnabler(false);
                         genericPopupQuerySelector('#disclaimer-check').disabled = 'disabled';
-                        beginScheduleBag();
+                        processEquips();
                     }), false);
                     let btnCancel = genericPopupAddButton('取消', 80, () => {
                         operationEnabler(false);
@@ -3189,7 +3332,7 @@ function gudaq() {
                     operationEnabler(false);
                     genericPopupQuerySelector('#disclaimer-check').onchange = ((e) => { operationEnabler(e.target.checked); });
 
-                    let objectsCount = bagEquips.length + bagAmulets.length + storeEquips.length + storeAmulets.length;
+                    let objectsCount = bagAmulets.length + storeEquips.length + storeAmulets.length;
                     genericPopupSetContentSize(Math.min((objectsCount * 31) + (6 * 104), Math.max(window.innerHeight - 400, 400)),
                                                Math.min(1000, Math.max(window.innerWidth - 200, 600)),
                                                true);
@@ -3296,18 +3439,21 @@ function gudaq() {
                     });
                 }
 
-                let equipmentStoreExpand = setupConfigCheckbox(equipmentDiv.querySelector('#equipment_StoreExpand'),
-                                                               g_equipmentStoreExpandStorageKey,
-                                                               (checked) => { switchObjectContainerStatus(!(equipmentStoreExpand = checked)); },
-                                                               null);
-                let equipmentExpand = setupConfigCheckbox(equipmentDiv.querySelector('#equipment_Expand'),
-                                                          g_equipmentExpandStorageKey,
-                                                          (checked) => { collapseEquipmentDiv(equipmentExpand = checked, true); },
-                                                          null);
-                let equipmentBG = setupConfigCheckbox(equipmentDiv.querySelector('#equipment_BG'),
-                                                      g_equipmentBGStorageKey,
-                                                      (checked) => { changeEquipmentDivStyle(equipmentBG = checked); },
-                                                      null);
+                let equipmentStoreExpand = setupConfigCheckbox(
+                    equipmentDiv.querySelector('#equipment_StoreExpand'),
+                    g_equipmentStoreExpandStorageKey,
+                    (checked) => { switchObjectContainerStatus(!(equipmentStoreExpand = checked)); },
+                    null);
+                let equipmentExpand = setupConfigCheckbox(
+                    equipmentDiv.querySelector('#equipment_Expand'),
+                    g_equipmentExpandStorageKey,
+                    (checked) => { collapseEquipmentDiv(equipmentExpand = checked, true); },
+                    null);
+                let equipmentBG = setupConfigCheckbox(
+                    equipmentDiv.querySelector('#equipment_BG'),
+                    g_equipmentBGStorageKey,
+                    (checked) => { changeEquipmentDivStyle(equipmentBG = checked); },
+                    null);
 
                 function addCollapse() {
                     let waitForBtn = setInterval(() => {
@@ -3339,8 +3485,8 @@ function gudaq() {
                                     }
                                 }
                                 if (!(document.getElementsByClassName('collapsed')?.length > 0)) {
-                                    document.getElementById('backpacks')
-                                            .insertBefore(equipmentDiv, document.getElementById('backpacks').firstChild.nextSibling);
+                                    let backpacks = document.getElementById('backpacks');
+                                    backpacks.insertBefore(equipmentDiv, backpacks.firstElementChild);
                                 }
                                 for (let i = eqbtns.length - 1; i >= 0; i--) {
                                     if (eqbtns[i].className.split(' ')[0] == 'popover') {
@@ -4109,23 +4255,26 @@ function gudaq() {
                                 if (amuletButtonsGroupContainer == null) {
                                     amuletButtonsGroupContainer = document.createElement('div');
                                     amuletButtonsGroupContainer.id = 'amulet_management_btn_group';
-                                    amuletButtonsGroupContainer.style.width = '100px';
-                                    amuletButtonsGroupContainer.style.float = 'right';
-                                    document.getElementById('backpacks').children[0].appendChild(amuletButtonsGroupContainer);
+                                    amuletButtonsGroupContainer.className = 'alert alert-danger';
+                                    amuletButtonsGroupContainer.style.textAlign = 'center';
+                                    amuletButtonsGroupContainer.style.marginBottom = '0px';
+
+                                    let eqDiv = document.querySelector('#equipmentDiv');
+                                    eqDiv.insertBefore(amuletButtonsGroupContainer, eqDiv.firstChild);
 
                                     let exportAmuletsBtn = document.createElement('button');
                                     exportAmuletsBtn.innerText = '导出护符';
-                                    exportAmuletsBtn.style.width = '100%';
-                                    exportAmuletsBtn.style.marginBottom = '1px';
+                                    exportAmuletsBtn.style.width = '19%';
+                                    exportAmuletsBtn.style.marginRight = '1px';
                                     exportAmuletsBtn.onclick = (() => {
                                         exportAmulets();
                                     });
                                     amuletButtonsGroupContainer.appendChild(exportAmuletsBtn);
 
                                     let beginClearBagBtn = document.createElement('button');
-                                    beginClearBagBtn.innerText = '清空背包';
-                                    beginClearBagBtn.style.width = '100%';
-                                    beginClearBagBtn.style.marginBottom = '1px';
+                                    beginClearBagBtn.innerText = '清空饰品栏';
+                                    beginClearBagBtn.style.width = '19%';
+                                    beginClearBagBtn.style.marginRight = '1px';
                                     beginClearBagBtn.onclick = (() => {
                                         genericPopupShowProgressMessage('处理中，请稍候...');
                                         beginClearBag(
@@ -4134,10 +4283,22 @@ function gudaq() {
                                     });
                                     amuletButtonsGroupContainer.appendChild(beginClearBagBtn);
 
+                                    let clearAmuletGroupBtn = document.createElement('button');
+                                    clearAmuletGroupBtn.innerText = '清除护符组';
+                                    clearAmuletGroupBtn.style.width = '19%';
+                                    clearAmuletGroupBtn.style.marginRight = '1px';
+                                    clearAmuletGroupBtn.onclick = (() => {
+                                        if (confirm('要删除全部已保存的护符组信息吗？')) {
+                                            amuletClearGroups();
+                                            alert('已删除全部预定义护符组信息。');
+                                        }
+                                    });
+                                    amuletButtonsGroupContainer.appendChild(clearAmuletGroupBtn);
+
                                     let amuletSaveGroupBtn = document.createElement('button');
                                     amuletSaveGroupBtn.innerText = '存为护符组';
-                                    amuletSaveGroupBtn.style.width = '100%';
-                                    amuletSaveGroupBtn.style.marginBottom = '1px';
+                                    amuletSaveGroupBtn.style.width = '19%';
+                                    amuletSaveGroupBtn.style.marginRight = '1px';
                                     amuletSaveGroupBtn.onclick = (() => {
                                         let groupName = inputAmuletGroupName('');
                                         if (groupName != null) {
@@ -4154,24 +4315,12 @@ function gudaq() {
 
                                     let manageAmuletGroupBtn = document.createElement('button');
                                     manageAmuletGroupBtn.innerText = '管理护符组';
-                                    manageAmuletGroupBtn.style.width = '100%';
-                                    manageAmuletGroupBtn.style.marginBottom = '1px';
+                                    manageAmuletGroupBtn.style.width = '19%';
                                     manageAmuletGroupBtn.onclick = (() => {
                                         genericPopupInitialize();
                                         showAmuletGroupsPopup();
                                     });
                                     amuletButtonsGroupContainer.appendChild(manageAmuletGroupBtn);
-
-                                    let clearAmuletGroupBtn = document.createElement('button');
-                                    clearAmuletGroupBtn.innerText = '清除护符组';
-                                    clearAmuletGroupBtn.style.width = '100%';
-                                    clearAmuletGroupBtn.onclick = (() => {
-                                        if (confirm('要删除全部已保存的护符组信息吗？')) {
-                                            amuletClearGroups();
-                                            alert('已删除全部预定义护符组信息。');
-                                        }
-                                    });
-                                    amuletButtonsGroupContainer.appendChild(clearAmuletGroupBtn);
 
                                     document.getElementById(storeButtonId).onclick = (() => {
                                         if ($(storeQueryString).css('display') == 'none') {
@@ -4202,80 +4351,9 @@ function gudaq() {
 
                 const g_genCalcCfgPopupLinkId = 'gen_calc_cfg_popup_link';
                 const g_bindingPopupLinkId = 'binding_popup_link';
-                const g_cardOnekeyLinkId = 'card_one_key_link';
                 const g_bindingSolutionId = 'binding_solution_div';
                 const g_bindingListSelectorId = 'binding_list_selector';
                 const g_equipOnekeyLinkId = 'equip_one_key_link';
-
-                function switchCardTemporarily(roleId) {
-                    let role = g_roleMap.get(roleId);
-                    if (role == undefined) {
-                        return;
-                    }
-
-                    genericPopupInitialize();
-                    genericPopupShowProgressMessage('正在切换，请稍候...');
-
-                    const upcard_data = getPostData(/upcard\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*"/).slice(7, -1);
-                    const halosave_data = getPostData(/halosave\(\)\{[\s\S]*\}/m, /data: ".*\+savearr\+.*"/).slice(7, -1);
-
-                    let roleInfo = [];
-                    let haloInfo = [];
-                    beginReadRoleAndHalo(roleInfo, haloInfo, switchToTempCard, null);
-
-                    function switchCardCompletion() {
-                        genericPopupClose();
-                        window.location.reload();
-                    }
-
-                    function switchToTempCard() {
-                        if (roleInfo.length == 2 && haloInfo.length == 3) {
-                            const infoHTML =
-                                  `<div style="display:block;width:100%;color:#0000c0;text-align:center;font-size:20px;padding-top:50px;"><b>
-                                   <p></p><span style="width:100%;">当前卡片已经由 [ ${roleInfo[1]} ] 临时切换至 ` +
-                                  `[ ${g_roleMap.get(roleId)?.name ?? 'UNKNOW'} ]</span><br><br>
-                                   <p></p><span style="width:100%;">请切换至搜刮页面尽快完成搜刮操作</span><br><br>
-                                   <p></p><span style="width:100%;">并返回本页面点击“恢复”按钮以恢复之前的卡片和光环设置</span></b></div>`;
-                            genericPopupSetContent(`临时装备卡片 [ ${g_roleMap.get(roleId)?.name ?? 'UNKNOW'} ]`, infoHTML);
-                            genericPopupSetContentSize(300, 600, false);
-                            genericPopupAddButton('恢复', 80, restoreCardAndHalo, false);
-
-                            switchCard(roleId, null, genericPopupShowModal, false);
-                        }
-                        else {
-                            alert('无法读取当前装备卡片和光环信息，卡片未切换！');
-                            switchCardCompletion();
-                        }
-                    }
-
-                    function restoreCardAndHalo() {
-                        genericPopupShowProgressMessage('正在恢复，请稍候...');
-                        switchCard(roleInfo[0], haloInfo[2], switchCardCompletion, null);
-                    }
-
-                    function switchCard(newRoleId, newHaloArray, fnFurtherProcess, fnParams) {
-                        let cardData = upcard_data.replace('"+id+"', newRoleId);
-                        $.ajax({ url:g_postUrl, type: g_postMethod, headers: g_postHeader, data: cardData,processData: false, })
-                            .done(response => {
-                            if (response == 'ok' || response == '你没有这张卡片或已经装备中') {
-                                    if (newHaloArray?.length > 0) {
-                                        let haloData = halosave_data.replace('"+savearr+"', newHaloArray.join());
-                                        $.ajax({ url:g_postUrl, type: g_postMethod, headers: g_postHeader, data: haloData,processData: false, })
-                                            .done(response => { if (fnFurtherProcess != null) { fnFurtherProcess(fnParams); } });
-                                        return;
-                                    }
-                                }
-                                else {
-                                    alert('无法完成卡片和光环切换，请尝试手动进行！');
-                                    switchCardCompletion();
-                                    return;
-                                }
-                                if (fnFurtherProcess != null) {
-                                    fnFurtherProcess(fnParams);
-                                }
-                        });
-                    }
-                }
 
                 function equipOnekey() {
                     const upcard_data = getPostData(/upcard\(id\)\{[\s\S]*\}/m, /data: ".*\+id\+.*"/).slice(7, -1);
@@ -4285,7 +4363,9 @@ function gudaq() {
                     function roleSetupCompletion() {
                         httpRequestClearAll();
                         genericPopupClose();
-                        window.location.reload();
+
+                        // refresh #carding & #backpacks
+                        cding();
                     }
 
                     function checkForRoleSetupCompletion() {
@@ -4304,23 +4384,6 @@ function gudaq() {
                         checkForRoleSetupCompletion();
                     }
 
-                    let scheduledObjects = { equips : [] , amulets : [] , exchanged : [] };
-                    function beginBagRestore() {
-                        if (scheduledObjects.equips.length == 0 && scheduledObjects.amulets.length == 0) {
-                            amuletLoadCompletion();
-                        }
-                        else {
-                            beginRestoreObjects(null, scheduledObjects.amulets, scheduledObjects.equips, amuletLoadCompletion, null);
-                        }
-                    }
-
-                    function beginUnloadExchangedEquipments(bag) {
-                        beginMoveObjects(findEquipmentIds(bag, scheduledObjects.exchanged),
-                                         g_object_move_path.bag2store,
-                                         beginBagRestore,
-                                         null);
-                    }
-
                     function beginAmuletLoadGroups() {
                         if (amuletGroupsToLoad?.length > 0) {
                             genericPopupTaskSetState(2);
@@ -4337,23 +4400,17 @@ function gudaq() {
                         genericPopupTaskComplete(2, equipmentOperationError > 0);
 
                         if (amuletGroupsToLoad != null) {
-                            genericPopupTaskSetState(2, '- 清理装备...');
+                            genericPopupTaskSetState(2, '- 清理饰品...');
                             beginClearBag(null, null, beginAmuletLoadGroups, null);
                         }
                         else {
-                            genericPopupTaskSetState(2, '- 恢复背包...');
-                            if (scheduledObjects.exchanged.length > 0) {
-                                beginReadObjects(originalBag = [], null, beginUnloadExchangedEquipments, originalBag);
-                            }
-                            else {
-                                beginBagRestore();
-                            }
+                            amuletLoadCompletion();
                         }
                     }
 
                     let equipmentOperationError = 0;
                     let putonRequestsCount;
-                    function putonEquipments(objects, fnFurtherProcess, fnParams) {
+                    function putonEquipments(objects, fnPostProcess, fnParams) {
                         if (objects?.length > 0) {
                             let ids = [];
                             while (ids.length < g_maxConcurrentRequests && objects.length > 0) {
@@ -4361,27 +4418,27 @@ function gudaq() {
                             }
                             if ((putonRequestsCount = ids.length) > 0) {
                                 while (ids.length > 0) {
-                                    let request = $.ajax({ url:g_postUrl, type: g_postMethod, headers: g_postHeader, data: puton_data.replace('"+id+"', ids.shift()),processData: false, })
-                                            .done(response => {
-                                                if (response != 'ok') {
-                                                    equipmentOperationError++;
-                                                    console.log(response);
-                                                }
-                                                if (--putonRequestsCount == 0) {
-                                                    putonEquipments(objects, fnFurtherProcess, fnParams);
-                                                }
-                                            });
-                                    httpRequestRegister(request);
+                                    httpRequestBegin(
+                                        false,
+                                        puton_data.replace('"+id+"', ids.shift()),
+                                        (response) => {
+                                            if (response.responseText.indexOf('已装备') < 0) {
+                                                equipmentOperationError++;
+                                                console.log(response.responseText);
+                                            }
+                                            if (--putonRequestsCount == 0) {
+                                                putonEquipments(objects, fnPostProcess, fnParams);
+                                            }
+                                        });
                                 }
                                 return;
                             }
                         }
-                        if (fnFurtherProcess != null) {
-                            fnFurtherProcess(fnParams);
+                        if (fnPostProcess != null) {
+                            fnPostProcess(fnParams);
                         }
                     }
 
-                    let originalBag, originalStore;
                     let currentEquipments = equipmentNodesToInfoArray(document.querySelectorAll(cardingObjectsQueryString));
                     function beginPutonEquipments(bindInfo) {
                         genericPopupTaskSetState(2, '- 检查装备...');
@@ -4396,64 +4453,20 @@ function gudaq() {
                         if (equipsToPuton.length == 0) {
                             beginLoadAmulets();
                         }
-                        else if (!(originalBag?.length > 0)) {
-                            beginReadObjects(originalBag = [], originalStore = [], scheduleEquipments, null);
-                        }
+                        else {
+                            let store;
+                            beginReadObjects(null, store = [], scheduleEquipments, null);
 
-                        function scheduleEquipments() {
-                            function rescheduleEquipments() {
-                                genericPopupTaskSetState(2, '- 检查装备...');
-                                beginReadObjects(originalBag = [], originalStore = [], scheduleEquipments, null);
-                            }
-
-                            let eqs = equipsToPuton.slice();
-                            let eqsInBag = findEquipmentIds(originalBag, eqs);
-                            if (eqsInBag.length == equipsToPuton.length) {
-                                genericPopupTaskSetState(2, `- 穿戴装备...（${eqsInBag.length}）`);
-                                putonEquipments(eqsInBag, beginLoadAmulets, null);
-                                return;
-                            }
-
-                            for (let i = eqs.length - 1; i >= 0; i--) {
-                                scheduledObjects.exchanged.push(currentEquipments[g_equipMap.get(eqs[i][0]).type]);
-                            }
-
-                            let eqsInStore = findEquipmentIds(originalStore, eqs);
-                            if (eqs.length > 0) {
-                                console.log(eqs);
-                                alert('有装备不存在，请重新检查绑定！');
-                                window.location.reload();
-                                return;
-                            }
-
-                            let ids = [];
-                            let freeCellsNeeded = eqsInStore.length;
-                            for (let i = originalBag.length - 1; i >= 0; i--) {
-                                if (objectIsEmptyNode(originalBag[i])) {
-                                    if (--freeCellsNeeded == 0) {
-                                        genericPopupTaskSetState(2, `- 取出仓库...（${eqsInStore.length}）`);
-                                        beginMoveObjects(eqsInStore, g_object_move_path.store2bag, rescheduleEquipments, null);
-                                        return;
-                                    }
+                            function scheduleEquipments() {
+                                let eqIds = findEquipmentIds(store, equipsToPuton);
+                                if (equipsToPuton.length == 0) {
+                                    genericPopupTaskSetState(2, `- 穿戴装备...（${eqIds.length}）`);
+                                    putonEquipments(eqIds, beginLoadAmulets, null);
                                 }
                                 else {
-                                    let e = equipmentInfoParseNode(originalBag[i])
-                                    if (e != null) {
-                                        scheduledObjects.equips.push(e);
-                                        ids.unshift(parseInt(e[7]));
-                                    }
-                                    else if ((e = (new Amulet()).fromNode(originalBag[i]))?.isValid()) {
-                                        scheduledObjects.amulets.push(e);
-                                        ids.unshift(e.id);
-                                    }
-                                    else {
-                                        continue;
-                                    }
-                                    if (--freeCellsNeeded == 0) {
-                                        genericPopupTaskSetState(2, `- 调整空间...（${ids.length}）`);
-                                        beginMoveObjects(ids, g_object_move_path.bag2store, rescheduleEquipments, null);
-                                        return;
-                                    }
+                                    console.log(equipsToPuton);
+                                    alert('有装备不存在，请重新检查绑定！');
+                                    window.location.reload();
                                 }
                             }
                         }
@@ -4470,13 +4483,14 @@ function gudaq() {
                             });
                             if ((halo = halo.join(','))?.length > 0) {
                                 genericPopupTaskSetState(1, '- 设置光环...');
-                                let request = $.ajax({ url:g_postUrl, type: g_postMethod, headers: g_postHeader, data: halosave_data.replace('"+savearr+"', halo),processData: false, })
-                                    .done(response => {
+                                httpRequestBegin(
+                                    false,
+                                    halosave_data.replace('"+savearr+"', halo),
+                                    (response) => {
                                         genericPopupTaskSetState(1);
-                                        genericPopupTaskComplete(1, response != 'ok');
+                                        genericPopupTaskComplete(1, response.responseText != 'ok');
                                         checkForRoleSetupCompletion();
                                     });
-                                httpRequestRegister(request);
                                 return;
                             }
                         }
@@ -4490,12 +4504,9 @@ function gudaq() {
 
                         if (bindInfo[5]?.length > 0) {
                             amuletGroupsToLoad = bindInfo[5].split(',');
-                            genericPopupTaskSetState(2, '- 清理背包...');
-                            beginClearBag(null, null, beginPutonEquipments, bindInfo);
                         }
-                        else {
-                            beginPutonEquipments(bindInfo);
-                        }
+
+                        beginPutonEquipments(bindInfo);
                     }
 
                     let bindingElements = document.getElementById(g_bindingListSelectorId)?.value?.split(BINDING_NAME_SEPARATOR);
@@ -4506,24 +4517,24 @@ function gudaq() {
                         }
 
                         genericPopupInitialize();
-                        genericPopupTaskListPopupSetup('切换中...', 300, [ '卡片', '光环', '装备', '护符' ], equipOnekeyQuit);
+                        genericPopupTaskListPopupSetup('切换中...', 300, [ '卡片', '光环', '装备', '饰品' ], equipOnekeyQuit);
                         genericPopupShowModal(false);
 
                         let roleId = g_roleMap.get(bindingElements[0].trim()).id;
                         let bindInfo = bindingElements[1].trim().split(BINDING_ELEMENT_SEPARATOR)
-                        if (roleId == g_roleMap.get(document.getElementById('carding')
-                                                           ?.querySelector('div.text-info.fyg_f24.fyg_lh60')
+                        if (roleId == g_roleMap.get(document.querySelector('#carding div.text-info.fyg_f24.fyg_lh60')
                                                            ?.children[0]?.innerText)?.id) {
                             genericPopupTaskComplete(0);
                             beginRoleSetup(bindInfo);
                         }
                         else {
                             genericPopupTaskSetState(0, '- 装备中...');
-                            $.ajax({ url:g_postUrl, type: g_postMethod, headers: g_postHeader, data: upcard_data.replace('"+id+"', roleId)})
-                                .done(response => {
-                                console.log(response)
+                            httpRequestBegin(
+                                false,
+                                upcard_data.replace('"+id+"', roleId),
+                                (response) => {
                                     genericPopupTaskSetState(0);
-                                    if (response == 'ok' || response == '你没有这张卡片或已经装备中') {
+                                    if (response.responseText == 'ok' || response.responseText == '你没有这张卡片或已经装备中') {
                                         genericPopupTaskComplete(0);
                                         beginRoleSetup(bindInfo);
                                     }
@@ -6062,7 +6073,7 @@ function gudaq() {
                     }
                 }
 
-                function addBindBtn() {
+                function addRoleOperationBtn() {
                     let roleId = g_roleMap.get(document.querySelector('#backpacks > div.row > div.col-md-3 > span.text-info.fyg_f24')
                                                       ?.innerText)?.id;
 
@@ -6137,38 +6148,50 @@ function gudaq() {
                     refreshBindingSelector(roleId);
                 }
 
-                function addStoneTipsEnabler() {
+                function addStoneOperation() {
                     let divs = document.querySelectorAll('#backpacks div.col-sm-8.fyg_tr');
                     if (divs.length == 3) {
-                        let storageKeys = [ g_stoneProgressEquipTipStorageKey, g_stoneProgressCardTipStorageKey, g_stoneProgressHaloTipStorageKey,
-                            g_stoneAuto1StorageKey,g_stoneAuto2StorageKey,g_stoneAuto3StorageKey,g_stoneAuto4StorageKey,g_stoneAuto5StorageKey,g_stoneAuto6StorageKey];
-                        let i = 0;
-                        for (let tip of divs) {
+                        let stoneOpCfg = localStorage.getItem(g_stoneOperationStorageKey)?.split(',');
+                        if (!(stoneOpCfg?.length == 3)) {
+                            stoneOpCfg = [ '1', '1', '1' ];
+                            localStorage.setItem(g_stoneOperationStorageKey, '1,1,1');
+                        }
+                        for (let opTips of divs) {
                             let div = document.createElement('div');
-                            let id = 'stoneProgressTipCheckbox_' + i;
-                            if(i!=2){
-                                div.innerHTML =
-                                `<label for="${id}" style="margin-right:5px;cursor:pointer;">100% 进度提醒</label>
-                                 <input type="checkbox" id="${id}" />`;
-                                tip.appendChild(div);
-                                setupConfigCheckbox(div.querySelector('#' + id), storageKeys[i++], null, null);
-                            }
-                            else{
-                                div.innerHTML =`<label style="margin-right:5px;cursor:pointer;">自动收集:</label>
-                                <label for="stone1" style="margin-right:5px;cursor:pointer;">红石</label><input type="checkbox" id="stone1" />
-                                <label for="stone2" style="margin-right:5px;cursor:pointer;">银石</label><input type="checkbox" id="stone2" />
-                                <label for="stone3" style="margin-right:5px;cursor:pointer;">金石</label><input type="checkbox" id="stone3" />
-                                <label for="stone4" style="margin-right:5px;cursor:pointer;">梦石</label><input type="checkbox" id="stone4" />
-                                <label for="stone5" style="margin-right:5px;cursor:pointer;">虚石</label><input type="checkbox" id="stone5" />
-                                <label for="stone6" style="margin-right:5px;cursor:pointer;">幻石</label><input type="checkbox" id="stone6" />&nbsp;&nbsp;
-                                <label for="${id}" style="margin-right:5px;cursor:pointer;">100% 进度提醒</label><input type="checkbox" id="${id}" />`;
-                                tip.appendChild(div);
-                                setupConfigCheckbox(div.querySelector('#' + id), storageKeys[i++], null, null);
-                                for(let j=1;j<6;j++){
-                                    setupConfigCheckbox(div.querySelector('#stone' + j), storageKeys[j+2], null, null);
+                            div.style.marginBottom = '10px';
+                            div.innerHTML =
+                                `<b>100% 进度 </b><select class="stone-operation-options" style="width:100px;color:purple;">
+                                 <option value="0">无动作</option><option value="1">提醒</option><option value="2">自动触发</option></select>`;
+                            opTips.appendChild(div);
+                        }
+                        let opSelectors = document.querySelectorAll('#backpacks select.stone-operation-options');
+                        let stoneInfos = document.querySelectorAll('#backpacks div.col-sm-2.fyg_tc > button.btn');
+                        if (stoneInfos?.length > 0) {
+                            let stoneList = opSelectors[2];
+                            for (let stone of stoneInfos) {
+                                let infos = stone.innerHTML?.match(/(.石)（上限(\d+)）.+?>(\d+)</m);
+                                if (infos?.length == 4 && parseInt(infos[2]) != parseInt(infos[3])) {
+                                    let op = document.createElement('option');
+                                    op.innerText = '收集：' + infos[1];
+                                    op.value = '-' + (stone.getAttribute('onclick')?.match(/\d+/)?.[0] ?? '0');
+                                    stoneList.appendChild(op);
                                 }
                             }
+                            if (stoneList.children.length < 4) {
+                                if (stoneOpCfg[2] != '0') {
+                                    stoneOpCfg[2] = '0';
+                                    localStorage.setItem(g_stoneOperationStorageKey, stoneOpCfg.join(','));
+                                }
+                                stoneList.disabled = 'disabled';
+                            }
                         }
+                        opSelectors.forEach((e, i) => {
+                            e.onchange = (() => {
+                                opSelectors.forEach((e, i) => { stoneOpCfg[i] = e.value; });
+                                localStorage.setItem(g_stoneOperationStorageKey, stoneOpCfg.join(','));
+                            });
+                            e.value = stoneOpCfg[i];
+                        });
                     }
                 }
 
@@ -6213,23 +6236,16 @@ function gudaq() {
                                         $('.pop_main').hide()
                                     })
                                     let text = $('.pop_text');
-
-                                    let amulet = document.getElementById('backpacks').lastChild.children[1].innerText.match(/\+\d+/g);
-                                    for (let i = amulet.length - 1; i >= 0; i--) {
-                                        if (amulet[i][1] == '0') {
-                                            amulet.splice(i, 1);
-                                        }
-                                        else {
-                                            amulet[i] = g_amuletBuffs[i].shortMark + amulet[i];
-                                        }
+                                    let bagAmulets = [];
+                                    amuletNodesToArray(document.querySelectorAll(bagObjectsQueryString), bagAmulets);
+                                    let bagGroup = amuletCreateGroupFromArray('temp', bagAmulets);
+                                    if (bagGroup.isValid()) {
+                                        text[0].innerText = `AMULET ${bagGroup.formatBuffShortMark(' ', ' ', false)} ENDAMULET`;
                                     }
-                                    text[0].innerText = `AMULET ${amulet.join(' ').replace(/\+/g, ' ')} ENDAMULET`;
-
                                     text[1].innerText = `${data[0].slice(0, -1).join(' ')}`;
                                     text[2].innerText = `${data[1].slice(0, -1).join(' ')}`;
                                     text[3].innerText = `${data[2].slice(0, -1).join(' ')}`;
                                     text[4].innerText = `${data[3].slice(0, -1).join(' ')}`;
-
                                     for (let i = 0; i < bagdata.length; i++) {
                                         text[5 + i].innerText = `${bagdata[i].slice(0, -1).join(' ')}`;
                                     }
@@ -6281,7 +6297,7 @@ function gudaq() {
                                     $('.pop_main').show();
                                 });
                                 backpacksObserver.disconnect();
-                                addBindBtn();
+                                addRoleOperationBtn();
                                 backpacksObserver.observe(document.getElementById('backpacks'), { childList : true , characterData : true });
                             }
                             else {
@@ -6319,7 +6335,7 @@ function gudaq() {
                             calcBtn.disabled = 'disabled';
                             calcBtn.onclick = (() => {});
                             backpacksObserver.disconnect();
-                            addStoneTipsEnabler();
+                            addStoneOperation();
                             backpacksObserver.observe(document.getElementById('backpacks'), { childList : true , characterData : true });
                             break;
                         }
@@ -6349,15 +6365,18 @@ function gudaq() {
             g_beachForceExpandStorageKey,
             (checked) => {
                 forceExpand = checked;
-                document.getElementById('analyze-indicator').innerText = '正在分析...';
-                setTimeout(() => { expandEquipment(equipment); }, 50);
+                if (document.getElementById('beach_copy') != null) {
+                    document.getElementById('analyze-indicator').innerText = '正在分析...';
+                    setTimeout(() => { expandEquipment(equipment); }, 50);
+                }
             },
             null);
 
-        let beach_BG = setupConfigCheckbox(beachConfigDiv.querySelector('#beach_BG'),
-                                           g_beachBGStorageKey,
-                                           (checked) => { changeBeachStyle('beach_copy', beach_BG = checked); },
-                                           null);
+        let beach_BG = setupConfigCheckbox(
+            beachConfigDiv.querySelector('#beach_BG'),
+            g_beachBGStorageKey,
+            (checked) => { changeBeachStyle('beach_copy', beach_BG = checked); },
+            null);
 
         beachConfigDiv.querySelector('#siftSettings').onclick = (() => {
             loadTheme();
@@ -6474,7 +6493,7 @@ function gudaq() {
         let beach = document.getElementById('beachall');
         beach.parentNode.insertBefore(beachConfigDiv, beach);
 
-        let batbtns = document.querySelector('div.col-md-9 > div.panel.panel-primary > div.panel-body > div.btn-group > button.btn.btn-danger');
+        let batbtns = document.querySelector('div.col-md-12 > div.panel > div.panel-heading > div.btn-group > button.btn.btn-danger');
         let toAmuletBtn = document.createElement('button');
         toAmuletBtn.className = batbtns.className;
         toAmuletBtn.innerText = '批量沙滩装备转护符';
@@ -6499,38 +6518,33 @@ function gudaq() {
                 }
             }
 
-            function refreshBackpacks(fnFurtherProcess) {
+            function refreshStore(fnPostProcess) {
                 let asyncOperations = 1;
                 let asyncObserver = new MutationObserver(() => { asyncObserver.disconnect(); asyncOperations = 0; });
-                asyncObserver.observe(document.getElementById('backpacks'), { childList : true , subtree : true });
+                asyncObserver.observe(document.getElementById('wares'), { childList : true , subtree : true });
 
                 stbp();
 
                 let timer = setInterval(() => {
                     if (asyncOperations == 0) {
                         clearInterval(timer);
-                        if (fnFurtherProcess != null) {
-                            fnFurtherProcess();
+                        if (fnPostProcess != null) {
+                            fnPostProcess();
                         }
                     }
                 }, 200);
             }
 
-            function queryObjects(bag, queryBagId, ignoreEmptyCell, beach, beachEquipLevel) {
-                if (bag != null) {
-                    let nodes = document.getElementById('backpacks').children;
-                    if (queryBagId) {
-                        objectIdParseNodes(nodes, bag, null, ignoreEmptyCell);
-                    }
-                    else {
-                        let i = 0;
-                        for (let node of nodes) {
-                            let e = ((new Amulet()).fromNode(node) ?? equipmentInfoParseNode(node));
-                            if (e != null) {
-                                bag.push([ i++, e ]);
-                            }
-                        }
-                    }
+            function queryObjects(storeEquips, storeAmulets, beach, beachEquipLevel) {
+                freeCell = parseInt(document.querySelector('#wares > p.fyg_lh40.fyg_tc.text-gray')?.innerText?.match(/\d+/));
+                if (isNaN(freeCell)) {
+                    freeCell = 0;
+                }
+                if (storeEquips != null) {
+                    equipmentNodesToInfoArray(document.querySelectorAll('#wares > button.fyg_mp3'), storeEquips);
+                }
+                if (storeAmulets != null) {
+                    amuletNodesToArray(document.querySelectorAll('#wares > button.fyg_mp3'), storeAmulets);
                 }
                 if (beach != null) {
                     let nodes = document.getElementById('beachall').children;
@@ -6554,35 +6568,30 @@ function gudaq() {
                     ids.unshift(originalBeach.pop());
                 }
                 pickCount = ids.length;
-                beginMoveObjects(ids, g_object_move_path.beach2bag, refreshBackpacks, findPickedEquip);
+                beginMoveObjects(ids, g_object_move_path.beach2store, refreshStore, findPickedEquip);
             }
 
             function findPickedEquip() {
-                let bag = [];
-                queryObjects(bag, true, true, null, 0);
-                let ids = findNewObjects(bag, originalBag, (a, b) => a - b, false);
-                if (ids.length != pickCount) {
+                let equips = [];
+                queryObjects(equips);
+                let newEqs = findNewObjects(equips, originalStoreEquips, equipmentInfoComparer, true);
+                if (newEqs.length != pickCount) {
                     alert('从海滩拾取装备出错无法继续，请手动处理！');
                     window.location.reload();
                     return;
                 }
                 genericPopupShowInformationTips('熔炼装备...', 0);
-                beginPirlObjects(ids, refreshBackpacks, prepareNewAmulets);
+                let ids = [];
+                newEqs.forEach((i) => {
+                    ids.push(equips[i][7]);
+                });
+                beginPirlObjects(ids, refreshStore, prepareNewAmulets);
             }
 
-            const objectTypeColor = [ '#e0fff0', '#ffe0ff', '#fff0e0', '#d0f0ff' ];
-            let minBeachAmuletPointsToStore = [ 1, 1, 1 ];
-            let cfg = g_configMap.get('minBeachAmuletPointsToStore')?.value?.split(',');
-            if (cfg?.length == 3) {
-                cfg.forEach((item, index) => {
-                    if (isNaN(minBeachAmuletPointsToStore[index] = parseInt(item))) {
-                        minBeachAmuletPointsToStore[index] = 1;
-                    }
-                });
-            }
             function prepareNewAmulets() {
-                newAmulets = findNewObjects(amuletNodesToArray(document.getElementById('backpacks').children),
-                                            originalBag, (a, b) => a.id - b, false);
+                let amulets = [];
+                queryObjects(null, amulets);
+                newAmulets = findNewObjects(amulets, originalStoreAmulets, (a, b) => a.compareTo(b), false);
                 if (newAmulets.length != pickCount) {
                     alert('熔炼装备出错无法继续，请手动处理！');
                     window.location.reload();
@@ -6602,7 +6611,7 @@ function gudaq() {
                     document.getSelection().removeAllRanges();
                 }
                 genericPopupShowInformationTips((originalBeach.length > 0 ? '本批' : '全部') + '装备熔炼完成，请分类后继续', 0);
-                btnContinue.innerText = `继续 （剩余 ${originalBeach.length} 件装备）`;
+                btnContinue.innerText = `继续 （剩余 ${originalBeach.length} 件装备 / ${freeCell} 个空位）`;
                 btnContinue.disabled = '';
                 btnCloseOnBatch.disabled = '';
             }
@@ -6611,10 +6620,7 @@ function gudaq() {
                 btnContinue.disabled = 'disabled';
                 btnCloseOnBatch.disabled = 'disabled';
 
-                if (freeCell == 0) {
-                    scheduleFreeCell();
-                }
-                else if (pickCount > 0) {
+                if (pickCount > 0) {
                     let indices = [];
                     for (let li of amuletToDestroyList.children) {
                         indices.push(parseInt(li.getAttribute('item-index')));
@@ -6638,176 +6644,75 @@ function gudaq() {
                         coresCollected += indices.length;
                         pickCount -= indices.length;
                         genericPopupShowInformationTips('转换果核...', 0);
-                        beginPirlObjects(ids, refreshBackpacks, processNewAmulets);
+                        beginPirlObjects(ids, refreshStore, processNewAmulets);
                     }
                     else {
-                        let bag = [];
-                        queryObjects(bag, true, true, null, 0);
-                        let ids = findNewObjects(bag, originalBag, (a, b) => a - b, false);
-                        if (ids.length != pickCount) {
-                            alert('将新护符放入仓库出错无法继续，请手动处理！');
-                            window.location.reload();
-                            return;
-                        }
                         amuletToStoreList.innerHTML = '';
                         amuletsCollected += pickCount;
                         pickCount = 0;
-                        genericPopupShowInformationTips('放入仓库...', 0);
-                        beginMoveObjects(ids, g_object_move_path.bag2store, refreshBackpacks, processNewAmulets);
+                        processNewAmulets();
                     }
                 }
                 else if (originalBeach.length > 0) {
+                    queryObjects(originalStoreEquips, originalStoreAmulets);
+                    originalStoreEquips.sort(equipmentInfoComparer);
+                    originalStoreAmulets.sort((a, b) => a.compareTo(b));
                     pickEquip();
                 }
                 else {
-                    restoreBag(15);
+                    postProcess(15);
                 }
             }
 
-            let originalFreeCell = 0;
-            let originalBag = [];
-            let originalBeach = [];
-            let scheduledObjects = { equips : [] , amulets : [] };
+            function postProcess(closeCountDown) {
+                if (closeCountDown > 0) {
+                    genericPopupQuerySelector('#' + g_genericPopupInformationTipsId).previousSibling.innerText =
+                        `操作完成，共获得 ${amuletsCollected} 个护符， ${coresCollected} 个果核`;
+                    let timer = setInterval(() => {
+                        if (--closeCountDown == 0) {
+                            clearInterval(timer);
+                            genericPopupClose();
+                            window.location.reload();
+                        }
+                        else {
+                            genericPopupShowInformationTips(`窗口将在 ${closeCountDown} 秒后关闭`, 0);
+                        }
+                    }, 1000);
+                }
+                else {
+                    genericPopupClose();
+                    window.location.reload();
+                }
+            }
 
+            const objectTypeColor = [ '#e0fff0', '#ffe0ff', '#fff0e0', '#d0f0ff' ];
+            let minBeachAmuletPointsToStore = [ 1, 1, 1 ];
+            let cfg = g_configMap.get('minBeachAmuletPointsToStore')?.value?.split(',');
+            if (cfg?.length == 3) {
+                cfg.forEach((item, index) => {
+                    if (isNaN(minBeachAmuletPointsToStore[index] = parseInt(item))) {
+                        minBeachAmuletPointsToStore[index] = 1;
+                    }
+                });
+            }
+
+            let originalBeach = [];
+            let originalStoreEquips = [];
+            let originalStoreAmulets = [];
             let freeCell = 0;
             let amuletsCollected = 0;
             let coresCollected = 0;
             let newAmulets = null;
 
             let minBeachEquipLevelToAmulet = (g_configMap.get('minBeachEquipLevelToAmulet')?.value ?? 1);
-            queryObjects(originalBag, true, false, originalBeach, minBeachEquipLevelToAmulet);
+            queryObjects(null, null, originalBeach, minBeachEquipLevelToAmulet);
             if (originalBeach.length == 0) {
                 alert('海滩无可熔炼装备！');
                 return;
             }
-
-            function prepareBagList() {
-                let info = (originalFreeCell > 0 ? [ '可', '更多' ] : [ '请', '必要' ])
-                genericPopupShowInformationTips(`${info[0]}将部分背包内容入仓以提供${info[1]}的操作空间，点击“继续”开始`, 0);
-                amuletToStoreList.parentNode.parentNode.children[0].innerText = '背包内容';
-                amuletToDestroyList.parentNode.parentNode.children[0].innerText = '临时入仓';
-
-                queryObjects(originalBag = [], false, true, null, 0);
-                let bag = originalBag.slice().sort((a, b) => {
-                    if (Array.isArray(a[1]) && Array.isArray(b[1])) {
-                        return equipmentInfoComparer(a[1], b[1]);
-                    }
-                    else if (Array.isArray(a[1])){
-                        return -1;
-                    }
-                    else if (Array.isArray(b[1])){
-                        return 1;
-                    }
-                    return a[1].compareTo(b[1], true);
-                });
-                bag.forEach((item, index) => {
-                    let e = item[1];
-                    let isEq = Array.isArray(e);
-                    let li = document.createElement('li');
-                    li.style.backgroundColor = (isEq ? objectTypeColor[3] : objectTypeColor[e.type]);
-                    li.setAttribute('item-index', index);
-                    li.setAttribute('original-index', item[0]);
-                    li.innerText = (isEq ? `${g_equipMap.get(e[0]).alias} Lv.${e[1]}` : e.formatBuffText());
-                    amuletToStoreList.appendChild(li);
-                });
-            }
-
-            function scheduleFreeCell() {
-                let info = '背包已满，请选择至少一个背包内容暂时放入仓库以提供必要的操作空间。';
-                function refreshOriginalBag() {
-                    amuletToStoreList.innerHTML = '';
-                    amuletToDestroyList.innerHTML = '';
-
-                    originalFreeCell = 0;
-                    queryObjects(originalBag = [], true, false, null, 0);
-                    while (originalBag[originalBag.length - 1] == -1) {
-                        originalBag.pop();
-                        originalFreeCell++;
-                    }
-                    if (originalFreeCell == 0) {
-                        alert(info);
-                        scheduledObjects.equips = [];
-                        scheduledObjects.amulets = [];
-
-                        prepareBagList();
-                        btnContinue.disabled = '';
-                    }
-                    else {
-                        amuletToStoreList.parentNode.parentNode.children[0].innerText = '放入仓库';
-                        amuletToDestroyList.parentNode.parentNode.children[0].innerText = '转换果核';
-
-                        freeCell = originalFreeCell;
-                        originalBag.sort((a, b) => a - b);
-                        processNewAmulets();
-                    }
-                }
-
-                let storeObjectsCount = (amuletToDestroyList?.children?.length ?? 0);
-                if (originalFreeCell + storeObjectsCount == 0) {
-                    alert(info);
-                    btnContinue.disabled = '';
-                    return;
-                }
-                else if (storeObjectsCount == 0) {
-                    refreshOriginalBag();
-                    return;
-                }
-
-                let indices = [];
-                for (let li of amuletToDestroyList.children) {
-                    indices.push(parseInt(li.getAttribute('original-index')));
-                }
-                indices.sort((a, b) => a - b);
-
-                let ids = [];
-                indices.forEach((i) => {
-                    let e = originalBag[i][1];
-                    let isEq = Array.isArray(e);
-                    ids.push(isEq ? e[7] : e.id);
-                    (isEq ? scheduledObjects.equips : scheduledObjects.amulets).push(e);
-                });
-
-                genericPopupShowInformationTips('临时放入仓库...', 0);
-                beginMoveObjects(ids, g_object_move_path.bag2store, refreshBackpacks, refreshOriginalBag);
-            }
-
-            function restoreBag(closeCountDown) {
-                function restoreCompletion() {
-                    if (scheduledObjects.amulets.length > 0 || scheduledObjects.equips.length > 0) {
-                        alert('部分背包内容无法恢复，请手动处理！');
-                        console.log(scheduledObjects.equips);
-                        console.log(scheduledObjects.amulets);
-                        scheduledObjects.equips = [];
-                        scheduledObjects.amulets = [];
-                    }
-
-                    if (closeCountDown > 0) {
-                        genericPopupQuerySelector('#' + g_genericPopupInformationTipsId).previousSibling.innerText =
-                            `操作完成，共获得 ${amuletsCollected} 个护符， ${coresCollected} 个果核`;
-                        let timer = setInterval(() => {
-                            if (--closeCountDown == 0) {
-                                clearInterval(timer);
-                                genericPopupClose();
-                                window.location.reload();
-                            }
-                            else {
-                                genericPopupShowInformationTips(`窗口将在 ${closeCountDown} 秒后关闭`, 0);
-                            }
-                        }, 1000);
-                    }
-                    else {
-                        genericPopupClose();
-                        window.location.reload();
-                    }
-                }
-
-                if (scheduledObjects.equips.length == 0 && scheduledObjects.amulets.length == 0) {
-                    restoreCompletion();
-                }
-                else {
-                    genericPopupShowInformationTips('恢复背包内容...', 0);
-                    beginRestoreObjects(null, scheduledObjects.amulets, scheduledObjects.equips, refreshBackpacks, restoreCompletion);
-                }
+            else if (freeCell == 0) {
+                alert('仓库已满！');
+                return;
             }
 
             let fixedContent =
@@ -6833,19 +6738,8 @@ function gudaq() {
             let amuletToDestroyList = genericPopupQuerySelector('#amulet_to_destroy_list');
             amuletToStoreList.ondblclick = amuletToDestroyList.ondblclick = moveAmuletItem;
 
-            while (originalBag[originalBag.length - 1] == -1) {
-                originalBag.pop();
-                originalFreeCell++;
-            }
-            if (originalBag.length > 0) {
-                prepareBagList();
-            }
-            else {
-                freeCell = originalFreeCell;
-                genericPopupShowInformationTips('这会分批将海滩可熔炼装备转化为护符，请点击“继续”开始', 0);
-            }
-
-            let btnContinue = genericPopupAddButton(`继续 （剩余 ${originalBeach.length} 件装备 / ${originalFreeCell} 个背包空位）`,
+            genericPopupShowInformationTips('这会分批将海滩可熔炼装备转化为护符，请点击“继续”开始', 0);
+            let btnContinue = genericPopupAddButton(`继续 （剩余 ${originalBeach.length} 件装备 / ${freeCell} 个空位）`,
                                                     0, processNewAmulets, true);
             let btnCloseOnBatch = genericPopupAddButton('本批完成后关闭', 0, (() => { originalBeach = []; processNewAmulets(); }), false);
             btnCloseOnBatch.disabled = 'disabled';
@@ -6868,10 +6762,13 @@ function gudaq() {
             () => {
                 equipedbtn = bag.concat(store);
                 asyncOperations--;
-                $.ajax({ url:g_readUrl, type: g_postMethod, headers: g_postHeader, data: 'f=9',processData: false, })
-                    .done(response => {
+
+                httpRequestBegin(
+                    true,
+                    'f=9',
+                    (response) => {
                         let div0 = document.createElement('div');
-                        div0.innerHTML = response;
+                        div0.innerHTML = response.responseText;
 
                         equipedbtn = equipedbtn.concat(Array.from(div0.querySelectorAll('div.row > div.fyg_tc > button.fyg_mp3')));
                         equipedbtn.sort(objectNodeComparer);
@@ -7114,47 +7011,52 @@ function gudaq() {
             return -delta;
         }
 
-        document.querySelector('body').style.paddingBottom = '1000px';
+        document.body.style.paddingBottom = '1000px';
     }
     else if (window.location.pathname == g_guguzhenPK) {
         let pkConfigDiv = document.createElement('div');
         pkConfigDiv.style.className = 'panel-heading';
         pkConfigDiv.style.float = 'right';
         pkConfigDiv.innerHTML =
-            `<label for="forgeAutoCheckbox" style="margin-right:5px;cursor:pointer;">满进度自动生成</label>
+            `<label for="forgeAutoCheckbox" style="margin-right:5px;cursor:pointer;">满进度自动跳转</label>
              <input type="checkbox" id="forgeAutoCheckbox" style="margin-right:15px;" />
-            <label for="indexRallyCheckbox" style="margin-right:5px;cursor:pointer;">为攻击回合加注索引</label>
+             <label for="indexRallyCheckbox" style="margin-right:5px;cursor:pointer;">为攻击回合加注索引</label>
              <input type="checkbox" id="indexRallyCheckbox" style="margin-right:15px;" />
              <label for="keepPkRecordCheckbox" style="margin-right:5px;cursor:pointer;">暂时保持战斗记录</label>
              <input type="checkbox" id="keepPkRecordCheckbox" style="margin-right:15px;" />
              <label for="autoTaskEnabledCheckbox" style="margin-right:5px;cursor:pointer;">允许执行自定义任务</label>
              <input type="checkbox" id="autoTaskEnabledCheckbox" />`;
 
-        let forgeAuto = setupConfigCheckbox(pkConfigDiv.querySelector('#forgeAutoCheckbox'),
-                                                  g_forgeAutoStorageKey,
-                                                  (checked) => { forgeAuto = checked; },
-                                                  null);
+        let forgeAuto = setupConfigCheckbox(
+            pkConfigDiv.querySelector('#forgeAutoCheckbox'),
+            g_forgeAutoStorageKey,
+            (checked) => { forgeAuto = checked; },
+            null);
 
-        let indexRally = setupConfigCheckbox(pkConfigDiv.querySelector('#indexRallyCheckbox'),
-                                             g_indexRallyStorageKey,
-                                             (checked) => { indexRally = checked; },
-                                             null);
+        let indexRally = setupConfigCheckbox(
+            pkConfigDiv.querySelector('#indexRallyCheckbox'),
+            g_indexRallyStorageKey,
+            (checked) => { indexRally = checked; },
+            null);
 
-        let keepPkRecord = setupConfigCheckbox(pkConfigDiv.querySelector('#keepPkRecordCheckbox'),
-                                               g_keepPkRecordStorageKey,
-                                               (checked) => { keepPkRecord = checked; },
-                                               null);
+        let keepPkRecord = setupConfigCheckbox(
+            pkConfigDiv.querySelector('#keepPkRecordCheckbox'),
+            g_keepPkRecordStorageKey,
+            (checked) => { document.querySelector('#pk_text_more').style.display = ((keepPkRecord = checked) ? 'block' : 'none'); },
+            null);
 
-        let autoTaskEnabled = setupConfigCheckbox(pkConfigDiv.querySelector('#autoTaskEnabledCheckbox'),
-                                                  g_autoTaskEnabledStorageKey,
-                                                  () => { window.location.reload(); },
-                                                  null);
+        let autoTaskEnabled = setupConfigCheckbox(
+            pkConfigDiv.querySelector('#autoTaskEnabledCheckbox'),
+            g_autoTaskEnabledStorageKey,
+            () => { window.location.reload(); },
+            null);
 
         document.querySelector('div.panel.panel-primary > div.panel-heading').appendChild(pkConfigDiv);
 
         let div0_pk_text_more = document.createElement('div');
-        div0_pk_text_more.setAttribute('id', 'pk_text_more');
-        div0_pk_text_more.setAttribute('class', 'panel-body');
+        div0_pk_text_more.className = 'panel-body';
+        div0_pk_text_more.id = 'pk_text_more';
+        div0_pk_text_more.style.display = (keepPkRecord ? 'block' : 'none');
         document.getElementsByClassName('panel panel-primary')[1].appendChild(div0_pk_text_more);
 
         let addingRallyIndices = false;
@@ -7192,8 +7094,8 @@ function gudaq() {
 
                     panels.forEach((panel) => {
                         panel.onclick = ((e) => {
-                            if (e.target.className == 'col-md-2 fyg_tc' || e.target.parentNode.className == 'col-md-2 fyg_tc') {
-                                stoneProgressTip();
+                            if (e.currentTarget.className == 'col-md-2 fyg_tc' && (e.target.tagName == 'DIV' || e.target.tagName == 'SPAN')) {
+                                stoneProgressTip((succeeded, msgs) => { createUserMessageArea(msgs); });
                             }
                         });
                     });
@@ -7202,10 +7104,14 @@ function gudaq() {
         }
         setupNotificationClicker();
 
-        (new MutationObserver(() => {
-            stoneProgressTip();
-            setupNotificationClicker();
-        })).observe(document.querySelector('#pklist'), { characterData : true, childList : true, subtree : true });
+        let pkListObserver = new MutationObserver((mlist) => {
+            mlist?.forEach((e) => {
+                if (e.target?.className?.indexOf('fyg_colpz03') >= 0) {
+                    stoneProgressTip((succeeded, msgs) => { createUserMessageArea(msgs); });
+                    setupNotificationClicker();
+                }
+            });
+        });
 
         if (autoTaskEnabled) {
             let btngroup0 = document.createElement('div');
@@ -7292,15 +7198,17 @@ function gudaq() {
                                 execDiv.innerHTML =
                                     `<p></p><button type="button" class="btn" id="btnAutoTask" style="margin-right:15px;">任务执行</button>
                                      <input type="checkbox" id="checkStoneProgressCheckbox" style="margin-right:5px;" />
-                                     <label for="checkStoneProgressCheckbox" style="cursor:pointer;">任务执行过程中检查宝石进度提醒</label>`;
-                                let checkStoneProgress = setupConfigCheckbox(execDiv.querySelector('#checkStoneProgressCheckbox'),
-                                                                             g_autoTaskCheckStoneProgressStorageKey,
-                                                                             (checked) => { checkStoneProgress = checked; },
-                                                                             null);
+                                     <label for="checkStoneProgressCheckbox" style="cursor:pointer;">任务执行过程中检查宝石进度</label>`;
+                                let checkStoneProgress = setupConfigCheckbox(
+                                    execDiv.querySelector('#checkStoneProgressCheckbox'),
+                                    g_autoTaskCheckStoneProgressStorageKey,
+                                    (checked) => { checkStoneProgress = checked; },
+                                    null);
                                 col.appendChild(execDiv);
                                 btnAutoTask = document.getElementById('btnAutoTask');
 
                                 function gobattle() {
+                                    pkListObserver.disconnect();
                                     btnAutoTask.disabled = 'disabled';
                                     let times = [ 0, 0, 0 ];
                                     let sum = 0;
@@ -7325,23 +7233,40 @@ function gudaq() {
 
                                         function func0(time) {
                                             if (time == 0) {
-                                                if (times[0] != 0) {
-                                                    $.ajax({ url:g_readUrl, type: g_postMethod, headers: g_postHeader, data: 'f=12',processData: false, })
-                                                        .done(response => {
-                                                            let ap = response.match(/class="fyg_colpz03" style="font-size:32px;font-weight:900;">\d+</)[0].match(/>\d+</)[0].slice(1, -1);
-                                                            document.getElementsByClassName('fyg_colpz03')[0].innerText = ap;
-                                                            let rankp = response.match(/class="fyg_colpz02" style="font-size:32px;font-weight:900;">\d+%</)[0].match(/\d+%/)[0];
-                                                            document.getElementsByClassName('fyg_colpz02')[0].innerText = rankp;
-                                                            times[0] = 0;
+                                                function refreshPkInfo(fnPostProcess) {
+                                                    httpRequestBegin(
+                                                        true,
+                                                        'f=12',
+                                                        (response) => {
+                                                            document.getElementsByClassName('fyg_colpz03')[0].innerText =
+                                                                response.responseText.match(/class="fyg_colpz03".*?>(\d+)</)[1];
+                                                            document.getElementsByClassName('fyg_colpz02')[0].innerText =
+                                                                response.responseText.match(/class="fyg_colpz02".*?>(\d+%)</)[1];
+                                                            document.getElementsByClassName('fyg_colpz04')[0].innerText =
+                                                                response.responseText.match(/class="fyg_colpz04".*?>(\+\d+%)</)[1];
+                                                            if (fnPostProcess != null) {
+                                                                fnPostProcess();
+                                                            }
                                                         });
+                                                }
+
+                                                if (!breakTask && checkStoneProgress) {
+                                                    stoneProgressTip((succeeded, msgs) => {
+                                                        createUserMessageArea(msgs);
+                                                        refreshPkInfo(() => { times[0] = 0; });
+                                                    });
+                                                }
+                                                else {
+                                                    refreshPkInfo(() => { times[0] = 0; });
                                                 }
                                             }
                                             else if (checkStoneProgress) {
-                                                stoneProgressTip((tip) => {
-                                                    if (tip) {
+                                                stoneProgressTip((succeeded, msgs) => {
+                                                    createUserMessageArea(msgs);
+                                                    if (!succeeded) {
                                                         let div_info = document.createElement('div');
                                                         div_info.style.color = 'red';
-                                                        div_info.innerText = '有宝石收藏相关功能进度已满，请先行处理';
+                                                        div_info.innerText = '宝石收藏相关功能出错或进度已满，请先行处理';
                                                         btnAutoTask.parentNode.appendChild(div_info);
                                                         breakTask = true;
                                                         func0(0);
@@ -7379,21 +7304,25 @@ function gudaq() {
                                                     return gainText;
                                                 }
 
-                                                $.ajax({ url:g_postUrl, type: g_postMethod, headers: g_postHeader, data: gox_data,processData: false, })
-                                                    .done(response => {
-                                                            let gainText = parseGainResponse(response);
+                                                httpRequestBegin(
+                                                    false,
+                                                    gox_data,
+                                                    (response) => {
+                                                        let gainText = parseGainResponse(response.responseText);
                                                         if (gainText.length > 0) {
                                                             let div_info = document.createElement('div');
                                                             div_info.innerHTML = gainText;
                                                             btnAutoTask.parentNode.appendChild(div_info);
                                                             func0(time - 1);
-                                                        } else {
+                                                        }
+                                                        else {
                                                             let div_info = document.createElement('div');
                                                             div_info.innerText = '段位进度不足或无法识别的应答信息';
                                                             btnAutoTask.parentNode.appendChild(div_info);
+                                                            breakTask = true;
                                                             func0(0);
                                                         }
-                                                     });
+                                                    });
                                             }
                                         }
 
@@ -7422,6 +7351,8 @@ function gudaq() {
                                             if (time == 0) {
                                                 times[2] = 0;
                                                 btnAutoTask.disabled = '';
+                                                pkListObserver.observe(document.querySelector('#pklist'),
+                                                                       { characterData : true, childList : true, subtree : true });
                                                 return;
                                             }
                                             let observerPk = new MutationObserver((mutationsList, observer) => {
@@ -7448,9 +7379,6 @@ function gudaq() {
                                                 if (!breakTask) {
                                                     func1(times[1]);
                                                 }
-                                                else {
-                                                    btnAutoTask.disabled = '';
-                                                }
                                             }
                                         }, 1000);
 
@@ -7459,15 +7387,19 @@ function gudaq() {
                                                 clearInterval(waitFor1);
                                                 if (!breakTask) {
                                                     func2(times[2]);
+                                                    return;
                                                 }
-                                                else {
-                                                    btnAutoTask.disabled = '';
-                                                }
+                                                btnAutoTask.disabled = '';
+                                                pkListObserver.observe(document.querySelector('#pklist'),
+                                                                       { characterData : true, childList : true, subtree : true });
                                             }
                                         }, 1000);
-                                    } else {
+                                    }
+                                    else {
                                         alert('体力不足');
                                         btnAutoTask.disabled = '';
+                                        pkListObserver.observe(document.querySelector('#pklist'),
+                                                               { characterData : true, childList : true, subtree : true });
                                     }
                                 }
                                 btnAutoTask.onclick = gobattle;
@@ -7490,6 +7422,7 @@ function gudaq() {
             });
             taskObserver.observe(document.getElementsByClassName('panel panel-primary')[0], { childList : true, subtree : true, });
         }
+        pkListObserver.observe(document.querySelector('#pklist'), { characterData : true, childList : true, subtree : true });
     }
     else if (window.location.pathname == g_guguzhenWish) {
         let timer = setInterval(() => {
