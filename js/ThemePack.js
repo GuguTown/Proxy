@@ -1100,13 +1100,14 @@ function register(username) {
         .fail(data => { console.log(data) });
 };
 function upload(way) {
+    console.log(way+" Uploading...");
     let text=beforeCloud(way),user_id,token,test=false;
     if(localStorage.momo_Cloud){
         let cupd=JSON.parse(localStorage.momo_Cloud);
         user_id=cupd[0];token=cupd[1];
     }
     else{ login(momoUser,"ltc",way);return;};
-    if(way=="test"){way="Cardupdate";test=true; };
+    if(way=="test"){way="Cardupdate";test=true;};
     let formData={
         "user_id":user_id,
         "token":token,
@@ -1133,7 +1134,7 @@ function download(way) {
         user_id=cupd[0];token=cupd[1];
     }
     else{ login(momoUser,"ctl",way);return;};
-    if(way=="test"){way="Cardbind";test=true;};
+    if(way=="test"){way="Cardbind";test=true;uuid="testfunc";};
     let formData={
         "user_id":user_id,
         "token":token,
@@ -1225,14 +1226,15 @@ function beforeCloud(way){
         encs = JSON.stringify(cardTemp);
     }
     else if(way=="Hufupdate"){
-        encs = localStorage.getItem(User+'_amulet_groups');
+        encs = localStorage.getItem(User+'_amulet_groups')||"";
     }
     else if(way=="Pkupdate"){
-        encs = localStorage.getItem("log_"+User);
+        encs = localStorage.getItem("log_"+User)||"";
     }
-    else{
+    else if(way=="test"){
         encs = localStorage.userTheme;
     };
+    if (encs==""){ console.log('Null Data');return;};
     let before=encs.length;
     console.log(way+" Raw Data Acquired!");
     console.log("Zipping "+way+" Data....")
@@ -1324,7 +1326,7 @@ function afterCloud(way,texts){
     else if(way=="Pkdate"){
         if(texts&&texts!={}){ localStorage.setItem('log_'+User,texts); console.log("Battle History Data Restored!"); };
     }
-    else{
+    else if(way=="test"){
         let encs=texts;
         if(encs==localStorage.userTheme){
             console.log("Test Passed!");
@@ -1334,6 +1336,9 @@ function afterCloud(way,texts){
             console.log(encs);
             console.log(localStorage.userTheme);
         };
+        console.log('Please Undo Changes In Cardbind!');
+        console.log("\n\n\n\n=== Test Finish! ===\n\n\n");
+        $('.themepack-uuid')[0].value="Finish!";
     };
 };
 
@@ -1417,11 +1422,15 @@ function uuidfunc(){
             uuid=temp;
             upload('Cardupdate');
             upload('Hufupdate');
+            $('.themepack-uuid')[0].value="Finish!";
         };
     };
+    $('.themepack-uuid')[0].value="Finish!";
 };
 function testfunc(){
-    upload("test")
+    console.log("\n\n\n\n=== Test Start ===\n\n\n\n");
+    uuid="testfunc";
+    upload("test");
 };
 
 
@@ -1441,7 +1450,8 @@ $(document).on('blur', "#btnAutoTask", function(){
         download('Hufugroup');
         e.target.value="Done!"
     }
-    else{e.target.value="Error!"; };
+    else if(temp=="test"){ e.target.value="Testing...";testfunc(); }
+    else { e.target.value="Error!"; };
 })
 .on('click',"button", function(){
     ccard=false;
@@ -1675,5 +1685,5 @@ if(window.location.href.indexOf('fyg_index.php') > -1&&window.location.href.inde
     download('Guhelper');
 }
 else{ finalInit(); };
-	
+
 });
