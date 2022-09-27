@@ -1,31 +1,4 @@
 $(document).ready(function(e) {
-// ==UserScript==
-// @name        GuguTown ThemePack Manager
-// @name:zh-CN  咕咕镇主题包管理器
-// @name:zh-TW  咕咕鎮主題包管理器
-// @name:ja     咕咕镇テーマパックマネージャー
-// @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.4.2
-// @description WebGame GuguTown ThemePack Manager.
-// @description:zh-CN 气人页游 咕咕镇 主题包管理器。
-// @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
-// @description:ja オンラインゲーム 咕咕镇 テーマパック マネージャー
-// @icon        https://sticker.inari.site/favicon.ico
-// @author      Hazuki Kaguya
-// @copyright   2022- Hazukikaguya
-// @match       https://*.guguzhen.com/*
-// @match       https://*.momozhen.com/*
-// @run-at      document-end
-// @require     https://greasyfork.org/scripts/450822-spine-webgl/code/spine-webgl.js?version=1098282
-// @require     https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js
-// @require     https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker.js
-// @license     MIT License
-// @downloadURL https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
-// @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
-// @grant       none
-// ==/UserScript==
-/* eslint-env jquery */
 'use strict';
 
 /**
@@ -1436,10 +1409,16 @@ function mySplit(str,leng){
 };
 function uuidfunc(){
     uuid=new Date().getTime().toString(36);
-    let tst=/^[a-z0-9]*$/g,temp=prompt(lang.puuid, uuid);
-    if(temp){ if(tst.test(temp)&&temp.length==8){ uuid=temp; }; };
     upload('Cardupdate');
     upload('Hufupdate');
+    let tst=/^[a-z0-9]*$/g,temp=prompt(lang.puuid, uuid);
+    if(temp){
+        if(tst.test(temp)&&temp.length==8){
+            uuid=temp;
+            upload('Cardupdate');
+            upload('Hufupdate');
+        };
+    };
 };
 function testfunc(){
     upload("test")
@@ -1670,13 +1649,14 @@ $(document).on('blur', "#btnAutoTask", function(){
     themeIcon(); oldEqName();
     if (custom.showCG == true) { themeFgimg(); };
 })
-.ajaxSuccess(function(){
+.ajaxSuccess(function(e,x){
     if(window.location.href.indexOf('fyg_index.php') != -1||window.location.href.indexOf('fyg_index.php#') == -1){
-        themeIcon();++soundonce;
-        if(custom.showCG == true){ themeFgimg();}else if(custom.showKanban==true||custom.voiceO==true){ equipKBVO() };
+        if(!x.responseJSON){
+            themeIcon();++soundonce;
+            if(custom.showCG == true){ themeFgimg();}else if(custom.showKanban==true||custom.voiceO==true){ equipKBVO() };
+        }
     };
 });
-
 
 
 /**
@@ -1695,5 +1675,5 @@ if(window.location.href.indexOf('fyg_index.php') > -1&&window.location.href.inde
     download('Guhelper');
 }
 else{ finalInit(); };
-
+	
 });
