@@ -1144,6 +1144,7 @@ function download(way) {
         if(data!=null){
             if (data.ret == 200) {
                 let tdt=data.data; tdt=tdt[way];
+                if(tdt==null){return;};
                 if(way!="Guhelper"||test){ if(test)way="test"; console.log(way+" Downloading..."); tdt=tdt.replace(/ /g, "+");console.log("Decrypting "+way+" Data..."); tdt=dec(tdt); console.log(way+" Data Decrypted!"); }
                 else{ console.log(way+" Downloading..."); };
                 console.log("Unzipping "+way+" Data...");tdt=unzip(tdt); console.log(way+" Data Unzipped!");
