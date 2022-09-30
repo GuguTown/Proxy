@@ -571,10 +571,11 @@ function finalInit(){
     let loadTime=new Date().getTime()-timeCheck;
     console.log("Load Finish! Takes "+loadTime+"ms");
     if(custom.showKanban==true&&nowTheme.spine==true){spineinit();};
+    if(localStorage.reload=="true"){localStorage.removeItem('reload');update();};
 };
 function update(){
     localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-    beforeCloud("Gupdater")
+    beforeCloud("Gupdater");
 };
 
 /* Theme Core */
@@ -1132,6 +1133,7 @@ function upload(way) {
             else if(data.data.ret!=200){ console.log(data);alert(data.data.ret+' Error! '+data.data.msg); return; }
             else{console.log(way+' successed!');};
             if(test){ download("test"); };
+            if(way=="Gupdate"){localStorage.setItem('momoConf_'+User, JSON.stringify(momoConf));};
         }
         else { alert(data.msg + data.ret);return; }
     })
@@ -1219,11 +1221,13 @@ function beforeCloud(way){
         if(localStorage.getItem(User)){
             let daqt=JSON.parse(localStorage.getItem(User));
             if(daqt.config) { momoConf.guDAQConf.config =daqt.config; };
+            if(daqt.dataBeachSift) { momoConf.guDAQConf.dataBeachSift =daqt.dataBeachSift; };
             if(daqt.calculatorTemplatePVE) { momoConf.guDAQConf.calculatorTemplatePVE =daqt.calculatorTemplatePVE; };
         };
         if(JSON.stringify(momoConf)!=localStorage.getItem('momoConf_'+User)){
-            localStorage.setItem('momoConf_'+User, JSON.stringify(momoConf));
-            if(localStorage.momo_Cloud){ upload('Gupdate'); }; return;
+            if(localStorage.momo_Cloud){ upload('Gupdate'); }
+            else{ localStorage.setItem('momoConf_'+User, JSON.stringify(momoConf)); };
+            return;
         }; return;
     }
     else if(way=="Gupdate"){
@@ -1294,6 +1298,7 @@ function afterCloud(way,texts){
         if(momoConf.guDAQConf&&momoConf.guDAQConf!={}){
             let DAQConf=momoConf.guDAQConf,daqt=JSON.parse(localStorage.getItem(User));
             if(DAQConf.config) { daqt.config =DAQConf.config; };
+            if(DAQConf.dataBeachSift) { daqt.dataBeachSift = DAQConf.dataBeachSift; };
             if(DAQConf.calculatorTemplatePVE) { daqt.calculatorTemplatePVE =DAQConf.calculatorTemplatePVE; };
             localStorage.setItem(User, JSON.stringify(daqt));
             if(DAQConf.over) { localStorage.setItem('over', DAQConf.over); };
@@ -1593,6 +1598,7 @@ $(document).on('blur', "#btnAutoTask", function(){
 .on('click',".themelang", function(){
     let ThemeLang = prompt('输入 zh 使用【简体中文】；\n輸入 zht 使用【繁體中文】；\nja を入力 表示言語【日本語】；\nInput en To show in 【English】.', "zh");
     if (ThemeLang) {
+        localStorage.setItem('reload',"true");
         if(ThemeLang=="zh"){ custom.language="zh"; update();location.reload();}
         else if(ThemeLang=="zht"){ custom.language="zht"; update();location.reload();}
         else if(ThemeLang=="ja"){ custom.language="ja"; update();location.reload();}
@@ -1601,6 +1607,7 @@ $(document).on('blur', "#btnAutoTask", function(){
     };
 })
 .on('click',".themepack-ls", function(){
+    localStorage.setItem('reload',"true");
     if (confirm(lang.themeSW)) {
         let ThemePack = prompt(lang.themeSA, "1");
         if (ThemePack) {
@@ -1620,7 +1627,7 @@ $(document).on('blur', "#btnAutoTask", function(){
                 }
                 else{ alert(lang.initUNU) };
             }
-            else{ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('upconf',false);update();location.reload();};
+            else{ console.log('classic');custom.ThemePack="classic";update();location.reload();};
         };
     }
     else{
@@ -1631,11 +1638,11 @@ $(document).on('blur', "#btnAutoTask", function(){
 })
 .on('click',".icons-size", function(){
     let IconSize = prompt(lang.iconUA, "50px");
-    if (IconSize) { custom.iconSize = IconSize; update();location.reload();};
+    if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('reload',"true");update();location.reload();};
 })
 .on('click',".kanban-size", function(){
     let KanbanSize = prompt(lang.kanbanUA, "100");
-    if (KanbanSize) { custom.kanbansize = KanbanSize; update();location.reload();};
+    if (KanbanSize) { custom.kanbansize = KanbanSize; localStorage.setItem('reload',"true");update();location.reload();};
 })
 .on('click',".themepack-usr", function(){
     let userTheme = prompt(lang.menuUA+'\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21',`${localStorage.userTheme}`);
@@ -1643,19 +1650,19 @@ $(document).on('blur', "#btnAutoTask", function(){
 })
 .on('click',".iconpack-switch", function(e){
     custom.useOldNames = e.target.checked;
-    update(); location.reload();
+    localStorage.setItem('reload',"true");update(); location.reload();
 })
 .on('click',".themepack-equip", function(e){
     custom.useThemeName = e.target.checked;
-    update(); location.reload();
+    localStorage.setItem('reload',"true");update(); location.reload();
 })
 .on('click',".themepack-showCG", function(e){
     custom.showCG = e.target.checked;
-    update(); location.reload();
+    localStorage.setItem('reload',"true");update(); location.reload();
 })
 .on('click',".themepack-showKB", function(e){
     custom.showKanban = e.target.checked;
-    update(); location.reload();
+    localStorage.setItem('reload',"true");update(); location.reload();
 })
 .on('click',".themepack-voiceO", function(e){
     custom.voiceO = e.target.checked;
@@ -1678,6 +1685,25 @@ $(document).on('blur', "#btnAutoTask", function(){
         }
     };
 });
+
+/* Other Update Event */
+$(document).on('change', ".stone-operation-options", function(){ beforeCloud("Gupdater"); })
+.on('click',"#indexRallyCheckbox", function() { beforeCloud("Gupdater"); })
+.on('click',"#keepPkRecordCheckbox", function() { beforeCloud("Gupdater"); })
+.on('click',"#autoTaskEnabledCheckbox", function() { beforeCloud("Gupdater"); })
+.on('click',".goxtip.smalldiv>input[type*='checkbox']", function() { beforeCloud("Gupdater"); })
+.on('change',".goxtip.smalldiv>select", function() { beforeCloud("Gupdater"); })
+.on('change',"#goxtipinfo>input[type*='text']", function() { beforeCloud("Gupdater"); })
+.on('click',"#goxtipinfo>input[type*='checkbox']", function() { beforeCloud("Gupdater"); })
+.on('change',"#timetogoxcheckbox", function() { beforeCloud("Gupdater"); })
+.on('change',"#timetogoxtime", function() { beforeCloud("Gupdater"); })
+.on('click',"#equipment_StoreExpand", function() { beforeCloud("Gupdater"); })
+.on('click',"#equipment_Expand", function() { beforeCloud("Gupdater"); })
+.on('click',"#equipment_BG", function() { beforeCloud("Gupdater"); })
+.on('click',"#beach_BG", function() { beforeCloud("Gupdater"); })
+.on('click',"#forceExpand", function() { beforeCloud("Gupdater"); })
+.on('click',"#generic-popup-foot-button-container>button", function() { beforeCloud("Gupdater"); localStorage.setItem('reload',"true");})
+.on('change',"input[oninput*='value=value.replace']", function() { beforeCloud("Gupdater"); });
 
 
 /**
