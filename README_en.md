@@ -1,4 +1,4 @@
-English | [Chinese](README_zh.md)  
+English | [Chinese](README.md)  
 # GuguTown Proxy —— Peach(momo) Town
 Webgame GuguTown unofficial froxy,with many useful plugins. Demo：https://momo.inari.site   
 If use demo,please change your hosts file，add this line to change 302 jump:    
