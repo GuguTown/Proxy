@@ -1,6 +1,6 @@
 [英文](README.md) | 中文  
-# 咕咕镇原版信息
-【[角色介绍](https://github.com/HazukiKaguya/GuguTownWiki/blob/main/char.md)】    【[装备列表](https://github.com/HazukiKaguya/GuguTownWiki/blob/main/equip.md)】    【[更新记录](https://github.com/HazukiKaguya/GuguTownWiki/blob/main/changelog.md)】
+# WIKI
+【[咕咕镇WIKI](https://github.com/HazukiKaguya/GuguTownWiki)】
 
 # 咕咕镇反代——桃子镇
 咕咕镇非官方反代，集成了各种实用脚本。演示地址：https://momo.inari.site   
