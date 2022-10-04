@@ -1,6 +1,6 @@
 [英文](README.md) | 中文  
 # 咕咕镇原版信息
-[【角色】](chars.md)    [【更新日志】](changelogs.md)
+[【角色介绍】](chars.md)    [【装备介绍】](equip.md)   [【更新日志】](changelogs.md)
 
 # 咕咕镇反代——桃子镇
 咕咕镇非官方反代，集成了各种实用脚本。演示地址：https://momo.inari.site   
