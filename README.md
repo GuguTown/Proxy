@@ -1,4 +1,7 @@
 [英文](README.md) | 中文  
+# 咕咕镇原版信息
+[【角色】](chars.md)    [【更新日志】](changelogs.md)
+
 # 咕咕镇反代——桃子镇
 咕咕镇非官方反代，集成了各种实用脚本。演示地址：https://momo.inari.site   
 要使用反代演示地址，请在 https://kf.inari.site 或 https://mkf.inari.site 登录账号，然后点击首页最下角的【咕咕镇】即可。   
