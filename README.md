@@ -1,8 +1,8 @@
 [英文](README.md) | 中文  
 # WIKI
-【[咕咕镇WIKI - Github载点](https://gugutown.github.io/Wiki)】   
+【[咕咕镇WIKI Github载点](https://gugutown.github.io/Wiki)】   
 
-【[咕咕镇WIKI - 一般载点](https://gu.inari.site/Wiki)】
+【[咕咕镇WIKI 普通载点](https://gu.inari.site/Wiki)】
 
 # 咕咕镇反代——桃子镇
 咕咕镇非官方反代，集成了各种实用脚本。演示地址：https://momo.inari.site   
