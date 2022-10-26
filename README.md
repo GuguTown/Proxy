@@ -5,8 +5,7 @@
 【[咕咕镇WIKI 普通载点](https://gu.inari.site/Wiki)】
 
 # 咕咕镇反代——桃子镇
-咕咕镇非官方反代，集成了各种实用脚本。演示地址：https://momo.inari.site   
-要使用反代演示地址，请在 https://kf.inari.site 或 https://mkf.inari.site 登录账号，然后点击首页最下角的【咕咕镇】即可。   
+咕咕镇非官方反代，集成了各种实用脚本。演示地址：https://momo.inari.site     
 使用演示地址请修改hosts文件，增加这行（为了劫持跳转）    
 使用自建反代请在电脑上将hosts设置为   
 `127.0.0.1 www.momozhen.com`    
