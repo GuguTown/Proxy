@@ -39,7 +39,7 @@ function FLASHbeach() {
 
 
 
-    var mydiv =$(".row>.row>.col-md-12>.panel>.panel-heading>.pull-right")[0];
+    var mydiv = $(".row>.row>.col-md-12>.panel>.panel-heading>.pull-right")[0];
     var text = mydiv.textContent
     if(!text.startsWith("距离下次随机装备")){
         alert("咕咕镇沙滩自动刷新脚本未获取到时间！");
@@ -56,7 +56,7 @@ function FLASHbeach() {
             await getstpage()
             await getstdata()
         }
-        window.location.reload();
+        unsafeWindow.location.reload();
     }, minute*60*1000);
     mydiv.textContent = text + " 将自动刷新"
 
@@ -129,6 +129,7 @@ function sxstbyxs(){
     })
 }
 
+
 FLASHbeach();
-window.FM_getValue = FM_getValue;
+Window.FM_getValue = FM_getValue;
 });
