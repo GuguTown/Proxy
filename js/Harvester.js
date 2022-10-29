@@ -1,5 +1,5 @@
 window.onload=function() {
-   (function(o) {
+(function(o) {
     "use strict";
     "function" == typeof define && define.amd ? define(["jquery"], o) : o(jQuery)
 }
@@ -196,6 +196,7 @@ function fyg_pk_html() {
     'use strict';
     console.log("fyg_pk_html init")
     var debugmode = false;
+    var goxing = false;
     var ctx = document.createElement("battleCountChart");
     var goxpanel= document.createElement('div');
     var goxpanelExtend= document.createElement('div');
@@ -218,9 +219,6 @@ function fyg_pk_html() {
         showcharlv = eval(localStorage.getItem('showcharlv'));
     }
 
-
-    var goxing = false;
-    var gx_sxdsing = false;
     var mainHost = "https://bbs.kfpromax.com/"
     if(localStorage.getItem('mainHost')!==null){
         mainHost = localStorage.getItem('mainHost');
@@ -238,8 +236,6 @@ function fyg_pk_html() {
     }
 
 
-    var autoreStaminaing = false;
-
     //var audio = new Audio("https://cdnringhlt.shoujiduoduo.com/ringres/user/a24/564/9246564.aac");
     //audio.load();
 
@@ -248,9 +244,9 @@ function fyg_pk_html() {
     var beike=0;
     var jingyan=0;
     if(localStorage.getItem('flashtime')===null){
-        localStorage.setItem('flashtime',10 );
+        localStorage.setItem('flashtime',30 );
     }
-    var maxtime = 10;
+    var maxtime = 30;
 
     maxtime = parseInt(localStorage.getItem('flashtime'));
     var time = maxtime;
@@ -371,14 +367,34 @@ function fyg_pk_html() {
     autoconfig.appendChild(autoreStaminacheckbox);
 
     let autoreStaminacheckboxtext = document.createElement('i');
-    autoreStaminacheckboxtext.innerText = "自动消耗星沙回体";
+    autoreStaminacheckboxtext.innerText = "自动消耗贝壳回体";
     autoreStaminacheckboxtext.setAttribute('style',"margin-right:20px;");
     autoreStaminacheckboxtext.setAttribute('class',"smalldiv");
     autoconfig.appendChild(autoreStaminacheckboxtext);
 
+    let autodrinkcheckbox = document.createElement('input');
+    autodrinkcheckbox.setAttribute('type','checkbox');
+    autodrinkcheckbox.addEventListener('change',function(){
+        if(autodrinkcheckbox.checked){
+            autoreStaminacheckbox.checked = true;
+        }
+    });
+    autoreStaminacheckbox.addEventListener('change',function(){
+        if(!autoreStaminacheckbox.checked){
+            autodrinkcheckbox.checked = false;
+        }
+    });
+    autoconfig.appendChild(autodrinkcheckbox);
+
+    let autodrinkcheckboxtext = document.createElement('i');
+    autodrinkcheckboxtext.innerText = "自动使用药水回体";
+    autodrinkcheckboxtext.setAttribute('style',"margin-right:20px;");
+    autodrinkcheckboxtext.setAttribute('class',"smalldiv");
+    autoconfig.appendChild(autodrinkcheckboxtext);
+
     //----------------------------------------------------------------------------------
 
-    let progresschange = document.createElement('div');  //显示log
+    let progresschange = document.createElement('div');
     progresschange.setAttribute('id','progresschange');
     progresschange.setAttribute('class','panel-body');
 
@@ -394,18 +410,13 @@ function fyg_pk_html() {
         g_ismanualmake = localStorage.getItem('g_ismanualmake') == "true";
         manualmakecheckbox.checked = g_ismanualmake
     }
-    /*    if(g_ismanualmake){
-        window.gox =
-    }*/
+
     var g_saveid = get_saveid();
     var g_gemid = -1;
     if(localStorage.getItem('g_gemid')!==null){
         g_gemid = parseInt(localStorage.getItem('g_gemid'));
         automakeselect.options[g_gemid].selected = true;
     }
-    var g_makeequiping = false;
-    var g_makecarding = false;
-    var g_makegeming = false;
 
     var gx_sxds_stopday = ""
 
@@ -434,12 +445,6 @@ function fyg_pk_html() {
         show_battle_log("主站域名:"+mainHost)
     }
 
-    function getNowtime(){
-        var date=getLocDate();
-        var datetext = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
-        return datetext;
-    }
-
     function dlog(text){
         if(debugmode){console.log(text)}
     }
@@ -456,10 +461,71 @@ function fyg_pk_html() {
         return data
     }
 
-    function postRequest(){
-         $.ajax({ url: window.location.origin + "/fyg_read.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data: 'f=12', processData: false, })
-            .done(response => {
-             Num++;
+//------------------------------------------------------------------------------------------
+    var read_rank_rightnow_flag = true
+
+    async function read_rank(){//主循环
+        if(maxtime <= 0){
+            $("#goxtiptext").text("无刷新");
+            return;
+        }
+        if(!read_rank_rightnow_flag && --time>0){
+            $("#goxtiptext").text("刷新进度倒计时 "+time);
+        }else{
+            $("#goxtiptext").text("刷新进度倒计时 "+0);
+            time = maxtime;
+            if(goxing) return;
+            goxing = true;
+            read_rank_rightnow_flag = false;
+
+            try {
+                var postRequestReturn = await postRequest();
+                if(!postRequestReturn){
+                    goxing = false;
+                    return;
+                }
+
+                timetogoxloop() //检查是否需要强制搜刮剩余体力
+                if(((autoconfigcheckbox.checked&&myap>=maxap&&myrank>=maxrank)|| timetogoxflag/*强制搜刮剩余体力*/)&&(myrank>=3))
+                {
+                    if(myap>=10){//搜刮分支
+                        read_rank_rightnow_flag = true;
+                        if(g_ismake){//假如需要制造
+                            let tempresponse = await get_gemData()
+                            /*while(!tempresponse){
+                            sleep(1000)
+                            tempresponse = await get_gemData()
+                        }*/
+                            }
+                        await mygox()
+                    }//搜刮分支 end
+                    else if(autoreStaminacheckbox.checked ){//回体分支
+                        if(!issxdsstop()){//进行贝壳回体
+                            await sxbybeike()//贝壳刷新体力  返回-1：错误  0：成功  1：贝壳不足，停止回体 2：回体达到今日上限，假如开启药水回体则请在之后的代码使用药水
+                        }
+
+                        if(issxdsstop() && autodrinkcheckbox.checked){//假如今日贝壳回体次数耗尽 且 勾选自动使用药水回体
+                            await sxbyyaoshui();
+                        }
+
+                        read_rank_rightnow_flag = true;
+                    }//回体分支 end
+
+                }
+            }catch(err) {
+                console.log(err.message)
+            }
+            progresschange.innerText = getChangeLogText();
+            goxing = false;
+        }
+    }
+
+    function postRequest(){ /* 获取段位进度、体力 */
+        return new Promise((resolve, reject)=>{
+            setTimeout(resolve, 10*1000,false)
+            $.ajax({ url: window.location.origin + "/fyg_read.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data: 'f=12', processData: false, })
+                .done(response => {
+                Num++;
                 let newrank = parseInt(response.match(/class="fyg_colpz02" style="font-size:32px;font-weight:900;">[0-9]+%</)[0].match(/[0-9]+%/)[0]);
                 let newap = parseInt(response.match(/class="fyg_colpz03" style="font-size:32px;font-weight:900;">[0-9]+</)[0].match(/>[0-9]+</)[0].slice(1,-1));
                 if(myrank == -100){
@@ -478,23 +544,9 @@ function fyg_pk_html() {
                     document.getElementsByClassName('fyg_colpz03')[0].innerText = newap;
                     myap = newap;
                 }
-                if(((autoconfigcheckbox.checked&&newap>=maxap&&newrank>=maxrank)||timetogoxflag)&&(newap>=10&&newrank>=1&&goxing==false)){
-                    maxtime = 1;
-                    time = 1;
-                    goxing = true;
-                    get_gemData()
-                }else if(autoconfigcheckbox.checked&&autoreStaminacheckbox.checked&&!autoreStaminaing&&newrank>=1&&newap>=maxap&&newrank>=maxrank&&goxing==false&&gx_sxdsing==false&&!issxdsstop()){
-                    gx_sxdsing = true;
-                    gx_sxds();
-                    maxtime = 1;
-                    time = 1;
-                }else{
-                    maxtime = parseInt(localStorage.getItem('flashtime'));
-                    time = maxtime;
-                }
-                progresschange.innerText = getChangeLogText();
-         }).fail(data => { console.log(data);});
-
+                resolve(true)
+            }).fail(data => { console.log(data);resolve(false)});
+        }) //Promise end
     }
 
     function mygox(){
@@ -532,41 +584,14 @@ function fyg_pk_html() {
                     appendChangeLogText( '返回状态码非200')
                     console.log(response);
                 }
+				resolve()
            }).fail(data => {
             goxing = false;
             console.log('发送搜刮请求出错');
             appendChangeLogText( '发送搜刮请求出错');
             console.log(data);
+			resolve()
         });
-    }
-
-    function gox(){
-        $("#pklist").toggleClass("loading");
-        $.ajax({
-            type: "POST",
-            url: "fyg_click.php",
-            data: "c=16&safeid=" + g_saveid,
-            success: function(msg){
-                $("#mymessagehtml").html(msg);
-                $("#mymessage").modal('show', 'fit');
-                pklist();
-                $("#pklist").toggleClass("loading");
-            }
-        });
-    }
-
-    function read_rank(){
-        if(maxtime <= 0){
-            $("#goxtiptext").text("无刷新");
-            return;
-        }
-        if(--time>0){
-            $("#goxtiptext").text("刷新进度倒计时 "+time);
-        }else{
-            $("#goxtiptext").text("刷新进度倒计时 "+0);
-            time = maxtime;
-            postRequest();
-        }
     }
 
     function getChangeLogText(){
@@ -584,7 +609,8 @@ function fyg_pk_html() {
         return LogText;
     }
     function appendChangeLogText(text){
-        changeLog.push(getNowtime() + " " + text)
+        changeLog.push(getNowtime() + " " + text);
+        progresschange.innerText = getChangeLogText();
     }
 
     function show_battle_log(text){
@@ -885,17 +911,16 @@ function fyg_pk_html() {
     color: black;
     cursor:pointer;
     }
- </style>`);
+ </style><style>@import url(https://sticker.inari.site/js/gugu/dateTime.css) </style>`);
     function initgoxpanel(){
         $("body")[0].appendChild(goxpanel);
         $("body")[0].appendChild(goxpanelExtend);
         goxpanel.setAttribute('id','goxpanel');
         goxpanel.style.setProperty('max-width', (document.body.clientWidth-1300)/2+'px');
-        goxpanel.innerHTML = '<div id="smallbar">&lt</div><div id="goxtip" class="goxtip"><a id="goxtiptext" title="设置刷新间隔"></a> </div>\
-<div id="goxtip2" class="goxtip smalldiv"></div>\
-<div id="goxtipinfo" class="smalldiv"></div><div id="goxtipbottom" class="goxtip goxtipbottom smalldiv">\
-<input type="text" class="btn btn-details" placeholder="战斗历史" readonly="true" id="date"></div><div id="extendbar">∨</div>'
-        //goxpanel.setAttribute('style','display: none;overflow-y:auto;');  ∧
+        goxpanel.innerHTML = `<div id="smallbar">&lt</div><div id="goxtip" class="goxtip"><a id="goxtiptext" title="设置刷新间隔"></a> </div>
+                              <div id="goxtip2" class="goxtip smalldiv"></div>
+                              <div id="goxtipinfo" class="smalldiv"></div><div id="goxtipbottom" class="goxtip goxtipbottom smalldiv">
+                              <input type="text" class="btn btn-details" placeholder="战斗历史" readonly="true" id="date"></div><div id="extendbar">∨</div>`
         $("#goxtip").append(autoconfigcheckboxdiv)
         $("#goxtip2").append(automakecheckboxdiv)
         $("#goxtipinfo").append(autoconfig);
@@ -1011,13 +1036,13 @@ function fyg_pk_html() {
         var now = getLocDate()
         var nowNumber = now.getHours() * 60 * 60 * 1000 + now.getMinutes() * 60 * 1000
 
-        if( timetogoxcheckboxchecked && nowNumber >= setttimeNumer && myap>=10&&myrank>=1 ){
+        if( timetogoxcheckboxchecked && nowNumber >= setttimeNumer && myap>=10&&myrank>=3 ){
             timetogoxflag = true;
         }else if(!timetogoxcheckboxchecked || nowNumber < setttimeNumer){
             timetogoxflag = false;
         }
 
-        if(timetogoxflag && (myap<10||myrank<1)){
+        if(timetogoxflag && (myap<10||myrank<3)){
             timetogoxflag = false;
         }
 
@@ -1026,7 +1051,11 @@ function fyg_pk_html() {
 
     function detaillogpanelset(key){
         var text = '';
-        var divtext = '<div class="detaillogitem {0}"><div class="nameandlevel"><h3><span style="width: 120px;">{1}</span>'+(showSM?'<span style="width: 70px;">{2}</span>':"")+(showcharlv?'<span style="width: 40px;">{3}</span><span style="width: 80px;">{4}</span>':'')+'</h3></div><div style="display:none;">{5}</div></div>';
+        var divtext = '<div class="detaillogitem {0}"><div class="nameandlevel"><h3><span style="width: 120px;">{1}</span>'+
+            (showSM?'<span style="width: 70px;">{2}</span>':"")+
+            (showcharlv?'<span style="width: 40px;">{3}</span><span style="width: 80px;">{4}</span>':'')+
+            '</h3></div><div style="display:none;">{5}</div></div>';
+
         var olddivtext = '<div class="detaillogitem {0}"><div class="nameandlevel"><h3>{1} '+(showSM?'{2}':"")+'</h3></div><div style="display:none;">{3}</div></div>';
         //console.log(divtext)
         var item = BattleLog[key];
@@ -1050,10 +1079,6 @@ function fyg_pk_html() {
                     let char = item[i][3]
                     let charlv = "LV:"+item[i][4]
 
-                    /*name = formatStringLen(name, 12, "&#8194;")
-                     xishu = formatStringLen(xishu, 7, "&#8194;")
-                     char = formatStringLen(char, 5, "&#8194;")
-                     charlv = formatStringLen(charlv, 7, "&#8194;")*/
                     text+=divtext.format(thisclass,name,xishu,char,charlv,item[i][0]);
                 }
                 else if(item[i].length>2){
@@ -1100,31 +1125,11 @@ function fyg_pk_html() {
         if(echar=="野怪"){return}
     });
 
-    function gx_sxdsingfalse(){
-        gx_sxdsing = false;
-    }
 
-    function issxdsstop(){ // 如果为真，则今天不用星沙刷新
+    function issxdsstop(){ // 如果为真，则今天不用贝壳回体
         var key = getDateString(getLocDate());
         return key == gx_sxds_stopday
     }
-
-    let observerBody2 = new MutationObserver(()=>{
-        var msg = $("#mymessagehtml").html();
-        if(msg == "星沙不足，本操作需 20 星沙"){
-            setTimeout(gx_sxdsingfalse,3000)
-            autoreStaminacheckbox.checked = false;
-            appendChangeLogText('星沙不足，回体失败')
-        }else if(msg == "体力已刷新。"){
-            setTimeout(gx_sxdsingfalse,3000)
-            appendChangeLogText('消耗星沙恢复体力')
-        }else if(msg == "今日刷新对手次数已达上限，每天可刷新 2 次。"){
-            setTimeout(gx_sxdsingfalse,3000)
-            //autoreStaminacheckbox.checked = false;
-            gx_sxds_stopday = getDateString(getLocDate())
-            appendChangeLogText('达到每日星沙恢复体力次数上限')
-        }
-    });
 
     function logupdate(enemyinfo,isbattlewin,enemyname,enemychar,enemycharlv){
         var etext = enemyinfo.innerHTML;
@@ -1137,11 +1142,8 @@ function fyg_pk_html() {
         }
 
         aaaa.push([etext,isbattlewin,enemyname,enemychar,enemycharlv])
-        /*console.log(key)
-        console.log(aaaa)*/
         console.log(BattleLog)
         FM_setValue("BattleLog",BattleLog)
-        //updatelogpanel()
     }
 
     function save_enemylevel(name,level){
@@ -1155,8 +1157,7 @@ function fyg_pk_html() {
     }
 
     function get_enemylevel(name){
-        //if(name.indexOf("等级 -")!=-1){return name}
-        if(name.indexOf("ikarosf")!=-1){return "" + 57257*2}
+        if(name.indexOf("ikarosf")!=-1){return "114514"}
         var a = BattleLog["enemylevel"]
         if(a===undefined){
             return "";
@@ -1320,121 +1321,179 @@ function fyg_pk_html() {
         return getPostData(/gox\(\)\{[\s\S]*\}/m,/data: ".*"/).slice(-7,-1);
     }
 
-    //逻辑：get_gemData-》收集-》get_gemData直到不可收集为止
-    function get_gemData(){
-        if(g_makeequiping || g_makecarding || g_makegeming) return;
-        if(!g_ismake) {mygox();return;}
-        $.ajax({ url: window.location.origin + "/fyg_read.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8', data:"f=21",processData: false, })
-        .done(data => {
-            console.log(data);
-            if (data.status == 200) {
-                let info = data;
-                /*console.log(info)*/
-                let makeequip_perc = info.match(/(?<=锻造装备 （)\d+(?=%）)/)[0]//锻造进度不足
-                let makecard_perc = info.match(/(?<=生成卡片 （)\d+(?=%）)/)[0]//生成卡片进度不足
-                let makegem_perc = info.match(/(?<=宝石收集 （)\d+(?=%）)/)[0] //没有收集到 //宝石收集进度不足
-                let red_num = info.match(/(?<=红石.+"fyg_f18">)\d+(?=<)/)[0] //id=1  50
-                let silver_num = info.match(/(?<=银石.+"fyg_f18">)\d+(?=<)/)[0]//50
-                let glod_num = info.match(/(?<=金石.+"fyg_f18">)\d+(?=<)/)[0]//30
-                let dream_num = info.match(/(?<=梦石.+"fyg_f18">)\d+(?=<)/)[0]//30
-                let invain_num = info.match(/(?<=虚石.+"fyg_f18">)\d+(?=<)/)[0]//10
-                let unreal_num = info.match(/(?<=幻石.+"fyg_f18">)\d+(?=<)/)[0]//10
-                /*console.log(makeequip_perc)
-                console.log(makecard_perc)
-                console.log(makegem_perc)
-                console.log(red_num)
-                console.log(silver_num)
-                console.log(glod_num)
-                console.log(dream_num)
-                console.log(invain_num)
-                console.log(unreal_num)*/
-                let doing = false;
-                if(makeequip_perc=="100"){
-                    doing = true;
-                    makeequip()
-                }
-                if(makecard_perc=="100"){
-                    doing = true;
-                    makecard()
-                }
-                if(makegem_perc=="100"){
-                    if(g_gemid > 0 && g_gemid < 7){
+    function get_gemData(){ /* return ture时，往下执行收刮；false时，请此函数（因可能造成死循环，实际上还是只运行一次 */
+        return new Promise((resolve, reject)=>{
+            setTimeout(resolve, 10*1000,false)
+            $.ajax({ url: window.location.origin + "/fyg_read.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8', data:"f=21",processData: false, })
+            .done( async function(data){
+                if (data.status == 200) {
+                    let info = res.responseText;
+                    /*console.log(info)*/
+                    let makeequip_perc = info.match(/(?<=锻造装备 （)\d+(?=%）)/)[0]//锻造进度不足
+                    let makecard_perc = info.match(/(?<=生成卡片 （)\d+(?=%）)/)[0]//生成卡片进度不足
+                    let makegem_perc = info.match(/(?<=宝石收集 （)\d+(?=%）)/)[0] //没有收集到 //宝石收集进度不足
+                    let red_num = info.match(/(?<=红石.+"fyg_f18">)\d+(?=<)/)[0] //id=1  50
+                    let silver_num = info.match(/(?<=银石.+"fyg_f18">)\d+(?=<)/)[0]//50
+                    let glod_num = info.match(/(?<=金石.+"fyg_f18">)\d+(?=<)/)[0]//30
+                    let dream_num = info.match(/(?<=梦石.+"fyg_f18">)\d+(?=<)/)[0]//30
+                    let invain_num = info.match(/(?<=虚石.+"fyg_f18">)\d+(?=<)/)[0]//10
+                    let unreal_num = info.match(/(?<=幻石.+"fyg_f18">)\d+(?=<)/)[0]//10
+                    /*console.log(makeequip_perc)
+                    console.log(makecard_perc)
+                    console.log(makegem_perc)
+                    console.log(red_num)
+                    console.log(silver_num)
+                    console.log(glod_num)
+                    console.log(dream_num)
+                    console.log(invain_num)
+                    console.log(unreal_num)*/
+                    let doing = false;
+                    if(makeequip_perc=="100"){
                         doing = true;
-                        makegem(g_gemid)
+                        await makeequip()
                     }
+                    if(makecard_perc=="100"){
+                        doing = true;
+                        await makecard()
+                    }
+                    if(makegem_perc=="100"){
+                        if(g_gemid > 0 && g_gemid < 7){
+                            doing = true;
+                            await makegem(g_gemid)
+                        }
+                    }
+                    resolve(!doing)
+                }else{
+                    appendChangeLogText('获取收藏页面失败')
+                    console.log(res)
+                    resolve(false)
                 }
-                if(!doing){
-                    mygox();
-                }
-            }else{
-                appendChangeLogText('获取收藏页面失败')
-                console.log(res)
-            }
-        }).fail(data => { appendChangeLogText( '获取收藏页面错误');console.log(data)});
+            })
+            .fail(data => { appendChangeLogText( '获取收藏页面错误');console.log(data);resolve(false);});
+        }) //Promise end
     }
 
     function makeequip(){
-        g_makeequiping = true;
-        $.ajax({ url: window.location.origin + "/fyg_click.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data:"c=25&xs=undefined&safeid=" + g_saveid, processData: false, })
-        .done(res => {
-            if(res.status === 200){
-                    let info = res;
+        return new Promise((resolve, reject)=>{
+            setTimeout(resolve, 10*1000)
+            $.ajax({ url: window.location.origin + "/fyg_click.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data:"c=25&xs=undefined&safeid=" + g_saveid, processData: false, })
+            .done(res => {
+                if(res.status === 200){
+                    let info = res.responseText;
                     appendChangeLogText("锻造装备:"+info)
 
                 }else{
                     appendChangeLogText( '锻造装备失败，可能网络问题')
                     console.log(res)
                 }
-                g_makeequiping = false;
-                get_gemData()
-        }).fail(err => { appendChangeLogText( '锻造装备错误');console.log(err);g_makeequiping = false;get_gemData()});
+                resolve()})
+            .fail(err => {
+                appendChangeLogText( '锻造装备错误');
+                console.log(err);
+                resolve()
+            });
+        }) //Promise end
     }
 
     function makecard(){
-        g_makecarding = true;
-        $.ajax({ url: window.location.origin + "/fyg_click.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data:"c=26&xs=undefined&safeid=" + g_saveid, processData: false, })
-        .done(res => {
-            if(res.status === 200){
-                    let info = res;
+        return new Promise((resolve, reject)=>{
+            setTimeout(resolve, 10*1000)
+            $.ajax({ url: window.location.origin + "/fyg_click.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data:"c=26&xs=undefined&safeid=" + g_saveid, processData: false, })
+            .done(res => {
+                if(res.status === 200){
+                    let info = res.responseText;
                     appendChangeLogText("生成卡片:" + info)
 
                 }else{
                     appendChangeLogText( '生成卡片失败，可能网络问题')
                     console.log(res)
                 }
-                g_makecarding = false;
-                get_gemData()
-        }).fail(err => { appendChangeLogText( '生成卡片错误');console.log(err);g_makecarding = false;get_gemData()});
+                resolve()
+            }).fail(err => { appendChangeLogText( '生成卡片错误');console.log(err);resolve()});
+        }) //Promise end
     }
 
     function makegem(id){
-        g_makegeming = true;
-        $.ajax({ url: window.location.origin + "/fyg_click.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data:"c=27&xs="+id+"&safeid=" + g_saveid, processData: false, })
-        .done(res => {
-            if(res.status === 200){
-                    let info = res;
+        return new Promise((resolve, reject)=>{
+            setTimeout(resolve, 10*1000)
+            $.ajax({ url: window.location.origin + "/fyg_click.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data:"c=27&xs="+id+"&safeid=" + g_saveid, processData: false, })
+            .done(res => {
+                if(res.status === 200){
+                    let info = res.responseText;
                     appendChangeLogText("宝石收集"+ info)
 
                 }else{
                     appendChangeLogText( '宝石收集失败，可能网络问题')
                     console.log(res)
                 }
-                g_makegeming = false;
-                get_gemData()
-        }).fail(err => { appendChangeLogText( '宝石收集错误');console.log(err);g_makegeming = false;get_gemData()});
+                resolve()
+            }).fail(err => { appendChangeLogText( '宝石收集错误');console.log(err);resolve()});
+        }) //Promise end
+    }
+
+    function sxbybeike(){//贝壳刷新体力  返回-1：错误  0：成功  1：贝壳不足，停止回体 2：回体达到今日上限，假如开启药水回体则请在之后的代码使用药水
+        return new Promise((resolve, reject)=>{
+            setTimeout(resolve, 10*1000,-1)
+            $.ajax({ url: window.location.origin + "/fyg_click.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data:"c=13&safeid"+ g_saveid, processData: false, })
+            .done(res => {
+                if(res.status === 200){
+                    let info = res.responseText;
+                    if(info.indexOf("不足")!=-1){
+                        autoreStaminacheckbox.checked = false;
+                        appendChangeLogText('贝壳不足，回体失败')
+                        resolve(1)
+                    }else if(info == "体力已刷新。"){
+                        appendChangeLogText('消耗贝壳恢复体力')
+                        resolve(0)
+                    }else if(info == "今日刷新对手次数已达上限，每天可刷新 2 次。"){
+                        gx_sxds_stopday = getDateString(getLocDate())
+                        appendChangeLogText('达到每日贝壳恢复体力次数上限')
+                        resolve(2)
+                    }
+                }else{
+                    appendChangeLogText( '贝壳刷新体力失败，可能网络问题')
+                    console.log(res)
+                    resolve(-1)
+                };
+            }).fail(err => { appendChangeLogText( '贝壳刷新体力错误');console.log(err);resolve(-1)});
+        }) //Promise end
+    }
+
+    function sxbyyaoshui(){//药水刷新体力
+        return new Promise((resolve, reject)=>{
+            setTimeout(resolve, 10*1000,false)
+            var id = 3001 //体力药水
+            $.ajax({ url: window.location.origin + "/fyg_click.php", type: 'POST', contentType: 'application/x-www-form-urlencoded; charset=UTF-8',data:"c=28&id="+id+"&safeid="+g_saveid, processData: false, })
+            .done(res => {
+                if(res.status === 200){
+                    let info = res.responseText;
+                    appendChangeLogText("药水刷新体力，"+ info)
+                    //已恢复了50体力
+                    //没有对应的物品
+                    if(info.indexOf("已恢复")!=-1){
+                        resolve(true)
+                    }else{
+                        autodrinkcheckbox.checked = false;
+                        resolve(false)
+                    }
+                }else{
+                    appendChangeLogText( '药水刷新体力失败，可能网络问题')
+                    console.log(res)
+                    resolve(false)
+                };
+            }).fail(err => { appendChangeLogText( '药水刷新体力错误');console.log(err);resolve(false)});
+        }) //Promise end
     }
 
     //——————————————————mainfun————————————
-    postRequest();
+    read_rank();
     setInterval(read_rank,"1000");
     observerBody1.observe(document.querySelector("#pk_text"), {characterData: true,childList: true});
-    observerBody2.observe(document.querySelector("#mymessagehtml"), {characterData: true,childList: true});
     initgoxpanel();
     init_table();
 
     autodeletelog(30);
     loadv();
-    setTimeout(timetogoxloop,60*1000);
 }
 
 function dictsort(dic){
@@ -1459,7 +1518,7 @@ String.format = function(src){
 
 function FM_setValue(name, value){
     var oldvalue = JSON.parse(localStorage.getItem(user));
-    if(oldvalue === undefined){
+    if(!oldvalue){
         oldvalue = {};}
     oldvalue[name] = value;
     localStorage.setItem(user,JSON.stringify(oldvalue));
@@ -1513,6 +1572,12 @@ function getDateString(thisDate){
     return thisDate.getFullYear() + "/" + (thisDate.getMonth()+1) + "/" + thisDate.getDate()
 }
 
+function getNowtime(){
+    var date=getLocDate();
+    var datetext = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    return datetext;
+}
+
 //参数container为图表盒子节点.charts为图表节点
 function chartssize (container,charts) {
     function getStyle(el, name) {
@@ -1557,8 +1622,13 @@ String.prototype.gblen = function() {
     return len;
 }
 
+var sleep = (ms) => {
+    // Unit is ms
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 //——————————————————mainfun————————————
-var user = document.getElementsByClassName('fyg_colpz06 fyg_f24')[0].innerText
+var user = 'log_'+document.getElementsByClassName('fyg_colpz06 fyg_f24')[0].innerText
 
 var rl = window.location.href;
 fyg_pk_html();
