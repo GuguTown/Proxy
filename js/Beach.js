@@ -11,7 +11,7 @@ function FLASHbeach() {
     flashbyxingshaNUMbox.setAttribute('style',"display: inline-block;float: right!important;");
 
     let flashbyxingshaNUMlabel = document.createElement('i');
-    flashbyxingshaNUMlabel.innerText = "使用星沙刷新次数：";
+    flashbyxingshaNUMlabel.innerText = "使用贝壳刷新次数：";
     flashbyxingshaNUMbox.appendChild(flashbyxingshaNUMlabel);
 
     let flashbyxingshaNUMInput = document.createElement('input');
