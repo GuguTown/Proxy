@@ -10,16 +10,18 @@ const defaultConf = {
     "ThemePack":"classic",
     "iconSize":"50px",
     "kanbansize":"100",
-    "useOldNames":false,"useThemeName":false,
-    "showKanban":false,"showCG":false,"voiceO":false,
-    "yourcard":"舞",
+    "useOldNames":false,"useThemeName":false,"nightmode":false,
+    "showKanban":false,"showCG":false,"voiceO":false,"ver":false,
+    "yourcard":"舞"
 }
+,level=["普通","幸运","稀有","史诗","传奇"]
 ,Language = {
     "zh": {
-        "initUFG":"此自定义主题包立绘功能不可用！请更新主题包或关闭立绘功能！",
-        "initUVO":"此自定义主题包语音功能不可用！请更新主题包或关闭语音功能！",
-        "initUOT":"自定义主题包json数据彻底过期，请及时更新！主题包未启用！",
-        "initUNU":"自定义主题包json数据不存在，主题包未启用！",
+        "initUFG":"此自定义主题包立绘功能不可用！",
+        "initUVO":"此自定义主题包语音功能不可用！",
+        "initUSP":"此自定义主题包Spine看板娘功能不可用！",
+        "initUOT":"自定义主题包数据非JSON格式，请及时更新！主题包未启用！",
+        "initUNU":"自定义主题包数据不存在，主题包未启用！",
         "cuuid":"生成引继码",
         "vuuid":"输入引继码",
         "puuid":"请复制引继码，或者自行输入8位小写字母+数字后按确定",
@@ -39,17 +41,21 @@ const defaultConf = {
         "kanbanUA":"请输入看板大小,数字为百分比。",
         "menuUA":"请输入自定义主题包的json数据,访问以下链接以查看完整的json格式。",
         "cloudPass":"请 输入/设置 云同步密码",
+        "dessertlevel":["稀有","史诗","传奇"],
+        "dessertname":["星铜苹果护身符","蓝银葡萄护身符","紫晶樱桃护身符"],
+        "itemsname":["体能刺激药水","锻造材料箱"],
         "equip":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-                 "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指"]
+                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指"]
     },
     "zht":{
-        "initUFG":"此自定義主題包立繪功能不可用！請更新主題包或關閉立繪功能！",
-        "initUVO":"此自定義主題包語音功能不可用！請更新主題包或關閉語音功能！",
-        "initUOT":"自定義主題包json數據徹底過期，請及時更新！主題包未啟用！",
-        "initUNU":"自定義主題包json數據不存在，主題包未啟用！",
-        "cuuid":"生成引继码",
-        "vuuid":"输入引继码",
-        "puuid":"请复制引继码，或者自行输入8位小写字母+数字后按确定",
+        "initUFG":"此自定義主題包立繪功能不可用！",
+        "initUVO":"此自定義主題包語音功能不可用！",
+        "initUSP":"此自定義主題包Spine看板娘功能不可用！",
+        "initUOT":"自定義主題包數據非JSON格式，請及時更新！主題包未啟用！",
+        "initUNU":"自定義主題包數據不存在，主題包未啟用！",
+        "cuuid":"生成引繼碼",
+        "vuuid":"輸入引繼碼",
+        "puuid":"請復製引繼碼，或者自行輸入8位小寫字母+數字後按確定",
         "menuTheme":"主題包",
         "menuUser":"寫入自定義主題",
         "menuIcon":"圖標大小",
@@ -66,19 +72,23 @@ const defaultConf = {
         "kanbanUA":"請輸入看板大小,數字為百分比。",
         "menuUA":"請輸入自定義主題包的json數據,訪問以下連結以查看完整的json格式。",
         "cloudPass":"請 輸入/设置 云同步密码",
+        "dessertlevel":["稀有","史詩","傳奇"],
+        "dessertname":["星銅蘋果護身符","藍銀葡萄護身符","紫晶櫻桃護身符"],
+        "itemsname":["体能刺激药水","鍛造材料箱"],
         "equip":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指"]
+                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指","噬魔戒指"]
     },
     "ja": {
-        "initUFG":"このユーザー テーマパックの立ち絵機能は使用できません！このテーマパックを更新するか、立ち絵機能無効化してください。",
-        "initUVO":"このユーザー テーマパックのボイス機能は使用できません！このテーマパックを更新するか、ボイス機能無効化してください。",
-        "initUOT":"このユーザー テーマパックのJSONは古くなっています！このテーマパックをできるだけ早く更新してください！テーマパックが有効になっていません！",
-        "initUNU":"このユーザー テーマパックのJSONは存在しません！テーマパックが有効になっていません！",
-        "cuuid":"引継Code作成",
-        "vuuid":"引継Code入力",
-        "puuid":"请复制引继码，或者自行输入8位小写字母+数字后按确定",
+        "initUFG":"このユーザー テーマパックの立ち絵機能は使用できません！",
+        "initUVO":"このユーザー テーマパックのボイス機能は使用できません！",
+        "initUSP":"このユーザー テーマパックのSpine看板娘機能は使用できません！",
+        "initUOT":"このユーザー テーマパックの形式はJSONではありません！このテーマパックをできるだけ早く更新してください！テーマパックが有効になっていません！",
+        "initUNU":"このユーザー テーマパックのDataは存在しません！テーマパックが有効になっていません！",
+        "cuuid":"引継号作成",
+        "vuuid":"引継号入力",
+        "puuid":"引継号をコピーしてください、または、自分で8つの小文字の英字または数字を入力して、[OK]を押します",
         "menuTheme":"テーマパック",
-        "menuUser":"テーマJSON入力",
+        "menuUser":"テーマ入力",
         "menuIcon":"アイコン大小",
         "menuKanban":"看板大小",
         "menuOldEQ":"旧装備名",
@@ -92,25 +102,28 @@ const defaultConf = {
         "iconUA":"アイコンのサイズを入力してください。32 ～ 128 の数値で px を使用する必要があります。\n 例： 50px",
         "kanbanUA":"看板のサイズを入力してください。％を除いた数値である必要があります。\n 例： 100",
         "menuUA":"カスタマイズ テーマパックの JSON データを入力してください。完全な JSON 形式を表示するには、以下のリンクにアクセスしてください。",
-        "cloudPass":"請 輸入/设置 云同步密码",
+        "cloudPass":"クラウド同期用のパスワードを入力/設定してください",
+        "dessertlevel":["レア","大作","伝説"],
+        "dessertname":["星銅林檎お守り","藍銀葡萄お守り","紫水晶桜ん坊お守り"],
+        "itemsname":["身体刺激剤","鍛造材料箱"],
         "equip":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
                  "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪"]
+                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪","デビル・デバウラー指輪"]
     },
     "en": {
-        "initUFG":"The CG Function in this User ThemePack is unavailable! Please Update This ThemePack or Turn Off CG Function!",
-        "initUVO":"The Voice Function in this User ThemePack is unavailable! Please Update This ThemePack or Turn Off Voice Function!",
-        "initUOT":"The JSON of this User ThemePack is out of date! Please Update This ThemePack ASAP! ThemePack not activated!",
-        "initUNU":"The JSON of this User ThemePack is non-existent! ThemePack not activated!",
+        "initUFG":"The CG Function in this User ThemePack is unavailable!",
+        "initUVO":"The Voice Function in this User ThemePack is unavailable!",
+        "initUOT":"The Data of this User ThemePack is not JSON! Please Update This ThemePack ASAP! ThemePack not activated!",
+        "initUNU":"The Data of this User ThemePack is non-existent! ThemePack not activated!",
         "cuuid":"Create Code",
         "vuuid":"Input Code",
-        "puuid":"请复制引继码，或者自行输入8位小写字母+数字后按确定",
+        "puuid":"Please Copy The Code, or self input 8 length [a-z]+[0-9],then press ok",
         "menuTheme":"ThemePack",
         "menuUser":"UserTheme",
         "menuIcon":"IconSize",
         "menuKanban":"KanbanSize",
-        "menuOldEQ":"Old Equip-Name",
-        "menuThemeEQ":"Theme Equip-Name",
+        "menuOldEQ":"Old EqName",
+        "menuThemeEQ":"Theme EqName",
         "menuSCG":"CGimg",
         "menuSVO":"Voice",
         "menuSKB":"Kanban",
@@ -121,39 +134,48 @@ const defaultConf = {
         "kanbanUA":"Please input the size of kanban, it should be a num without %\n example: 100",
         "menuUA":"Please input The JSON data of UserThemePack,\n Access the link below to see the complete JSON format.",
         "cloudPass":"Please input/set cloud sync password",
-        "equip":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword",
-                 "Bloodthirsty demon Sword","Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe",
-                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring"]
+        "dessertlevel":["Rare   ","Epic   ","Legend "],
+        "dessertname":["star copper apple amulet","blue silver grape amulet","amethyst cherry amulet"],
+        "itemsname":["Stamina Stimulant Potion","Forging material box"],
+        "equip":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword","Bloodthirsty demon Sword",
+                "Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe","Thorny Armor of the front supporter",
+                "Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring","Devil Devourer Ring"]
     }
 }
-,originTheme = {
+,sampleTheme ={
     "url":"ys/icon/",
-    "old":"1",
-    "ext":".gif",
+    "iurl":"ys/icon/",
+    "old":"1","ext":".gif",
     "background":"normal",
     "kanbanbg":"https://sticker.inari.site/api/null.gif",
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:100% 100%;",
-    "level":["普通","幸运","稀有","史诗","传奇"],
-    "equip-zh":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指"],
-    "equip-zht":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指"],
-    "equip-ja":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
-                 "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪"],
-    "equip-en":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword",
-                 "Bloodthirsty demon Sword","Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe",
-                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring"],
-    "dessert":["z/z903","z/z902","z/z901"],
-    "dessertlevel":["稀有","史诗","传奇"],
+    "nofgimg":false,"nospine":false,"novoice":false,
+    "nothemeEqName":false,"nothemeAmName":false,
+	"equip-zh":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
+     "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指"],
+	"equip-zht":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
+     "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指","噬魔戒指"],
+	"equip-ja":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
+    "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
+    "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪","デビル・デバウラー指輪"],
+	"equip-en":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword","Bloodthirsty demon Sword",
+    "Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe","Thorny Armor of the front supporter",
+    "Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring","Devil Devourer Ring"],
+    "dessertlevel-zh":["稀有","史诗","传奇"],
     "dessertlevel-zht":["稀有","史詩","傳奇"],
     "dessertlevel-ja":["レア","大作","伝説"],
     "dessertlevel-en":["Rare   ","Epic   ","Legend "],
-    "dessertname":["苹果护身符","葡萄护身符","樱桃护身符"],
+    "dessertname-zh":["苹果护身符","葡萄护身符","樱桃护身符"],
     "dessertname-zht":["蘋果護身符","葡萄護身符","櫻桃護身符"],
     "dessertname-ja":["林檎お守り","葡萄お守り","桜ん坊お守り"],
     "dessertname-en":["apple amulet","grape amulet","cherry amulet"],
+    "itemsname-zh":["体能刺激药水","锻造材料箱"],
+    "itemsname-zht":["體能刺激藥水","鍛造材料箱"],
+    "itemsname-ja":["身体刺激剤","鍛造材料箱"],
+    "itemsname-en":["Stamina Stimulant Potion","Forging material box"],
+    "dessert":["z/z903","z/z902","z/z901"],
+    "items":["i/it001","i/it002"],
     "魔灯之灵（野怪":"https://sticker.inari.site/null.gif",
     "六眼飞鱼（野怪":"https://sticker.inari.site/null.gif",
     "铁皮木人（野怪":"https://sticker.inari.site/null.gif",
@@ -181,6 +203,17 @@ const defaultConf = {
     "冥voice":["/vo/",".mp3"],
     "命voice":["/vo/",".mp3"],
     "希voice":["/vo/",".mp3"],
+    "spinert":["https://","https://"],
+    "舞spine":{"name":"/unit/wuu/","type":"6","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
+    "默spine":{"name":"/unit/mo/","type":"7","hasRarity6":true,"wi":-350,"hi":-42,"re":0.8},
+    "琳spine":{"name":"/unit/lin/","type":"5","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
+    "艾spine":{"name":"/unit/ai/","type":"8","hasRarity6":true,"wi":-320,"hi":-64,"re":0.8},
+    "梦spine":{"name":"/unit/meng/","type":"4","hasRarity6":false,"wi":-320,"hi":-42,"re":0.8},
+    "薇spine":{"name":"/unit/wei/","type":"1","hasRarity6":true,"wi":-360,"hi":-42,"re":0.8},
+    "伊spine":{"name":"/unit/yi/","type":"8","hasRarity6":false,"wi":-380,"hi":-92,"re":0.8},
+    "冥spine":{"name":"/unit/min/","type":"3","hasRarity6":true,"wi":-350,"hi":-48,"re":0.8},
+    "命spine":{"name":"/unit/life/","type":"1","hasRarity6":false,"wi":-360,"hi":-36,"re":1.0},
+    "希spine":{"name":"/unit/xii/","type":"10","hasRarity6":false,"wi":-370,"hi":-64,"re":0.8},
     "a1":["z2101","z1","探险者之剑","探险者之剑","z/z2101_"],
     "a2":["z2102","z2","探险者短弓","探险者短弓","z/z2102_"],
     "a3":["z2103","z3","探险者短杖","探险者短杖","z/z2103_"],
@@ -199,6 +232,53 @@ const defaultConf = {
     "w3":["z2203","z5","秃鹫手环","秃鹫手环","z/z2203_"],
     "wo3":["z2203","z5","秃鹫手套","秃鹫手套","z/z2203_"],
     "w4":["z2204","z2204","海星戒指","海星戒指","z/z2204_"],
+    "w5":["z2205","z2205","噬魔戒指","噬魔戒指","z/z2205_"],
+    "c1":["z2301","z9","探险者铁甲","探险者铁甲","z/z2301_"],
+    "c2":["z2302","z10","探险者皮甲","探险者皮甲","z/z2302_"],
+    "c3":["z2303","z10","探险者布甲","探险者布甲","z/z2303_"],
+    "c4":["z2304","z11","旅法师的灵光袍","旅法师的灵光袍","z/z2304_"],
+    "c5":["z2305","z9","战线支撑者的荆棘重甲","战线支撑者的荆棘重甲","z/z2305_"],
+    "c6":["z2306","z2306","复苏战衣","复苏战衣","z/z2306_"],
+    "co6":["z2306","z2306","复苏木甲","复苏木甲","z/z2306_"],
+    "c7":["z2307","z2307","挑战斗篷","挑战斗篷","z/z2307_"],
+    "h1":["z2401","z7","探险者耳环","探险者耳环","z/z2401_"],
+    "ho1":["z2401","z7","探险者头巾","探险者头巾","z/z2401_"],
+    "h2":["z2402","z7","占星师的耳饰","占星师的耳饰","z/z2402_"],
+    "ho2":["z2402","z7","占星师的发饰","占星师的发饰","z/z2402_"],
+    "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","z/z2403_"],
+    "ho3":["z2403","z7","天使缎带","天使缎带","z/z2403_"]
+}
+,originTheme = {
+    "url":"ys/icon/",
+    "iurl":"ys/icon/",
+    "old":"1","ext":".gif",
+    "background":"normal",
+    "kanbanbg":"https://sticker.inari.site/api/null.gif",
+    "backsize":"background-size:80% 80%;",
+    "wqbacksize":"background-size:100% 100%;",
+    "dessert":["z/z903","z/z902","z/z901"],
+    "items":["i/it001","i/it002"],
+    "nothemeAmName":true,"nothemeEqName":true,
+    "nofgimg":true,"novoice":true,"nospine":true,
+    "a1":["z2101","z1","探险者之剑","探险者之剑","z/z2101_"],
+    "a2":["z2102","z2","探险者短弓","探险者短弓","z/z2102_"],
+    "a3":["z2103","z3","探险者短杖","探险者短杖","z/z2103_"],
+    "a4":["z2104","z4","狂信者的荣誉之刃","狂信者的荣誉之刃","z/z2104_"],
+    "a5":["z2105","z2","反叛者的刺杀弓","反叛者的刺杀弓","z/z2105_"],
+    "a6":["z2106","z4","幽梦匕首","幽梦匕首","z/z2106_"],
+    "a7":["z2107","z3","光辉法杖","光辉法杖","z/z2107_"],
+    "a8":["z2108","z1","荆棘盾剑","荆棘盾剑","z/z2108_"],
+    "ao8":["z2108","z1","荆棘剑盾","荆棘剑盾","z/z2108_"],
+    "a9":["z2109","z1","陨铁重剑","陨铁重剑","z/z2109_"],
+    "a10":["z2110","z2110","饮血魔剑","饮血魔剑","z/z2110_"],
+    "ao10":["z2110","z2110","饮血长枪","饮血长枪","z/z2110_"],
+    "w1":["z2201","z5","探险者手环","探险者手环","z/z2201_"],
+    "wo1":["z2201","z5","探险者手套","探险者手套","z/z2201_"],
+    "w2":["z2202","z8","命师的传承手环","命师的传承手环","z/z2202_"],
+    "w3":["z2203","z5","秃鹫手环","秃鹫手环","z/z2203_"],
+    "wo3":["z2203","z5","秃鹫手套","秃鹫手套","z/z2203_"],
+    "w4":["z2204","z2204","海星戒指","海星戒指","z/z2204_"],
+    "w5":["z2205","z2205","噬魔戒指","噬魔戒指","z/z2205_"],
     "c1":["z2301","z9","探险者铁甲","探险者铁甲","z/z2301_"],
     "c2":["z2302","z10","探险者皮甲","探险者皮甲","z/z2302_"],
     "c3":["z2303","z10","探险者布甲","探险者布甲","z/z2303_"],
@@ -216,59 +296,27 @@ const defaultConf = {
 }
 ,classicTheme = {
     "url":"https://sticker.inari.site/guguicons/old/",
-    "old":"",
-    "ext":".gif",
+    "iurl":"https://sticker.inari.site/guguicons/old/",
+    "old":"", "ext":".gif",
     "background":"overlay",
-    "kanbanbg":"https://sticker.inari.site/api/null.gif",
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:80% 80%;",
-    "level":["普通","幸运","稀有","史诗","传奇"],
-    "equip-zh":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指"],
-    "equip-zht":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指"],
-    "equip-ja":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
-                 "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪"],
-    "equip-en":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword",
-                 "Bloodthirsty demon Sword","Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe",
-                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring"],
-    "dessert":["apple","grape","cherry"],
-    "dessertlevel":["稀有","史诗","传奇"],
+    "nofgimg":true,"novoice":true,"nospine":true,
+    "nothemeEqName":true,"nothemeAmName":false,
+    "dessertlevel-zh":["稀有","史诗","传奇"],
     "dessertlevel-zht":["稀有","史詩","傳奇"],
     "dessertlevel-ja":["レア","大作","伝説"],
     "dessertlevel-en":["Rare   ","Epic   ","Legend "],
-    "dessertname":["苹果护身符","葡萄护身符","樱桃护身符"],
+    "dessertname-zh":["苹果护身符","葡萄护身符","樱桃护身符"],
     "dessertname-zht":["蘋果護身符","葡萄護身符","櫻桃護身符"],
     "dessertname-ja":["林檎お守り","葡萄お守り","桜ん坊お守り"],
     "dessertname-en":["apple amulet","grape amulet","cherry amulet"],
-    "魔灯之灵（野怪":"https://sticker.inari.site/null.gif",
-    "六眼飞鱼（野怪":"https://sticker.inari.site/null.gif",
-    "铁皮木人（野怪":"https://sticker.inari.site/null.gif",
-    "迅捷魔蛛（野怪":"https://sticker.inari.site/null.gif",
-    "食铁兽（野怪"  :"https://sticker.inari.site/null.gif",
-    "晶刺豪猪（野怪":"https://sticker.inari.site/null.gif",
-    "舞":["3000","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "默":["3001","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "琳":["3002","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "艾":["3003","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "梦":["3004","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "薇":["3005","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "伊":["3006","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "冥":["3007","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "命":["3008","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "希":["3009","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
-    "voice":["on.mp3","off.mp3"],
-    "舞voice":["/vo/",".mp3"],
-    "默voice":["/vo/",".mp3"],
-    "琳voice":["/vo/",".mp3"],
-    "艾voice":["/vo/",".mp3"],
-    "梦voice":["/vo/",".mp3"],
-    "薇voice":["/vo/",".mp3"],
-    "伊voice":["/vo/",".mp3"],
-    "冥voice":["/vo/",".mp3"],
-    "命voice":["/vo/",".mp3"],
-    "希voice":["/vo/",".mp3"],
+    "itemsname-zh":["体能刺激药水","锻造材料箱"],
+    "itemsname-zht":["體能刺激藥水","鍛造材料箱"],
+    "itemsname-ja":["身体刺激剤","鍛造材料箱"],
+    "itemsname-en":["Stamina Stimulant Potion","Forging material box"],
+    "dessert":["apple","grape","cherry"],
+    "items":["powerdrug","forgebox"],
     "a1":["z2101","z1","探险者之剑","探险者之剑","sword_"],
     "a2":["z2102","z2","探险者短弓","探险者短弓","bow_"],
     "a3":["z2103","z3","探险者短杖","探险者短杖","staff_"],
@@ -287,6 +335,7 @@ const defaultConf = {
     "w3":["z2203","z5","秃鹫手环","秃鹫手环","bracelet_"],
     "wo3":["z2203","z5","秃鹫手套","秃鹫手套","gloves_"],
     "w4":["z2204","z2204","海星戒指","海星戒指","bracelet_"],
+    "w5":["z2205","z2205","噬魔戒指","噬魔戒指","bracelet_"],
     "c1":["z2301","z9","探险者铁甲","探险者铁甲","armour_"],
     "c2":["z2302","z10","探险者皮甲","探险者皮甲","clothes_"],
     "c3":["z2303","z10","探险者布甲","探险者布甲","clothes_"],
@@ -304,6 +353,7 @@ const defaultConf = {
 }
 ,testTheme = {
     "url":"https://p.inari.site/guguicons/test/eq/",
+    "iurl":"https://p.inari.site/guguicons/test/eq/",
     "old":"0",
     "ext":".gif",
     "background":"normal",
@@ -311,25 +361,32 @@ const defaultConf = {
     "backsize":"background-size:100% 100%;",
     "wqbacksize":"background-size:100% 100%;",
     "level":["普通","幸运","稀有","史诗","传奇"],
+    "nofgimg":false,"nospine":false,"novoice":false,
+    "nothemeEqName":false,"nothemeAmName":false,
     "equip-zh":["旅人剑","猎人弓","香木法杖","妖刀血鸦","深渊之弓","黑曜石天黑剑","棒棒糖手杖","盖亚之斧","盖亚之斧","勇气星核剑","混沌之刃","毁灭之伤冥神枪","旅者手镯","旅者拳套","睿智手镯","朋克手镯","深红爪","重金属护甲","皮革工作服","旅者长袍",
-                "魔导师的长袍","霸王树之棘针铠","翠绿灵衣","翠绿灵衣","黑玛瑙之祈装衣","旅者耳环","旅者头巾","海神耳饰","桜花の月夜簪","精灵王护石","细冰姬的蝴蝶结","永恒绿戒"],
+                "魔导师的长袍","霸王树之棘针铠","翠绿灵衣","翠绿灵衣","黑玛瑙之祈装衣","旅者耳环","旅者头巾","海神耳饰","桜花の月夜簪","精灵王护石","细冰姬的蝴蝶结","永恒绿戒","深结晶变异水晶"],
     "equip-zht":["旅人劍","獵人弓","檀香之杖","妖刀血鴉","深淵之弓","天黑劍奧比修斯","棒棒糖手杖","蓋亞之斧","蓋亞之斧","星核劍艾爾茲修奈德","渾沌之劍","冥神槍毀滅苦痛","旅者手镯","旅者拳套","睿智手镯","龐克棘刺手環","深紅之爪","重金屬盔甲","皮革工作服",
-                 "旅行長袍","魔導師的長袍","霸王樹之棘針鎧","翠綠靈衣","翠綠靈衣","黑瑪瑙祈裝衣","旅者耳環","旅者頭巾","海神耳飾","櫻花月夜簪","精靈王護石","細冰姬的蝴蝶結","常青之綠戒"],
+                 "旅行長袍","魔導師的長袍","霸王樹之棘針鎧","翠綠靈衣","翠綠靈衣","黑瑪瑙祈裝衣","旅者耳環","旅者頭巾","海神耳飾","櫻花月夜簪","精靈王護石","細冰姬的蝴蝶結","常青之綠戒","深結晶變異水晶"],
     "equip-ja":["旅立ちの剣","狩人の弓","香木の杖","妖刀血鴉","アビスボウ","天黒剣オブシウス","ロリポップステッキ","ガイアアクス","ガイアアクス","星核剣エルツシュナイド","カオスブレード","冥神槍ドゥームペイン","旅立ちのミサンガ","旅立ちのパンチ",
                 "ソフォスブレスレット","パンクニードルバングル","クリムゾンクロー","ヘビーメタルアーマー","革のサロペット","旅立ちのローブ","魔導師のローブ","覇王樹の棘針鎧","翠緑の霊衣","翠緑の霊衣","黒瑪瑙の祈装衣","旅立ちの耳環","旅立ちの頭巾",
-                "海神の耳飾り","桜花の月夜簪","精霊王の護石","細氷姫の結び紐","常盤の緑環"],
+                "海神の耳飾り","桜花の月夜簪","精霊王の護石","細氷姫の結び紐","常盤の緑環","深結晶ゼノクリスタル"],
     "equip-en":["Iron Blade","Hunter's Bow","Fragrant Wood Wand","Blood Raven Demon Blade","Abyss Bow","Heavenly Black Obsidian Sword","Lolipop Stick","Gaia Axe","Gaia Axe","Star Core Sword - Erst Schneide","Chaos Blade","Nether God Spear, Doom Pain",
                 "Journey Bracelet","Journey Punches","Sophos Bracelet","Punk Bangle","Crimson Claw","Heavy Metal Armor","Leather Overalls","Journey Robe","Magician's Robe","Thorn of the Great Tree Armor","Viridian Spiritual Dress","Viridian Spiritual Dress",
-                "Black Agate Prayer Dress","Journey Earrings","Journey Hood","Ocean God's Earrings","Moonlight Blossom Hairpin","Fairy King's Guardian Stone","Ice Princess Ribbon","Evergreen Ring"],
-    "dessert":["pie","donuts","cake"],
-    "dessertlevel":["家常的","美味的","诱人的"],
+                "Black Agate Prayer Dress","Journey Earrings","Journey Hood","Ocean God's Earrings","Moonlight Blossom Hairpin","Fairy King's Guardian Stone","Ice Princess Ribbon","Evergreen Ring","Deep Crystalized Xenocrystal"],
+    "dessert":["apie","gdonuts","cakey"],
+    "items":["powerdrug","forgebox"],
+    "dessertlevel-zh":["家常的","美味的","诱人的"],
     "dessertlevel-zht":["家常的","美味的","誘人的"],
     "dessertlevel-ja":["自家製の","美味しい","超美味い"],
     "dessertlevel-en":["homemade  ","tasty     ","delicious "],
-    "dessertname":["苹果派","甜甜圈","樱桃蛋糕"],
+    "dessertname-zh":["苹果派","甜甜圈","樱桃蛋糕"],
     "dessertname-zht":["蘋果派","甜甜圈","櫻桃蛋糕"],
     "dessertname-ja":["アップルパイ","ドーナツ","チェリーケーキ"],
     "dessertname-en":["apple pie","grape donuts","cherry cake"],
+    "itemsname-zh":["初级体力药剂","初级锻造台"],
+    "itemsname-zht":["初級體力藥劑","初級鍛造桌"],
+    "itemsname-ja":["下級体力薬剤","下級鍛造台"],
+    "itemsname-en":["Primary Stamina Potion","primary forging table"],
     "魔灯之灵（野怪":"https://p.inari.site/guguicons/test/mob/deng.png",
     "六眼飞鱼（野怪":"https://p.inari.site/guguicons/test/mob/fish.png",
     "铁皮木人（野怪":"https://p.inari.site/guguicons/test/mob/mu.png",
@@ -367,7 +424,6 @@ const defaultConf = {
     "冥voice":["https://p.inari.site/guguicons/test/vo/ming/",".mp3"],
     "命voice":["https://p.inari.site/guguicons/test/vo/life/",".mp3"],
     "希voice":["https://p.inari.site/guguicons/test/vo/xii/",".mp3"],
-    "spine":true,
     "spinert":["https://sticker.inari.site/api/common/","https://"],
     "舞spine":{"name":"sticker.inari.site/api/unit/wuu/","type":"6","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
     "默spine":{"name":"sticker.inari.site/api/unit/mo/","type":"7","hasRarity6":true,"wi":-350,"hi":-42,"re":0.8},
@@ -397,6 +453,7 @@ const defaultConf = {
     "w3":["z2203","z5","秃鹫手环","朋克手镯","%E7%A7%83%E9%B9%AB%E6%89%8B%E7%8E%AF/"],
     "wo3":["z2203","z5","秃鹫手套","深红爪","%E7%A7%83%E9%B9%AB%E6%89%8B%E5%A5%97/"],
     "w4":["z2204","z2204","海星戒指","永恒绿戒","%E6%B5%B7%E6%98%9F%E6%88%92%E6%8C%87/"],
+    "w5":["z2205","z2205","噬魔戒指","深结晶变异水晶","%E5%99%AC%E9%AD%94%E6%88%92%E6%8C%87/"],
     "c1":["z2301","z9","探险者铁甲","重金属护甲","%E6%8E%A2%E9%99%A9%E8%80%85%E9%93%81%E7%94%B2/"],
     "c2":["z2302","z10","探险者皮甲","皮革工作服","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9A%AE%E7%94%B2/"],
     "c3":["z2303","z10","探险者布甲","旅者长袍","%E6%8E%A2%E9%99%A9%E8%80%85%E5%B8%83%E7%94%B2/"],
@@ -417,11 +474,11 @@ const defaultConf = {
 ,api='https://api.inari.site/?s=App.User_User.'
 ,cards=['舞','默','琳','艾','梦','薇','伊','冥','命','希'];
 let ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,momoConf={},User=$('span.fyg_colpz06.fyg_f24')[0].innerText,momoUser = "momo_"+User,uuid,nowTheme
-,custom,tempca,tpkanban,kanban,kanbanimg,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,nowEquip,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
+,custom,tempca,tpkanban,kanban,kanbanimg,ext='.gif',old,purl,iurl,dessert,items,dessertlevel,dessertname,itemsname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,w5,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
 ,canvas,gl,shader,batcher,skeletonRenderer,loadingSkeleton,currentSkeletonBuffer,animationState,forceNoLoop,currentTexture,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,pagetype=24,speedFactor=1,tempvo=false,ccard=false,loading = false
 ,timeout = null,useOldNamesCheck='',useThemeNameCheck='',Multilingual='',tpkanbanHTML='',showCGCheck='',voiceOCheck='',kanbanCheck='',activeSkeleton="",pendingAnimation='',generalAdditionAnimations={},userTheme={},generalBattleSkeletonData={},lang="zh"
 ,animationQueue=[],currentClass='1',imgmove=[0,0.6],lastFrameTime=Date.now()/1000,bgColor=[0,0,0,0],additionAnimations=['DEAR','NO_WEAPON','POSING','RACE','RUN_JUMP','SMILE'],currentClassAnimData={type:0,data:{}},currentCharaAnimData={id:0,data:{}}
-,mvp=new spine.webgl.Matrix4();
+,nowEquip = localStorage.nowEquip || "0",mvp=new spine.webgl.Matrix4();
 
 
 /**
@@ -435,8 +492,7 @@ if (localStorage.ThemePackConf) {
 else{
     custom =defaultConf; localStorage.setItem('ThemePackConf',JSON.stringify(defaultConf));
 };
-if (localStorage.nowEquip) { nowEquip = localStorage.nowEquip;};
-if (!custom.yourcard ) { custom.yourcard=defaultConf.yourcard; update();};
+if (!custom.yourcard ) { custom.yourcard="舞"; update();};
 if (!custom.kanbansize){ custom.kanbansize=defaultConf.kanbansize;update();};
 if (!custom.language ) { custom.language=defaultConf.language;update();};lang=Language[custom.language];
 if (custom.showCG == true) { showCGCheck = 'checked'; };
@@ -444,77 +500,55 @@ if (custom.voiceO == true) { voiceOCheck = 'checked'; };
 if (custom.useThemeName==true){ useThemeNameCheck='checked';};
 if(custom.ThemePack=="classic"){ nowTheme=classicTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="test"||custom.ThemePack=="pcr"){ nowTheme=testTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-else if(custom.ThemePack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="user"){
-    if (localStorage.userTheme||momoConf.userTheme){
-        if(localStorage.userTheme&&!momoConf.userTheme){momoConf.userTheme=JSON.parse(localStorage.userTheme);update();userTheme=momoConf.userTheme;}
-        else{userTheme=momoConf.userTheme;};
-        if(userTheme.w4!=null){
-            nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
-            if(userTheme.舞==null&&custom.showCG==true){
-                alert(lang.initUFG);custom.showCG=false;
-            };
-            if(userTheme.舞==null&&custom.showKanban==true){
-                alert(lang.initUFG);custom.showKanban=false;;
-            };
-            if(userTheme.voice==null&&custom.voiceO==true){
-                alert(lang.initUVO);custom.voiceO=false;
-            };
-        }
-        else{
-            alert(lang.initUOT);custom.ThemePack="off"; update();
-            nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
-        };
-    }
-    else{ alert(lang.initUNU);custom.ThemePack="off"; update();nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
+    if(localStorage.userTheme&&custom.ver!="ver1.0"){ usTheme(localStorage.userTheme,true); }
+    else{
+        if(localStorage.userTheme&&custom.ver=="ver1.0"){ nowTheme=JSON.parse(localStorage.userTheme); }
+        else{ custom.ThemePack="classic"; nowTheme=classicTheme; alert('code:init-004\n'+lang.initUNU); };
+        sessionStorage.setItem('ThemePack',JSON.stringify(nowTheme));
+    };
 }
-else{nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
-yourcard=custom.yourcard;cardvo=nowTheme[yourcard+"voice"];iconsize=custom.iconSize;
-if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
-if (custom.showKanban == true&&nowTheme.spine==true){spinert=nowTheme.spinert;kanbanCheck='checked';}else if(custom.showKanban == true){kanbanimg=nowTheme[yourcard][2];kanbanCheck='checked';}else{kanbanimg=nullimg;};
-if(nowTheme["dessertlevel-"+custom.language]){nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
-if(nowTheme["dessertname-"+custom.language]){nowTheme.dessertname=nowTheme["dessertname-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
-if(custom.useThemeName==true){ Multilingual='checked';equipName=nowTheme["equip-"+custom.language];}
-else if(nowTheme["equip-"+custom.language]){ Multilingual='checked';equipName=Language[custom.language].equip;};
+else{ nowTheme=originTheme; sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
+
+yourcard=custom.yourcard; cardvo=nowTheme[yourcard+"voice"]; iconsize=custom.iconSize; kanbanimg=nullimg;
+
+if(custom.showKanban==true){ kanbanCheck='checked'; };
+Multilingual='checked'; equipName=Language[custom.language].equip;
+if(custom.useOldNames&&!custom.useThemeName){
+    nowTheme.dessertlevel=classicTheme["dessertlevel-"+custom.language];
+    nowTheme.dessertname=classicTheme["dessertname-"+custom.language];
+    nowTheme.itemsname=classicTheme["itemsname-"+custom.language];
+}
+else if(custom.useThemeName&&!nowTheme.nothemeAmName){
+    nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];
+    nowTheme.dessertname=nowTheme["dessertname-"+custom.language];
+    nowTheme.itemsname=nowTheme["itemsname-"+custom.language];
+}
+else{
+    nowTheme.dessertlevel=Language[custom.language].dessertlevel;
+    nowTheme.dessertname =Language[custom.language].dessertname;
+    nowTheme.itemsname =Language[custom.language].itemsname;
+};
+if(!nowTheme.nothemeEqName&&custom.useThemeName){ equipName=nowTheme["equip-"+custom.language]; };
 
 nowTheme.a1[3]=equipName[0];nowTheme.a2[3]=equipName[1];nowTheme.a3[3]=equipName[2];nowTheme.a4[3]=equipName[3];nowTheme.a5[3]=equipName[4];nowTheme.a6[3]=equipName[5];
 nowTheme.a7[3]=equipName[6];nowTheme.a8[3]=equipName[7];nowTheme.ao8[3]=equipName[8];nowTheme.a9[3]=equipName[9];nowTheme.a10[3]=equipName[10];nowTheme.ao10[3]=equipName[11];
-nowTheme.w1[3]=equipName[12];nowTheme.wo1[3]=equipName[13];nowTheme.w2[3]=equipName[14];nowTheme.w3[3]=equipName[15];nowTheme.wo3[3]=equipName[16];nowTheme.w4[3]=equipName[31];
+nowTheme.w1[3]=equipName[12];nowTheme.wo1[3]=equipName[13];nowTheme.w2[3]=equipName[14];nowTheme.w3[3]=equipName[15];nowTheme.wo3[3]=equipName[16];nowTheme.w4[3]=equipName[31];nowTheme.w5[3]=equipName[32];
 nowTheme.c1[3]=equipName[17];nowTheme.c2[3]=equipName[18];nowTheme.c3[3]=equipName[19];nowTheme.c4[3]=equipName[20];nowTheme.c5[3]=equipName[21];nowTheme.c6[3]=equipName[22];nowTheme.co6[3]=equipName[23];nowTheme.c7[3]=equipName[24];
 nowTheme.h1[3]=equipName[25];nowTheme.ho1[3]=equipName[26];nowTheme.h2[3]=equipName[27];nowTheme.ho2[3]=equipName[28];nowTheme.h3[3]=equipName[29];nowTheme.ho3[3]=equipName[30];
 sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
 
-ext=nowTheme.ext;purl=nowTheme.url;dessert=nowTheme.dessert;old=nowTheme.old;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;
+ext=nowTheme.ext;purl=nowTheme.url;iurl=nowTheme.iurl;dessert=nowTheme.dessert;items=nowTheme.items;old=nowTheme.old;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;itemsname=nowTheme.itemsname;
 a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;
-w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;w4=nowTheme.w4;
+w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;w4=nowTheme.w4;w5=nowTheme.w5;
 c1=nowTheme.c1;c2=nowTheme.c2;c3=nowTheme.c3;c4=nowTheme.c4;c5=nowTheme.c5;c6=nowTheme.c6;c7=nowTheme.c7;
 h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
 
 if(custom.useOldNames==true){ useOldNamesCheck='checked'; a8=nowTheme.ao8;a10=nowTheme.ao10;w1=nowTheme.wo1;w3=nowTheme.wo3;c6=nowTheme.co6;h1=nowTheme.ho1;h2=nowTheme.ho2;h3=nowTheme.ho3; };
-if(localStorage.nowEquip){nowEquip=localStorage.nowEquip;}else{nowEquip=spineJson.type;};
+nowEquip = localStorage.nowEquip || "0";
 if (window.location.href.indexOf('pk.php') > -1||window.location.href.indexOf('equip.php') > -1) { pagetype=nowEquip; };
 };
 function insertHTML(){
-    if (custom.showKanban==true&&nowTheme.spine==true) {
-        if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove);};
-        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
-        tpkanbanHTML =$( `<div class="tool" style ="display:none;">
-        <span> 动画:</span><select id="animationList"></select><input id="setAnimation" type="button" value="播放"></div>
-        <div id = "divkanban" style = "position:fixed;left:${kbw}px;top:${kbh}px;z-index:88;cursor:pointer;width:${365*Math.floor(custom.kanbansize )/100}px; height=${305*Math.floor(custom.kanbansize )/100}px;" >
-        <canvas id="tpkanban" width="360" height="300"></canvas></div>`).insertBefore('body');
-    }
-    else if (custom.showKanban==true){
-        if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove); };
-        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
-        tpkanbanHTML =$( `<div id = "divkanban" style = "position:fixed;left:${kbw}px;top:${kbh}px;z-index:88;cursor:pointer;width:${365*Math.floor(custom.kanbansize )/100}px; height=${305*Math.floor(custom.kanbansize )/100}px;" >
-        <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`).insertBefore('body');
-    }
-    else{
-        tpkanbanHTML = $(`<div id ="divkanban" style ="display:none;"><img class="tpkanban" src = ${kanbanimg}></div>`).insertBefore('body');
-    };
-    kanban = document.getElementById("divkanban");
     if($('.themepack-ls').length==0){
     $(`<p></p><span><b>${lang.vuuid}:</b> <input type="text" class="themepack-uuid" style="width:65px" value="">
     <input type="button" class="themepack-cuuid" value="${lang.cuuid}">
@@ -528,7 +562,8 @@ function insertHTML(){
     <input type="checkbox" class="themepack-voiceO" ${voiceOCheck}><span class="thememenu">${lang.menuSVO}</span>
     <input type="checkbox" class="themepack-showKB" ${kanbanCheck}><span class="thememenu">${lang.menuSKB}</span>
     <input type="button" class="themelang" value="文A">
-    <input type="checkbox" class="themepack-switch" ${Multilingual} style="display:none"><audio id="themeSoundPlay" controls src="${nullimg}" type="audio/mp3" style="display:none"></audio>
+    <input type="checkbox" class="themepack-switch" ${Multilingual} style="display:none">
+    <audio id="themeSoundPlay" controls src="${nullimg}" type="audio/mp3" style="display:none"></audio>
     </span>`).insertBefore($('hr')[0])};
 };
 function addCSS(){
@@ -540,9 +575,11 @@ $('head').append(`<style>
     .btn.fyg_tc.fyg_mp3{ width: 536px !important; height: 40px !important;}
     .btn.fyg_colpzbg.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important; ${nowTheme.wqbacksize}}
     .img-rounded { width: 50px; height:50px;}
-    .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
-    #smallcardimg {height:50px;width:50px;}
+    .btn.fyg_colpzbg.fyg_colpz01.fyg_mp3.fyg_tc,.btn.fyg_colpzbg.fyg_colpz02.fyg_mp3.fyg_tc,.btn.fyg_colpzbg.fyg_colpz03.fyg_mp3.fyg_tc,.btn.fyg_colpzbg.fyg_colpz04.fyg_mp3.fyg_tc,.btn.fyg_colpzbg.fyg_colpz05.fyg_mp3.fyg_tc { width: 60px !important; height: 100px !important;line-height:24px;}
+    .smallcardimg {height:50px;width:50px;}
     .tool {position: fixed;top: 0;width: 100%;z-index: 1;cursor: default}
+    .themepack-uuid,input[type='button'] { border: 1px solid #e5e5e5;color:#3280fc;display: inline-block; text-align: center; margin: 0px;}
+    input[type='button']{ cursor: pointer; }
 	.tool>span {white-space: nowrap}
 </style>`);
 if(nowTheme.spinert){$('head').append(`<style>#divkanban:hover{background:url(${nowTheme.kanbanbg});background-size:cover;}</style>`);};
@@ -558,7 +595,7 @@ if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Pho
     div[class='btn'],div[class='btn btn-primary'],.with-padding.bg-special.fyg_f14,.icon.icon-diamond{font-size:24px !important;}
     .btn.btn-block.dropdown-toggle.fyg_lh30{font-size:18px !important;}
     button[onclick*='b_forcbs(']{white-space: pre-wrap;}
-    .img-rounded,#smallcardimg {height:100px;width:100px;}
+    .img-rounded,.smallcardimg {height:100px;width:100px;}
     .btn.fyg_mp3{width:${Math.floor(parseInt(iconsize)*2)}px !important;height: ${Math.floor(parseInt(iconsize)*2)}px !important;line-height: ${Math.floor(parseInt(iconsize)*1.2)-1}px;}
     .btn.fyg_colpzbg.fyg_mp3{width:${Math.floor(parseInt(iconsize)*2)}px !important;height: ${Math.floor(parseInt(iconsize)*2)}px !important;}
     .fyg_tc>.btn.fyg_colpzbg.fyg_mp3.fyg_tc{width:120px !important;height: 160px !important;line-height:42px;}
@@ -566,11 +603,10 @@ if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Pho
 </style>`);};
 };
 function finalInit(){
-    initConf(); insertHTML(); dragfunc(kanban); addCSS();
-    $("#themeSoundPlay")[0].addEventListener('ended', function(){ battleVo();});
+    initConf(); insertHTML(); addCSS();
     let loadTime=new Date().getTime()-timeCheck;
     console.log("Load Finish! Takes "+loadTime+"ms");
-    if(custom.showKanban==true&&nowTheme.spine==true){spineinit();};
+    showKanban();
     if(localStorage.reload=="true"){localStorage.removeItem('reload');update();};
 };
 function update(){
@@ -579,267 +615,487 @@ function update(){
 };
 
 /* Theme Core */
-function oldEqName(){
-    if(custom.useOldNames!=true){
-        $("button[data-original-title*='荆棘剑盾']").attr("data-original-title",function(n,v){ n= v.replace(/荆棘剑盾/g, "荆棘盾剑");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a8[4]+old);return n;});
-        $("button[data-original-title*='饮血长枪']").attr("data-original-title",function(n,v){ n= v.replace(/饮血长枪/g, "饮血魔剑");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z/g, purl+a10[4]+old);return n;});
-        $("button[data-original-title*='探险者手套']").attr("data-original-title",function(n,v){ n= v.replace(/探险者手套/g, "探险者手环");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z5/g, purl+w1[4]+old);return n;});
-        $("button[data-original-title*='秃鹫手套']").attr("data-original-title",function(n,v){ n= v.replace(/秃鹫手套/g, "秃鹫手环");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z5/g, purl+w3[4]+old);return n;});
-        $("button[data-original-title*='复苏木甲']").attr("data-original-title",function(n,v){ n= v.replace(/复苏木甲/g, "复苏战衣");return n;});
-        $("button[data-original-title*='探险者头巾']").attr("data-original-title",function(n,v){ n= v.replace(/探险者头巾/g, "探险者耳环");return n;})
-            .attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h1[4]+old);return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2401/g, purl+h1[4]+old);return n;});
-        $("button[data-original-title*='占星师的发饰']").attr("data-original-title",function(n,v){ n= v.replace(/占星师的发饰/g, "占星师的耳饰");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h2[4]+old);return n;});
-        $("button[data-original-title*='天使缎带']").attr("data-original-title",function(n,v){ n= v.replace(/天使缎带/g, "萌爪耳钉");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h3[4]+old);return n;});
-    };
-    $("button[data-original-title*='"+a1[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a1[4]+old);return n;});
-    $("button[data-original-title*='"+a2[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2/g, purl+a2[4]+old);return n;});
-    $("button[data-original-title*='"+a3[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z3/g, purl+a3[4]+old);return n;});
-    $("button[data-original-title*='"+a4[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z4/g, purl+a4[4]+old);return n;});
-    $("button[data-original-title*='"+a5[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2/g, purl+a5[4]+old);return n;});
-    $("button[data-original-title*='"+a6[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z4/g, purl+a6[4]+old);return n;});
-    $("button[data-original-title*='"+a7[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z3/g, purl+a7[4]+old);return n;});
-    $("button[data-original-title*='"+a8[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a8[4]+old);return n;});
-    $("button[data-original-title*='"+a9[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a9[4]+old);return n;});
-    $("button[data-original-title*='"+w1[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z5/g, purl+w1[4]+old);return n;});
-    $("button[data-original-title*='"+w2[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z8/g, purl+w2[4]+old);return n;});
-    $("button[data-original-title*='"+w3[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z5/g, purl+w3[4]+old);return n;});
-    $("button[data-original-title*='"+c1[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z9/g, purl+c1[4]+old);return n;});
-    $("button[data-original-title*='"+c2[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z10/g, purl+c2[4]+old);return n;});
-    $("button[data-original-title*='"+c3[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z10/g, purl+c3[4]+old);return n;});
-    $("button[data-original-title*='"+c4[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z11/g, purl+c4[4]+old);return n;});
-    $("button[data-original-title*='"+c5[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z9/g, purl+c5[4]+old);return n;});
-    $("button[data-original-title*='"+h1[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h1[4]+old);return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2401/g, purl+h1[4]+old);return n;});
-    $("button[data-original-title*='"+h2[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h2[4]+old);return n;});
-    $("button[data-original-title*='"+h3[2]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h3[4]+old);return n;});
-    $("button[data-original-title*='"+a1[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a1[4]+old);return n;});
-    $("button[data-original-title*='"+a2[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2/g, purl+a2[4]+old);return n;});
-    $("button[data-original-title*='"+a3[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z3/g, purl+a3[4]+old);return n;});
-    $("button[data-original-title*='"+a4[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z4/g, purl+a4[4]+old);return n;});
-    $("button[data-original-title*='"+a5[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2/g, purl+a5[4]+old);return n;});
-    $("button[data-original-title*='"+a6[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z4/g, purl+a6[4]+old);return n;});
-    $("button[data-original-title*='"+a7[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z3/g, purl+a7[4]+old);return n;});
-    $("button[data-original-title*='"+a8[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a8[4]+old);return n;});
-    $("button[data-original-title*='"+a9[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a9[4]+old);return n;});
-    $("button[data-original-title*='"+w1[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z5/g, purl+w1[4]+old);return n;});
-    $("button[data-original-title*='"+w2[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z8/g, purl+w2[4]+old);return n;});
-    $("button[data-original-title*='"+w3[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z5/g, purl+w3[4]+old);return n;});
-    $("button[data-original-title*='"+c1[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z9/g, purl+c1[4]+old);return n;});
-    $("button[data-original-title*='"+c2[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z10/g, purl+c2[4]+old);return n;});
-    $("button[data-original-title*='"+c3[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z10/g, purl+c3[4]+old);return n;});
-    $("button[data-original-title*='"+c4[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z11/g, purl+c4[4]+old);return n;});
-    $("button[data-original-title*='"+c5[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z9/g, purl+c5[4]+old);return n;});
-    $("button[data-original-title*='"+h1[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h1[4]+old);return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2401/g, purl+h1[4]+old);return n;});
-    $("button[data-original-title*='"+h2[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h2[4]+old);return n;});
-    $("button[data-original-title*='"+h3[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h3[4]+old);return n;});
+function usTheme(UserJSON,act){
+    if(isJSON(UserJSON)){
+        let tempTheme=JSON.parse(UserJSON);userTheme = {};
+        if(!custom.ver){ update00(); }
+        /*
+        else if(custom.ver=="ver1.0"){ update10();}
+        else if(custom.ver=="ver1.1"){ update11(); }
+        else if(custom.ver=="ver1.2"){ update12(); }
+        */
+        else{ update00(); };
+
+        function update00(){
+            if(tempTheme.url){ userTheme.url=tempTheme.url; }else{ userTheme.url=sampleTheme.url; };
+            if(tempTheme.old){ userTheme.old=tempTheme.old; }else{ userTheme.old=sampleTheme.old; };
+            if(tempTheme.ext){ userTheme.ext=tempTheme.ext; }else{ userTheme.ext=sampleTheme.ext; };
+            if(tempTheme.background){ userTheme.background=tempTheme.background; }else{ userTheme.background=sampleTheme.background; };
+            if(tempTheme.kanbanbg){ userTheme.kanbanbg=tempTheme.kanbanbg; }else{ userTheme.kanbanbg=sampleTheme.kanbanbg; };
+            if(tempTheme.backsize){ userTheme.backsize=tempTheme.backsize; }else{ userTheme.backsize=sampleTheme.backsize; };
+            if(tempTheme.wqbacksize){ userTheme.wqbacksize=tempTheme.wqbacksize; }else{ userTheme.wqbacksize=sampleTheme.wqbacksize; };
+            if(tempTheme.iurl&&tempTheme.dessert&&tempTheme.items){
+                userTheme.iurl=tempTheme.iurl;userTheme.dessert=tempTheme.dessert;userTheme.items=tempTheme.items;
+            }else{
+                userTheme.iurl=sampleTheme.iurl;userTheme.dessert=sampleTheme.dessert;userTheme.items=sampleTheme.items;
+            };
+            if(tempTheme.nothemeAmName){ userTheme.nothemeAmName=true; }else{
+                if(tempTheme['dessertlevel-zh']||tempTheme['dessertlevel-zht']||tempTheme['dessertlevel-ja']||tempTheme['dessertlevel-en']||
+                   tempTheme['dessertname-zh']||tempTheme['dessertname-zht']||tempTheme['dessertname-ja']||tempTheme['dessertname-en']||
+                   tempTheme['itemsname-zh']||tempTheme['itemsname-zht']||tempTheme['itemsname-ja']||tempTheme['itemsname-en']){
+                    if(tempTheme['dessertlevel-zh']){ userTheme['dessertlevel-zh']=tempTheme.dessertlevel-zh; }else{ userTheme['dessertlevel-zh']=Language.zh.dessertlevel; };
+                    if(tempTheme['dessertlevel-zht']){ userTheme['dessertlevel-zht']=tempTheme['dessertlevel-zht']; }else{ userTheme['dessertlevel-zht']=Language.zht.dessertlevel; };
+                    if(tempTheme['dessertlevel-ja']){ userTheme['dessertlevel-ja']=tempTheme['dessertlevel-ja']; }else{ userTheme['dessertlevel-ja']=Language.ja.dessertlevel; };
+                    if(tempTheme['dessertlevel-en']){ userTheme['dessertlevel-en']=tempTheme['dessertlevel-en']; }else{ userTheme['dessertlevel-en']=Language.en.dessertlevel; };
+                    if(tempTheme['dessertname-zh']){ userTheme['dessertname-zh']=tempTheme['dessertname-zh']; }else{ userTheme['dessertname-zh']=Language.zh.dessertname; };
+                    if(tempTheme['dessertname-zht']){ userTheme['dessertname-zht']=tempTheme['dessertname-zht']; }else{ userTheme['dessertname-zht']=Language.zht.dessertname; };
+                    if(tempTheme['dessertname-ja']){ userTheme['dessertname-ja']=tempTheme['dessertname-ja']; }else{ userTheme['dessertname-ja']=Language.ja.dessertname; };
+                    if(tempTheme['dessertname-en']){ userTheme['dessertname-en']=tempTheme['dessertname-en']; }else{ userTheme['dessertname-en']=Language.en.dessertname; };
+                    if(tempTheme['itemsname-zh']){ userTheme['itemsname-zh']=tempTheme['itemsname-zh']; }else{ userTheme['itemsname-zh']=Language.zh.itemsname; };
+                    if(tempTheme['itemsname-zht']){ userTheme['itemsname-zht']=tempTheme['itemsname-zht']; }else{ userTheme['itemsname-zht']=Language.zht.itemsname; };
+                    if(tempTheme['itemsname-ja']){ userTheme['itemsname-ja']=tempTheme['itemsname-ja']; }else{ userTheme['itemsname-ja']=Language.ja.itemsname; };
+                    if(tempTheme['itemsname-en']){ userTheme['itemsname-en']=tempTheme['itemsname-en']; }else{ userTheme['itemsname-en']=Language.en.itemsname; };
+                    userTheme.nothemeAmName=false;
+                }else{ userTheme.nothemeAmName=true; };
+            };
+            if(tempTheme.nofgimg){ userTheme.nofgimg=true; alert('code:userTheme-001\n'+lang.initUFG); custom.showCG=false; }else{
+                if(tempTheme.舞||tempTheme.默||tempTheme.琳||tempTheme.艾||tempTheme.梦||tempTheme.薇||tempTheme.伊||tempTheme.冥||tempTheme.命||tempTheme.希){
+                    if(tempTheme.舞){ userTheme.舞=tempTheme.舞; }else{ userTheme.舞=sampleTheme.舞; };
+                    if(tempTheme.默){ userTheme.默=tempTheme.默; }else{ userTheme.默=sampleTheme.默; };
+                    if(tempTheme.琳){ userTheme.琳=tempTheme.琳; }else{ userTheme.琳=sampleTheme.琳; };
+                    if(tempTheme.艾){ userTheme.艾=tempTheme.艾; }else{ userTheme.艾=sampleTheme.艾; };
+                    if(tempTheme.梦){ userTheme.梦=tempTheme.梦; }else{ userTheme.梦=sampleTheme.梦; };
+                    if(tempTheme.薇){ userTheme.薇=tempTheme.薇; }else{ userTheme.薇=sampleTheme.薇; };
+                    if(tempTheme.伊){ userTheme.伊=tempTheme.伊; }else{ userTheme.伊=sampleTheme.伊; };
+                    if(tempTheme.冥){ userTheme.冥=tempTheme.冥; }else{ userTheme.冥=sampleTheme.冥; };
+                    if(tempTheme.命){ userTheme.命=tempTheme.命; }else{ userTheme.命=sampleTheme.命; };
+                    if(tempTheme.希){ userTheme.希=tempTheme.希; }else{ userTheme.希=sampleTheme.希; };
+                    if(tempTheme['魔灯之灵（野怪']){ userTheme['魔灯之灵（野怪']=tempTheme['魔灯之灵（野怪']; }else{ userTheme['魔灯之灵（野怪']=sampleTheme['魔灯之灵（野怪']; };
+                    if(tempTheme['六眼飞鱼（野怪']){ userTheme['六眼飞鱼（野怪']=tempTheme['六眼飞鱼（野怪']; }else{ userTheme['六眼飞鱼（野怪']=sampleTheme['六眼飞鱼（野怪']; };
+                    if(tempTheme['铁皮木人（野怪']){ userTheme['铁皮木人（野怪']=tempTheme['铁皮木人（野怪']; }else{ userTheme['铁皮木人（野怪']=sampleTheme['铁皮木人（野怪']; };
+                    if(tempTheme['迅捷魔蛛（野怪']){ userTheme['迅捷魔蛛（野怪']=tempTheme['迅捷魔蛛（野怪']; }else{ userTheme['迅捷魔蛛（野怪']=sampleTheme['迅捷魔蛛（野怪']; };
+                    if(tempTheme['晶刺豪猪（野怪']){ userTheme['晶刺豪猪（野怪']=tempTheme['晶刺豪猪（野怪']; }else{ userTheme['晶刺豪猪（野怪']=sampleTheme['晶刺豪猪（野怪']; };
+                    if(tempTheme['食铁兽（野怪']){ userTheme['食铁兽（野怪']=tempTheme['食铁兽（野怪']; }else{ userTheme['食铁兽（野怪']=sampleTheme['食铁兽（野怪']; };
+                    userTheme.nofgimg=false;
+                }else{ userTheme.nofgimg=true; alert('code:updt-001\n'+lang.initUFG);custom.showKanban=false; };
+            };
+            if(tempTheme.nospine){ userTheme.nospine=true; alert('code:userTheme-002\n'+lang.initUSP); }else{
+                let thespine;thespine=tempTheme.舞spine||tempTheme.默spine||tempTheme.琳spine||tempTheme.艾spine||tempTheme.梦spine||tempTheme.薇spine||tempTheme.伊spine||tempTheme.冥spine||tempTheme.命spine||tempTheme.希spine||false;
+                if(tempTheme.spinert&&thespine!=false){
+                    if(tempTheme.舞spine){ userTheme.舞spine=tempTheme.舞spine; }else{ userTheme.舞spine=thespine; };
+                    if(tempTheme.默spine){ userTheme.默spine=tempTheme.默spine; }else{ userTheme.默spine=thespine; };
+                    if(tempTheme.琳spine){ userTheme.琳spine=tempTheme.琳spine; }else{ userTheme.琳spine=thespine; };
+                    if(tempTheme.艾spine){ userTheme.艾spine=tempTheme.艾spine; }else{ userTheme.艾spine=thespine; };
+                    if(tempTheme.梦spine){ userTheme.梦spine=tempTheme.梦spine; }else{ userTheme.梦spine=thespine; };
+                    if(tempTheme.薇spine){ userTheme.薇spine=tempTheme.薇spine; }else{ userTheme.薇spine=thespine; };
+                    if(tempTheme.伊spine){ userTheme.伊spine=tempTheme.伊spine; }else{ userTheme.伊spine=thespine; };
+                    if(tempTheme.冥spine){ userTheme.冥spine=tempTheme.冥spine; }else{ userTheme.冥spine=thespine; };
+                    if(tempTheme.命spine){ userTheme.命spine=tempTheme.命spine; }else{ userTheme.命spine=thespine; };
+                    if(tempTheme.希spine){ userTheme.希spine=tempTheme.希spine; }else{ userTheme.希spine=thespine; };
+                    userTheme.nospine=false;
+                }
+                else{ userTheme.nospine=true; alert('code:updt-002\n'+lang.initUSP); };
+            };
+            if(userTheme.nofgimg&&userTheme.nospine){ custom.showKanban=false; };
+            if(tempTheme.novoice){ userTheme.novoice=true; alert('code:userTheme-003\n'+lang.initUVO);custom.voiceO=false; }else{
+                let thevoice;thevoice=tempTheme.舞voice||tempTheme.默voice||tempTheme.琳voice||tempTheme.艾voice||tempTheme.梦voice||tempTheme.薇voice||tempTheme.伊voice||tempTheme.冥voice||tempTheme.命voice||tempTheme.希voice||false;
+                if(tempTheme.voice&&thevoice!=false){
+                    if(tempTheme.舞voice){ userTheme.舞voice=tempTheme.舞voice; }else{ userTheme.舞voice=thevoice; };
+                    if(tempTheme.默voice){ userTheme.默voice=tempTheme.默voice; }else{ userTheme.默voice=thevoice; };
+                    if(tempTheme.琳voice){ userTheme.琳voice=tempTheme.琳voice; }else{ userTheme.琳voice=thevoice; };
+                    if(tempTheme.艾voice){ userTheme.艾voice=tempTheme.艾voice; }else{ userTheme.艾voice=thevoice; };
+                    if(tempTheme.梦voice){ userTheme.梦voice=tempTheme.梦voice; }else{ userTheme.梦voice=thevoice; };
+                    if(tempTheme.薇voice){ userTheme.薇voice=tempTheme.薇voice; }else{ userTheme.薇voice=thevoice; };
+                    if(tempTheme.伊voice){ userTheme.伊voice=tempTheme.伊voice; }else{ userTheme.伊voice=thevoice; };
+                    if(tempTheme.冥voice){ userTheme.冥voice=tempTheme.冥voice; }else{ userTheme.冥voice=thevoice; };
+                    if(tempTheme.命voice){ userTheme.命voice=tempTheme.命voice; }else{ userTheme.命voice=thevoice; };
+                    if(tempTheme.希voice){ userTheme.希voice=tempTheme.希voice; }else{ userTheme.希voice=thevoice; };
+                    userTheme.novoice=false;
+                }
+                else{ userTheme.novoice=true; }
+            };
+            if(tempTheme.nothemeEqName){ userTheme.nothemeEqName=true; }else{
+                if(tempTheme['equip-zh']||tempTheme['equip-zht']||tempTheme['equip-ja']||tempTheme['equip-en']){
+                    if(tempTheme['equip-zh']){ userTheme['equip-zh']=tempTheme['equip-zh']; }else{ userTheme['equip-zh']=Language.zh.equip; };
+                    if(tempTheme['equip-zht']){ userTheme['equip-zht']=tempTheme['equip-zht']; }else{ userTheme['equip-zht']=Language.zht.equip; };
+                    if(tempTheme['equip-ja']){ userTheme['equip-ja']=tempTheme['equip-ja']; }else{ userTheme['equip-ja']=Language.ja.equip; };
+                    if(tempTheme['equip-en']){ userTheme['equip-en']=tempTheme['equip-en']; }else{ userTheme['equip-en']=Language.en.equip; };
+                    userTheme.nothemeEqName=false;
+                }else{ userTheme.nothemeEqName=true; };
+            };
+            if(tempTheme.a1){ userTheme.a1=tempTheme.a1; }else{ userTheme.a1=sampleTheme.a1; };
+            if(tempTheme.a2){ userTheme.a2=tempTheme.a2; }else{ userTheme.a2=sampleTheme.a2; };
+            if(tempTheme.a3){ userTheme.a3=tempTheme.a3; }else{ userTheme.a3=sampleTheme.a3; };
+            if(tempTheme.a4){ userTheme.a4=tempTheme.a4; }else{ userTheme.a4=sampleTheme.a4; };
+            if(tempTheme.a5){ userTheme.a5=tempTheme.a5; }else{ userTheme.a5=sampleTheme.a5; };
+            if(tempTheme.a6){ userTheme.a6=tempTheme.a6; }else{ userTheme.a6=sampleTheme.a6; };
+            if(tempTheme.a7){ userTheme.a7=tempTheme.a7; }else{ userTheme.a7=sampleTheme.a7; };
+            if(tempTheme.a8){ userTheme.a8=tempTheme.a8; }else{ userTheme.a8=sampleTheme.a8; };
+            if(tempTheme.a9){ userTheme.a9=tempTheme.a9; }else{ userTheme.a9=sampleTheme.a9; };
+            if(tempTheme.a10){ userTheme.a10=tempTheme.a10; }else{ userTheme.a10=sampleTheme.a10; };
+            if(tempTheme.ao8){ userTheme.ao8=tempTheme.ao8; }else{
+                if(tempTheme.a8){ userTheme.ao8=tempTheme.a8; }else{ userTheme.ao8=sampleTheme.ao8; };
+            };
+            if(tempTheme.ao10){ userTheme.a=tempTheme.ao10; }else{
+                if(tempTheme.ao10){ userTheme.ao10=tempTheme.a10; }else{ userTheme.ao10=sampleTheme.ao10; };
+            };
+            if(tempTheme.w1){ userTheme.w1=tempTheme.w1; }else{ userTheme.w1=sampleTheme.w1; };
+            if(tempTheme.w2){ userTheme.w2=tempTheme.w2; }else{ userTheme.w2=sampleTheme.w2; };
+            if(tempTheme.w3){ userTheme.w3=tempTheme.w3; }else{ userTheme.w3=sampleTheme.w3; };
+            if(tempTheme.w4){ userTheme.w4=tempTheme.w4; }else{ userTheme.w4=sampleTheme.w4; };
+            if(tempTheme.w5){ userTheme.w5=tempTheme.w5; }else{ userTheme.w5=sampleTheme.w5; };
+            if(tempTheme.wo1){ userTheme.wo1=tempTheme.wo1; }else{
+                if(tempTheme.w1){ userTheme.wo1=tempTheme.w1; }else{ userTheme.wo1=sampleTheme.wo1; };
+            };
+            if(tempTheme.wo3){ userTheme.wo3=tempTheme.wo3; }else{
+                if(tempTheme.w3){ userTheme.wo3=tempTheme.w3; }else{ userTheme.wo3=sampleTheme.wo3; };
+            };
+            if(tempTheme.c1){ userTheme.c1=tempTheme.c1; }else{ userTheme.c1=sampleTheme.c1; };
+            if(tempTheme.c2){ userTheme.c2=tempTheme.c2; }else{ userTheme.c2=sampleTheme.c2; };
+            if(tempTheme.c3){ userTheme.c3=tempTheme.c3; }else{ userTheme.c3=sampleTheme.c3; };
+            if(tempTheme.c4){ userTheme.c4=tempTheme.c4; }else{ userTheme.c4=sampleTheme.c4; };
+            if(tempTheme.c5){ userTheme.c5=tempTheme.c5; }else{ userTheme.c5=sampleTheme.c5; };
+            if(tempTheme.c6){ userTheme.c6=tempTheme.c6; }else{ userTheme.c6=sampleTheme.c6; };
+            if(tempTheme.c7){ userTheme.c7=tempTheme.c7; }else{ userTheme.c7=sampleTheme.c7; };
+            if(tempTheme.co6){ userTheme.co6=tempTheme.co6; }else{
+                if(tempTheme.c6){ userTheme.co6=tempTheme.c6; }else{ userTheme.co6=sampleTheme.co6; };
+            };
+            if(tempTheme.h1){ userTheme.h1=tempTheme.h1; }else{ userTheme.h1=sampleTheme.h1; };
+            if(tempTheme.h2){ userTheme.h2=tempTheme.h2; }else{ userTheme.h2=sampleTheme.h2; };
+            if(tempTheme.h3){ userTheme.h3=tempTheme.h3; }else{ userTheme.h3=sampleTheme.h3; };
+            if(tempTheme.ho1){ userTheme.ho1=tempTheme.ho1; }else{
+                if(tempTheme.h1){ userTheme.ho1=tempTheme.h1; }else{ userTheme.ho1=sampleTheme.ho1; };
+            };
+            if(tempTheme.ho2){ userTheme.ho2=tempTheme.ho2; }else{
+                if(tempTheme.h2){ userTheme.ho2=tempTheme.h2; }else{ userTheme.ho2=sampleTheme.ho2; };
+            };
+            if(tempTheme.ho3){ userTheme.ho3=tempTheme.ho3; }else{
+                if(tempTheme.h3){ userTheme.ho3=tempTheme.h3; }else{ userTheme.ho3=sampleTheme.ho3; };
+            };
+            sessionStorage.setItem('userTheme', JSON.stringify(userTheme)); custom.ver="ver1.0"; update();
+            if(act){ nowTheme=userTheme; sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
+        };
+        /*
+        function update10(){ tempTheme.ver11=""; update11(); };
+        function update11(){ tempTheme.ver12=""; update12(); };
+        function update12(){ tempTheme.ver13=""; sessionStorage.setItem('userTheme', JSON.stringify(tempTheme)); custom.ver="ver1.3"; update();};
+        */
+    }
+    else{ alert('code:init-008\n'+lang.initUOT); };
 };
-function themeEqName(){
+function theEqName(action){
+    let eqn=Language.zh.equip,dnn=Language.zh.dessertname,itn=Language.zh.itemsname;
+    /*
+    let eqn=[],dnn=[];
+    if(!action){
+        eqn=Language.zh.equip;dnn=Language.zh.dessertname;
+    }
+    else if(action=="old"){
+    }
+    else if(action=="new"){
+    }
+    else if(action=="oldtheme"){
+    }
+    else if(action=="newtheme"){
+    };
+    */
     $("button[data-original-title]").attr("data-original-title",function(n,v){
-        n= v.replace(/探险者之剑/g, a1[3]);n= n.replace(/探险者短弓/g, a2[3]);n= n.replace(/探险者短杖/g, a3[3]);n= n.replace(/狂信者的荣誉之刃/g, a4[3]);n= n.replace(/反叛者的刺杀弓/g, a5[3]);n= n.replace(/幽梦匕首/g, a6[3]);
-        n= n.replace(/光辉法杖/g, a7[3]);n= n.replace(/荆棘盾剑/g, a8[3]);n= n.replace(/荆棘剑盾/g, a8[3]);n= n.replace(/陨铁重剑/g, a9[3]);n= n.replace(/饮血魔剑/g, a10[3]);n= n.replace(/饮血长枪/g, a10[3]);
-        n= n.replace(/探险者手环/g, w1[3]);n= n.replace(/探险者手套/g, w1[3]);n= n.replace(/命师的传承手环/g, w2[3]);n= n.replace(/秃鹫手环/g, w3[3]);n= n.replace(/秃鹫手套/g, w3[3]);n= n.replace(/海星戒指/g, w4[3]);
-        n= n.replace(/探险者铁甲/g, c1[3]);n= n.replace(/探险者皮甲/g, c2[3]);n= n.replace(/探险者布甲/g, c3[3]);n= n.replace(/旅法师的灵光袍/g, c4[3]);n= n.replace(/战线支撑者的荆棘重甲/g, c5[3]);
-        n= n.replace(/复苏战衣/g, c6[3]);n= n.replace(/复苏木甲/g, c6[3]);n= n.replace(/挑战斗篷/g, c7[3]);
-        n= n.replace(/探险者耳环/g, h1[3]);n= n.replace(/探险者头巾/g, h1[3]);n= n.replace(/占星师的耳饰/g, h2[3]);n= n.replace(/占星师的发饰/g, h2[3]);n= n.replace(/萌爪耳钉/g, h3[3]);n= n.replace(/天使缎带/g, h3[3]);return n;
-    });
-    $(".with-padding").html(function(n,v){
-        n= v.replace(/探险者之剑/g, a1[3]);n= n.replace(/探险者短弓/g, a2[3]);n= n.replace(/探险者短杖/g, a3[3]);n= n.replace(/狂信者的荣誉之刃/g, a4[3]);n= n.replace(/反叛者的刺杀弓/g, a5[3]);n= n.replace(/幽梦匕首/g, a6[3]);
-        n= n.replace(/光辉法杖/g, a7[3]);n= n.replace(/荆棘盾剑/g, a8[3]);n= n.replace(/荆棘剑盾/g, a8[3]);n= n.replace(/陨铁重剑/g, a9[3]);n= n.replace(/饮血魔剑/g, a10[3]);n= n.replace(/饮血长枪/g, a10[3]);
-        n= n.replace(/探险者手环/g, w1[3]);n= n.replace(/探险者手套/g, w1[3]);n= n.replace(/命师的传承手环/g, w2[3]);n= n.replace(/秃鹫手环/g, w3[3]);n= n.replace(/秃鹫手套/g, w3[3]);n= n.replace(/海星戒指/g, w4[3]);
-        n= n.replace(/探险者铁甲/g, c1[3]);n= n.replace(/探险者皮甲/g, c2[3]);n= n.replace(/探险者布甲/g, c3[3]);n= n.replace(/旅法师的灵光袍/g, c4[3]);n= n.replace(/战线支撑者的荆棘重甲/g, c5[3]);
-        n= n.replace(/复苏战衣/g, c6[3]);n= n.replace(/复苏木甲/g, c6[3]);n= n.replace(/挑战斗篷/g, c7[3]);
-        n= n.replace(/探险者耳环/g, h1[3]);n= n.replace(/探险者头巾/g, h1[3]);n= n.replace(/占星师的耳饰/g, h2[3]);n= n.replace(/占星师的发饰/g, h2[3]);n= n.replace(/萌爪耳钉/g, h3[3]);n= n.replace(/天使缎带/g, h3[3]);return n;
-    });
+            n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
+                .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
+                .replace(new RegExp(eqn[11],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
+                .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
+                .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
+                .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
+                .replace(new RegExp(dnn[2],'g'), dessertname[2]).replace(new RegExp(dnn[1],'g'), dessertname[1]).replace(new RegExp(dnn[0],'g'), dessertname[0])
+                .replace(new RegExp(itn[0],'g'), itemsname[0]).replace(new RegExp(itn[1],'g'), itemsname[1]);
+            return n;
+        });
+        $(".with-padding").html(function(n,v){
+            n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
+                .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
+                .replace(new RegExp(eqn[11],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
+                .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
+                .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
+                .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
+                .replace(new RegExp(dnn[2],'g'), dessertname[2]).replace(new RegExp(dnn[1],'g'), dessertname[1]).replace(new RegExp(dnn[0],'g'), dessertname[0])
+                .replace(new RegExp(itn[0],'g'), itemsname[0]).replace(new RegExp(itn[1],'g'), itemsname[1]);;
+            return n;
+        });
 };
 function themeIcon(){
-    if(ext!=".gif"){ $("button[style*='ys/icon/z']").attr("style",function(n,v){ n= v.replace(/.gif/g, ext);return n;});};
-    $("button[style*='z2101']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]);n=n.replace(/ys\/icon\/z2101/g, purl+a1[4]+old);return n;});
-    $("button[style*='z2102']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2102_/g, purl+a2[4]);n=n.replace(/ys\/icon\/z2102/g, purl+a2[4]+old);return n;});
-    $("button[style*='z2103']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2103_/g, purl+a3[4]);n=n.replace(/ys\/icon\/z2103/g, purl+a3[4]+old);return n;});
-    $("button[style*='z2104']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2104_/g, purl+a4[4]);n=n.replace(/ys\/icon\/z2104/g, purl+a4[4]+old);return n;});
-    $("button[style*='z2105']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2105_/g, purl+a5[4]);n=n.replace(/ys\/icon\/z2105/g, purl+a5[4]+old);return n;});
-    $("button[style*='z2106']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2106_/g, purl+a6[4]);n=n.replace(/ys\/icon\/z2106/g, purl+a6[4]+old);return n;});
-    $("button[style*='z2107']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2107_/g, purl+a7[4]);n=n.replace(/ys\/icon\/z2107/g, purl+a7[4]+old);return n;});
-    $("button[style*='z2108']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2108_/g, purl+a8[4]);n=n.replace(/ys\/icon\/z2108/g, purl+a8[4]+old);return n;});
-    $("button[style*='z2109']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]);n=n.replace(/ys\/icon\/z2109/g, purl+a9[4]+old);return n;});
-    $("button[style*='z2110']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2110_/g,purl+a10[4]);n=n.replace(/ys\/icon\/z2110/g,purl+a10[4]+old);return n;});
-    $("button[style*='z2201']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2201_/g, purl+w1[4]);n=n.replace(/ys\/icon\/z2201/g, purl+w1[4]+old);return n;});
-    $("button[style*='z2202']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2202_/g, purl+w2[4]);n=n.replace(/ys\/icon\/z2202/g, purl+w2[4]+old);return n;});
-    $("button[style*='z2203']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2203_/g, purl+w3[4]);n=n.replace(/ys\/icon\/z2203/g, purl+w3[4]+old);return n;});
-    $("button[style*='z2204']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2204_/g, purl+w4[4]);n=n.replace(/ys\/icon\/z2204/g, purl+w4[4]+old);return n;});
-    $("button[style*='z2301']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2301_/g, purl+c1[4]);n=n.replace(/ys\/icon\/z2301/g, purl+c1[4]+old);return n;});
-    $("button[style*='z2302']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2302_/g, purl+c2[4]);n=n.replace(/ys\/icon\/z2302/g, purl+c2[4]+old);return n;});
-    $("button[style*='z2303']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2303_/g, purl+c3[4]);n=n.replace(/ys\/icon\/z2303/g, purl+c3[4]+old);return n;});
-    $("button[style*='z2304']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2304_/g, purl+c4[4]);n=n.replace(/ys\/icon\/z2304/g, purl+c4[4]+old);return n;});
-    $("button[style*='z2305']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2305_/g, purl+c5[4]);n=n.replace(/ys\/icon\/z2305/g, purl+c5[4]+old);return n;});
-    $("button[style*='z2306']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2306_/g, purl+c6[4]);n=n.replace(/ys\/icon\/z2306/g, purl+c6[4]+old);return n;});
-    $("button[style*='z2307']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2307_/g, purl+c7[4]);n=n.replace(/ys\/icon\/z2307/g, purl+c7[4]+old);return n;});
-    $("button[style*='z2401']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]);n=n.replace(/ys\/icon\/z2401/g, purl+h1[4]+old);return n;});
-    $("button[style*='z2402']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]);n=n.replace(/ys\/icon\/z2402/g, purl+h2[4]+old);return n;});
-    $("button[style*='z2403']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]);n=n.replace(/ys\/icon\/z2403/g, purl+h3[4]+old);return n;});
-    $(".with-padding").html(function(n,v){n= v.replace(/星铜苹果护身符/g, dessertname[0]); n= n.replace(/蓝银葡萄护身符/g, dessertname[1]); n= n.replace(/紫晶樱桃护身符/g, dessertname[2]); return n;});
-    $("button[data-original-title*='樱桃']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z901/g, purl+dessert[2]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/紫晶樱桃护身符/g, dessertname[2]);return n;});
-    $("button[data-original-title*='葡萄']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z902/g, purl+dessert[1]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/蓝银葡萄护身符/g, dessertname[1]);return n;});
-    $("button[data-original-title*='苹果']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z903/g, purl+dessert[0]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/星铜苹果护身符/g, dessertname[0]);return n;});
-    $("button[data-original-title*='稀有']").attr("data-original-title",function(n,v){ n= v.replace(/稀有/g, dessertlevel[0]);return n;})
-        .attr("style",function(n,v){n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#38B03F;background-image`);return n;});
-    $("button[data-original-title*='史诗']").attr("data-original-title",function(n,v){ n= v.replace(/史诗/g, dessertlevel[1]);return n;})
-        .attr("style",function(n,v){n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#F1A325;background-image`);return n;});
-    $("button[data-original-title*='传奇']").attr("data-original-title",function(n,v){ n= v.replace(/传奇/g, dessertlevel[2]);return n;})
-        .attr("style",function(n,v){n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#EA644A;background-image`);return n;});;
-    $(".fyg_tc>img[src*='z2101_']").attr("src",function(n,v){ loading = false;nowEquip=4;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]);return n;});
-    $(".fyg_tc>img[src*='z2102_']").attr("src",function(n,v){ loading = false;nowEquip=8;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2102_/g, purl+a2[4]);return n;});
-    $(".fyg_tc>img[src*='z2103_']").attr("src",function(n,v){ loading = false;nowEquip=7;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2103_/g, purl+a3[4]);return n;});
-    $(".fyg_tc>img[src*='z2104_']").attr("src",function(n,v){ loading = false;nowEquip=2;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2104_/g, purl+a4[4]);return n;});
-    $(".fyg_tc>img[src*='z2105_']").attr("src",function(n,v){ loading = false;nowEquip=8;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2105_/g, purl+a5[4]);return n;});
-    $(".fyg_tc>img[src*='z2106_']").attr("src",function(n,v){ loading = false;nowEquip=9;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2106_/g, purl+a6[4]);return n;});
-    $(".fyg_tc>img[src*='z2107_']").attr("src",function(n,v){ loading = false;nowEquip=7;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2107_/g, purl+a7[4]);return n;});
-    $(".fyg_tc>img[src*='z2108_']").attr("src",function(n,v){ loading = false;nowEquip=3;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2108_/g, purl+a8[4]);return n;});
-    $(".fyg_tc>img[src*='z2109_']").attr("src",function(n,v){ loading = false;nowEquip=5;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]);return n;});
-    $(".fyg_tc>img[src*='z2202_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2202_/g, purl+w2[4]);return n;});
-    $(".fyg_tc>img[src*='z2204_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2204_/g, purl+w4[4]);return n;});
-    $(".fyg_tc>img[src*='z2301_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2301_/g, purl+c1[4]);return n;});
-    $(".fyg_tc>img[src*='z2302_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2302_/g, purl+c2[4]);return n;});
-    $(".fyg_tc>img[src*='z2303_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2303_/g, purl+c3[4]);return n;});
-    $(".fyg_tc>img[src*='z2304_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2304_/g, purl+c4[4]);return n;});
-    $(".fyg_tc>img[src*='z2305_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2305_/g, purl+c5[4]);return n;});
-    $(".fyg_tc>img[src*='z2306_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2306_/g, purl+c6[4]);return n;});
-    $(".fyg_tc>img[src*='z2307_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2307_/g, purl+c7[4]);return n;});
-    $(".fyg_tc>img[src*='z2401_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]);return n;});
-    $(".fyg_tc>img[src*='z2402_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]);return n;});
-    $(".fyg_tc>img[src*='z2403_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]);return n;});
-    if(custom.useOldNames==true){
-        $(".fyg_tc>img[src*='z2110_']").attr("src",function(n,v){ loading = false;nowEquip=6;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2110_/g, purl+a10[4]);return n;});
-        $(".fyg_tc>img[src*='z2201_']").attr("src",function(n,v){ loading = false;nowEquip=1;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2201_/g, purl+w1[4]);return n;});
-        $(".fyg_tc>img[src*='z2203_']").attr("src",function(n,v){ loading = false;nowEquip=1;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2203_/g, purl+w3[4]);return n;});
-        $("button[data-original-title*='荆棘盾剑']").attr("data-original-title",function(n,v){ n= v.replace(/荆棘盾剑/g, "荆棘剑盾");return n;});
-        $("button[data-original-title*='饮血魔剑']").attr("data-original-title",function(n,v){ n= v.replace(/饮血魔剑/g, "饮血长枪");return n;});
-        $("button[data-original-title*='探险者手环']").attr("data-original-title",function(n,v){ n= v.replace(/探险者手环/g, "探险者手套");return n;});
-        $("button[data-original-title*='秃鹫手环']").attr("data-original-title",function(n,v){ n= v.replace(/秃鹫手环/g, "秃鹫手套");return n;});
-        $("button[data-original-title*='复苏战衣']").attr("data-original-title",function(n,v){ n= v.replace(/复苏战衣/g, "复苏木甲");return n;});
-        $("button[data-original-title*='探险者耳环']").attr("data-original-title",function(n,v){ n= v.replace(/探险者耳环/g, "探险者头巾");return n;});
-        $("button[data-original-title*='占星师的耳饰']").attr("data-original-title",function(n,v){ n= v.replace(/占星师的耳饰/g, "占星师的发饰");return n;});
-        $("button[data-original-title*='萌爪耳钉']").attr("data-original-title",function(n,v){ n= v.replace(/萌爪耳钉/g, "天使缎带");return n;});
-        $(".with-padding").html(function(n,v){
-            n= v.replace(/荆棘盾剑/g, "荆棘剑盾");n= n.replace(/饮血魔剑/g, "饮血长枪");n= n.replace(/探险者手环/g, "探险者手套");n= n.replace(/秃鹫手环/g, "秃鹫手套");
-            n= n.replace(/复苏战衣/g, "复苏木甲");n= n.replace(/探险者耳环/g, "探险者头巾");n= n.replace(/占星师的耳饰/g, "占星师的发饰");n= n.replace(/萌爪耳钉/g, "天使缎带");return n;});
-    }else{
-        $(".fyg_tc>img[src*='z2110_']").attr("src",function(n,v){ nowEquip=10;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2110_/g,purl+a10[4]);return n;});
-        $(".fyg_tc>img[src*='z2201_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2201_/g, purl+w1[4]);return n;});
-        $(".fyg_tc>img[src*='z2203_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2203_/g, purl+w3[4]);return n;});
-    };
-    if(custom.useThemeName==true){ themeEqName(); } else if(nowTheme["equip-"+custom.language]){ themeEqName(); };localStorage.setItem('nowEquip', nowEquip);
+    $("button[style*='ys/icon/z']").attr("style",function(n,v){
+        n= v;
+        if(nowTheme.background=="overlay"){
+            if(v.indexOf('_1')>-1)n=n.replace(/und-im/g,`und-blend-mode:overlay;background-color:#C0C0C0;background-im`).replace(/_1./g,'_.');
+            if(v.indexOf('_2')>-1)n=n.replace(/und-im/g,`und-blend-mode:overlay;background-color:#03B7CD;background-im`).replace(/_2./g,'_.');
+            if(v.indexOf('_3')>-1)n=n.replace(/und-im/g,`und-blend-mode:overlay;background-color:#38B03F;background-im`).replace(/_3./g,'_.');
+            if(v.indexOf('_4')>-1)n=n.replace(/und-im/g,`und-blend-mode:overlay;background-color:#F1A325;background-im`).replace(/_4./g,'_.');
+            if(v.indexOf('_5')>-1)n=n.replace(/und-im/g,`und-blend-mode:overlay;background-color:#EA644A;background-im`).replace(/_5./g,'_.');
+        };
+        if(ext!=".gif")n=n.replace(/.gif/g,ext);
+        return n;
+    });
+    $("button[data-original-title*='稀有']").attr("data-original-title",function(n,v){ n= v.replace(/稀有/g, dessertlevel[0]);return n; })
+        .attr("style",function(n,v){ n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#38B03F;background-image`);return n; });
+    $("button[data-original-title*='史诗']").attr("data-original-title",function(n,v){ n= v.replace(/史诗/g, dessertlevel[1]);return n; })
+        .attr("style",function(n,v){ n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#F1A325;background-image`);return n; });
+    $("button[data-original-title*='传奇']").attr("data-original-title",function(n,v){ n= v.replace(/传奇/g, dessertlevel[2]);return n; })
+        .attr("style",function(n,v){ n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#EA644A;background-image`);return n;});
+
+    $("button[style*='ys/icon/z/z21']").attr("style",function(n,v){
+        n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]).replace(/ys\/icon\/z\/z2102_/g, purl+a2[4]).replace(/ys\/icon\/z\/z2103_/g, purl+a3[4]).replace(/ys\/icon\/z\/z2104_/g, purl+a4[4])
+            .replace(/ys\/icon\/z\/z2105_/g, purl+a5[4]).replace(/ys\/icon\/z\/z2106_/g, purl+a6[4]).replace(/ys\/icon\/z\/z2107_/g, purl+a7[4]).replace(/ys\/icon\/z\/z2108_/g, purl+a8[4])
+            .replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]).replace(/ys\/icon\/z\/z2110_/g,purl+a10[4]);
+        return n;
+    });
+    $("button[style*='ys/icon/z/z22']").attr("style",function(n,v){
+        n= v.replace(/ys\/icon\/z\/z2201_/g, purl+w1[4]).replace(/ys\/icon\/z\/z2202_/g, purl+w2[4]).replace(/ys\/icon\/z\/z2203_/g, purl+w3[4]).replace(/ys\/icon\/z\/z2204_/g, purl+w4[4])
+            .replace(/ys\/icon\/z\/z2205_/g, purl+w5[4]);
+        return n;
+    });
+    $("button[style*='ys/icon/z/z23']").attr("style",function(n,v){
+        n= v.replace(/ys\/icon\/z\/z2301_/g, purl+c1[4]).replace(/ys\/icon\/z\/z2302_/g, purl+c2[4]).replace(/ys\/icon\/z\/z2303_/g, purl+c3[4]).replace(/ys\/icon\/z\/z2304_/g, purl+c4[4])
+            .replace(/ys\/icon\/z\/z2305_/g, purl+c5[4]).replace(/ys\/icon\/z\/z2306_/g, purl+c6[4]).replace(/ys\/icon\/z\/z2307_/g, purl+c7[4]);
+        return n;
+    });
+    $("button[style*='ys/icon/z/z24']").attr("style",function(n,v){
+        n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]).replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]).replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]);
+        return n;
+    });
+    $("button[style*='ys/icon/z/z9']").attr("style",function(n,v){
+        n= v.replace(/ys\/icon\/z\/z901/g, iurl+dessert[2]).replace(/ys\/icon\/z\/z902/g, iurl+dessert[1]).replace(/ys\/icon\/z\/z903/g, iurl+dessert[0]);
+        return n;
+    });
+    $("button[style*='ys/icon/i/it']").attr("style",function(n,v){
+        n= v.replace(/ys\/icon\/i\/it001/g, iurl+items[0]).replace(/ys\/icon\/i\/it002/g, iurl+items[1]);
+        return n;
+    });
+
+    $(".fyg_tc>img[src*='ys/icon/z/z21']").attr("src",function(n,v){
+        if(v.indexOf('01')>-1)nowEquip=4;if(v.indexOf('02')>-1)nowEquip=8;if(v.indexOf('03')>-1)nowEquip=7;if(v.indexOf('04')>-1)nowEquip=2;if(v.indexOf('08')>-1)nowEquip=4;
+        if(v.indexOf('06')>-1)nowEquip=9;if(v.indexOf('07')>-1)nowEquip=7;if(v.indexOf('08')>-1)nowEquip=3;if(v.indexOf('09')>-1)nowEquip=5;
+        if(v.indexOf('10')>-1)custom.useOldNames?nowEquip=6:nowEquip=10;
+        n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]).replace(/ys\/icon\/z\/z2102_/g, purl+a2[4]).replace(/ys\/icon\/z\/z2103_/g, purl+a3[4]).replace(/ys\/icon\/z\/z2104_/g, purl+a4[4])
+            .replace(/ys\/icon\/z\/z2105_/g, purl+a5[4]).replace(/ys\/icon\/z\/z2106_/g, purl+a6[4]).replace(/ys\/icon\/z\/z2107_/g, purl+a7[4]).replace(/ys\/icon\/z\/z2108_/g, purl+a8[4])
+            .replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]).replace(/ys\/icon\/z\/z2110_/g, purl+a10[4]);
+        loading = false; pagetype=nowEquip;
+        return n;
+    });
+    $(".fyg_tc>img[src*='ys/icon/z/z22']").attr("src",function(n,v){
+        if(v.indexOf('01')>-1||v.indexOf('03')>-1){
+            if(custom.useOldNames){
+                loading=false; nowEquip=1; pagetype=nowEquip;
+            };
+        };
+        n= v.replace(/ys\/icon\/z\/z2201_/g, purl+w1[4]).replace(/ys\/icon\/z\/z2202_/g, purl+w2[4]).replace(/ys\/icon\/z\/z2203_/g, purl+w3[4]).replace(/ys\/icon\/z\/z2204_/g, purl+w4[4])
+            .replace(/ys\/icon\/z\/z2205_/g, purl+w5[4]);
+        return n;
+    });
+    $(".fyg_tc>img[src*='ys/icon/z/z23']").attr("src",function(n,v){
+        n= v.replace(/ys\/icon\/z\/z2301_/g, purl+c1[4]).replace(/ys\/icon\/z\/z2302_/g, purl+c2[4]).replace(/ys\/icon\/z\/z2303_/g, purl+c3[4]).replace(/ys\/icon\/z\/z2304_/g, purl+c4[4])
+        .replace(/ys\/icon\/z\/z2305_/g, purl+c5[4]).replace(/ys\/icon\/z\/z2306_/g, purl+c6[4]).replace(/ys\/icon\/z\/z2307_/g, purl+c7[4]);
+        return n;
+    });
+    $(".fyg_tc>img[src*='ys/icon/z/z24']").attr("src",function(n,v){
+        n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]).replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]).replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]);
+        return n;
+    });
+
+    localStorage.setItem('nowEquip', nowEquip);
+    theEqName();
 };
-function themeFgimg(){
-    let imgpanel,cardname;yourcard="舞";tempca="舞";
+function themePKimg(){
+    if(custom.showCG == true&&!nowTheme.nofgimg){
+        let imgpanel,cardname;
+        if($(".col-md-7.fyg_tr").length>0){
+            for(let i=0;i<$(".col-md-7.fyg_tr").length;i++){
+                imgpanel = document.getElementsByClassName('col-md-7 fyg_tr')[i];
+                cardname=imgpanel.children[0].innerText;
+                if(cardname[cardname.length-3]!="."){
+                    cardname=cardname[cardname.length-2];
+                    imgpanel.style.backgroundImage=`url("${nowTheme[cardname][4]}")`;
+                    imgpanel.style.backgroundSize="cover";
+                };
+            };
+        };
+        if($(".col-md-7.fyg_tl").length>0){
+            for(let i=0;i<$(".col-md-7.fyg_tl").length;i++){
+                imgpanel = document.getElementsByClassName('col-md-7 fyg_tl')[i];
+                cardname=imgpanel.children[0].innerText;
+                let isyg=false;
+                for(let j=0;j<ygcheck.length;j++){
+                    if(cardname.indexOf(ygcheck[j])>-1){
+                        let ygtcheck=ygcheck[j];
+                        imgpanel.style.backgroundImage=`url("${nowTheme[ygtcheck]}")`;
+                        imgpanel.style.backgroundSize="cover";
+                        isyg = true;
+                    };
+                };
+                if(cardname[cardname.length-2]!="."&&isyg==false){
+                    cardname=cardname[cardname.length-9];
+                    imgpanel.style.backgroundImage=`url("${nowTheme[cardname][5]}")`;
+                    imgpanel.style.backgroundSize="cover";
+                };
+            };
+        };
+    };
+};
+function getCardName(){
+    let imgpanel,cardname; yourcard=custom.yourcard; tempca=false; tempvo=false;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
-        if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
-        imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
+        imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];
+        cardname=imgpanel.children[0].innerText;
         if(cardname.length==1){
-            for(let i=0;i<cards.length;i++){
-                if (cardname.indexOf(cards[i]) > -1) { yourcard=cardname;i=999; };
+            for(let i=0;i<cards.length;i++){ if(cardname.indexOf(cards[i])>-1){ yourcard=cardname; i=999; }; };
+            if(custom.showCG&&!nowTheme.nofgimg){
+                if(nowTheme[yourcard][2]!="https://sticker.inari.site/null.gif"&&imgpanel.children.length==2){
+                    $(`<p id="middlecardimg1"></p><img id="middlecardimg" src="${nowTheme[yourcard][2]}" style="cursor: pointer;"><p id="middlecardimg2"></p>`).insertAfter(imgpanel.children[1]);
+                };
             };
-            if(custom.yourcard!=yourcard){ custom.yourcard=yourcard;update(); };
-            cardvo=nowTheme[yourcard+"voice"];
-            kanbanimg=nowTheme[yourcard][2];$("#bigcardimg").attr('src',nowTheme[yourcard][3]);spineJson=nowTheme[yourcard+"spine"];
-            if(custom.showKanban==true&&nowTheme.spine!=true){$(".tpkanban").attr('src', kanbanimg);};
-            if(nowTheme[yourcard][2]!="https://sticker.inari.site/null.gif"&&imgpanel.children.length==2){
-                $(`<p></p><img id="middlecardimg" src="${nowTheme[yourcard][2]}" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);
-            };pagetype=nowEquip;
         }
-        else if(cardname.length==0){
-            custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];
-            kanbanimg=nowTheme[yourcard][2];$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
-            if(custom.showKanban==true&&nowTheme.spine!=true){$(".tpkanban").attr('src', kanbanimg);};pagetype=nowEquip;
+        else{ yourcard="舞"; };
+        cardvo=nowTheme[yourcard+"voice"];
+        spineJson=nowTheme[yourcard+"spine"];
+        if(custom.yourcard!=yourcard){ custom.yourcard=yourcard; update(); };
+    };
+    if($("#eqli2.active").length==1){
+        if($("#bigcardimg").length==0&&custom.showCG&&!nowTheme.nofgimg){ $(`<p id="bigcardimg1"></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
+        if($(".text-info.fyg_f24").length!=2&&custom.showCG&&!nowTheme.nofgimg){
+            imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];
+            if(imgpanel){
+                cardname=imgpanel.children[0].innerText;
+                if(cardname.length!=0){ $("#bigcardimg").attr('src',nowTheme[yourcard][3]); }
+                else{ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif"); };
+            };
         };
-    };
-    if($(".text-info.fyg_f24").length==2){
-        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;
-        for(let i=0;i<cards.length;i++){ if (cardname.indexOf(cards[i]) > -1) { tempca=cardname;i=999; }; };
-        cardname=tempca;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
-        if(custom.voiceO==true&&ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
-        loading=false;spineload(nowTheme[cardname+"spine"].name, nowTheme[cardname+"spine"].type);
-    };
-    if($(".col-sm-2.fyg_lh60").length>0){
-        for(let i=0;i<$(".col-sm-2.fyg_lh60").length;i++){
-            imgpanel = document.getElementsByClassName('col-sm-2 fyg_lh60')[i];cardname=imgpanel.children[0].innerText;
-            if(cardname.length==1){ imgpanel.style.textAlign="left";$(`<img id="smallcardimg" src="${nowTheme[cardname][1]}" style="vertical-align:top !important;"><span>&nbsp;&nbsp;</span>`).insertBefore(imgpanel.children[0]);};
-        };
-    };
-    if($(".col-md-7.fyg_tr").length>0){
-        for(let i=0;i<$(".col-md-7.fyg_tr").length;i++){
-            imgpanel = document.getElementsByClassName('col-md-7 fyg_tr')[i];cardname=imgpanel.children[0].innerText;
-            if(cardname[cardname.length-3]!="."){ cardname=cardname[cardname.length-2]; imgpanel.style.backgroundImage=`url("${nowTheme[cardname][4]}")`;imgpanel.style.backgroundSize="cover";};
-        };
-    };
-    if($(".col-md-7.fyg_tl").length>0){
-        for(let i=0;i<$(".col-md-7.fyg_tl").length;i++){
-            imgpanel = document.getElementsByClassName('col-md-7 fyg_tl')[i];cardname=imgpanel.children[0].innerText;let isyg=false;
-            for (let j = 0; j < ygcheck.length; j++) { if (cardname.indexOf(ygcheck[j]) > -1) { let ygtcheck=ygcheck[j];imgpanel.style.backgroundImage=`url("${nowTheme[ygtcheck]}")`;imgpanel.style.backgroundSize="cover";isyg = true; };};
-            if(cardname[cardname.length-2]!="."&&isyg==false){ cardname=cardname[cardname.length-9];imgpanel.style.backgroundImage=`url("${nowTheme[cardname][5]}")`;imgpanel.style.backgroundSize="cover"; };
-        };
-    };
-    if(nowTheme.spine!=true){spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
-    if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype); if($("#eqli2.active").length!=1){$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");};};
-};
-function equipKBVO(){
-    let cardname;yourcard="舞";tempca="舞";
-    if($(".text-info.fyg_f24.fyg_lh60").length==1){
-        let imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
-        if(cardname.length==1){
-            for(let i=0;i<cards.length;i++){ if (cardname.indexOf(cards[i]) > -1) { yourcard=cardname;i=999; }; };
-            if(custom.yourcard!=yourcard){custom.yourcard=yourcard;update();};
-            cardvo=nowTheme[yourcard+"voice"];
-            spineJson=nowTheme[yourcard+"spine"];pagetype=nowEquip;
+        if($(".text-info.fyg_f24").length==2){
+            cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;
+            for(let i=0;i<cards.length;i++){ if(cardname.indexOf(cards[i])>-1){ tempca=cardname; i=999; }; };
+            cardname=tempca;
+            if(custom.showCG&&!nowTheme.nofgimg){ $("#bigcardimg").attr('src',nowTheme[cardname][3]); };
+            themeVoice("click",cardname); themeKanban(cardname);
         }
-        else if(cardname.length==0){
-            custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];pagetype=nowEquip;
+        else{ themeKanban(); };
+
+        if($(".col-sm-2.fyg_lh60").length>0){
+            for(let i=0;i<$(".col-sm-2.fyg_lh60").length;i++){
+                imgpanel = document.getElementsByClassName('col-sm-2 fyg_lh60')[i];
+                cardname=imgpanel.children[0].innerText;
+                if(cardname.length==1&&custom.showCG&&!nowTheme.nofgimg){
+                    imgpanel.style.textAlign="left";
+                    $(`<img class="smallcardimg" id="smallcardimg${i}" src="${nowTheme[cardname][1]}" style="vertical-align:top !important;"><span id="smallcardimg1${i}">&nbsp;&nbsp;</span>`).insertBefore(imgpanel.children[0]);
+                };
+            };
         };
+    }
+    else if($("#eqli2.active").length!=1){
+        if($("#bigcardimg").length!=0){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif"); };
+        themeKanban();
     };
-    if($(".text-info.fyg_f24").length==2){
-        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;
-        for(let i=0;i<cards.length;i++){
-            if (cardname.indexOf(cards[i]) > -1) { tempca=cardname;i=999; };
-        };
-        cardname=tempca;tempvo=nowTheme[cardname+"voice"];
-        if(custom.voiceO==true&&ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
-        if(nowTheme.spine==true){loading=false;spineload(nowTheme[cardname+"spine"].name, nowTheme[cardname+"spine"].type);};
-    };
-    if(nowTheme.spine!=true){spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
-    if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype);};
 };
-function battleVo(){
-    if(soundonce%2==0&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
-        let battleCG;
-        if($(".alert.with-icon.fyg_tc").length!=1){
-            if($(".alert.alert-danger.with-icon.fyg_tc").length>sucheck){
-                let spjoy=$("option[value*=joyResult]")[0].value.split(',');playAnimation([spjoy[0]]);battleCG=nowTheme[yourcard][6];
-                $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);
-            };
-            if($(".alert.alert-info.with-icon.fyg_tc").length>facheck){
-                $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);battleCG=nowTheme[yourcard][7];playAnimation(['damage','die','landing']);
-            };
+function themeKanban(cardname){
+    if(custom.showKanban&&!nowTheme.nospine){
+        pagetype=nowEquip;
+        if(!cardname){
+            spineload(spineJson.name,pagetype);
         }
         else{
-            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){
-                let spjoy=$("option[value*=joyResult]")[0].value.split(',');playAnimation([spjoy[0]]);battleCG=nowTheme[yourcard][6];
-                $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);
-            };
-            if($(".alert.alert-info.with-icon.fyg_tc").length>0){
-                $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);battleCG=nowTheme[yourcard][7];playAnimation(['damage','die','landing']);
-            };
+            loading=false;
+            spineload(nowTheme[cardname+"spine"].name,nowTheme[cardname+"spine"].type);
+        }
+    }
+    else if(custom.showKanban&&!nowTheme.nofgimg&&cardname){
+        kanbanimg=nowTheme[cardname][2];
+        $(".tpkanban").attr('src', kanbanimg);
+    };
+};
+function showKanban(){
+    if(!custom.showKanban){
+        if($(".spinetool").length>0){ $(".spinetool").remove(); };
+        if($("#divkanban").length>0){ $("#divkanban").remove(); };
+    }
+    else if(!nowTheme.nospine){
+        spineJson=nowTheme[yourcard+"spine"];
+        spinert=nowTheme.spinert;
+        if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove);};
+        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
+        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
+        tpkanbanHTML =$( `<div class="spinetool" style ="display:none;">
+        <span> 动画:</span><select id="animationList"></select><input id="setAnimation" type="button" value="播放"></div>
+        <div id = "divkanban" style = "position:fixed;left:${kbw}px;top:${kbh}px;z-index:88;cursor:pointer;" >
+        <canvas id="tpkanban" ></canvas></div>`).insertBefore('body');
+        if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Phone') > -1){
+            $('head').append(`<style>
+            .divkanban { width:725px ; height:605px ;}
+            #tpkanban { width:720px ; height:600px ; }
+            </style>`);
+        }
+        else{
+            $('head').append(`<style>
+            .divkanban { width:${365*Math.floor(custom.kanbansize )/100}px ; height:${305*Math.floor(custom.kanbansize )/100}px ;}
+            #tpkanban { width:360px ; height:300px ; }
+            </style>`);
         };
-        if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};if(custom.showKanban==true){battleCg(battleCG);};++battlecheck;
+        kanban = document.getElementById("divkanban"); dragfunc(kanban);
+        spineinit(true);
+    }
+    else if(!nowTheme.nofgimg){
+        kanbanimg=nowTheme[yourcard][2];
+        if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove); };
+        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
+        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
+        tpkanbanHTML =$( `<div id = "divkanban" style = "position:fixed;left:${kbw}px;top:${kbh}px;z-index:88;cursor:pointer;width:${365*Math.floor(custom.kanbansize )/100}px; height=${305*Math.floor(custom.kanbansize )/100}px;" >
+        <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`).insertBefore('body');
+        kanban = document.getElementById("divkanban"); dragfunc(kanban);
+    };
+};
+function themeVoice(type,cardname){
+
+    if(custom&&custom.voiceO&&!nowTheme.novoice){
+        let playvo=cardvo;
+        if(cardname){ tempvo=nowTheme[cardname+"voice"]; playvo=tempvo; };
+        if(type=="on")$("#themeSoundPlay").attr('src',nowTheme.voice[0]);
+        if(type=="click")$("#themeSoundPlay").attr('src',playvo[0]+Math.ceil(Math.random()*4-1)+playvo[1]);
+        if(type=="levelup"||type=="colle"||type=="change"||type=="power"||type=="win"||type=="lose"||type=="reset"||type=="exp"||type=="battle"){
+            $("#themeSoundPlay").attr('src',playvo[0]+type+playvo[1]);
+        };
+        if(type=="win"||type=="lose"){
+            $("#themeSoundPlay")[0].addEventListener('ended', function(){ $("#themeSoundPlay")[0].play(); });
+        }
+        else if(!ccard){
+            $("#themeSoundPlay")[0].play();
+        };
+    }
+    else if(type=="off"&&!nowTheme.novoice){ $("#themeSoundPlay").attr('src',nowTheme.voice[1]); $("#themeSoundPlay")[0].play(); };
+};
+function themeBattle(){
+    if(soundonce%2==0&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
+        if($(".alert.with-icon.fyg_tc").length!=1){
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>sucheck){ battleCG("win"); themeVoice("win"); };
+            if($(".alert.alert-info.with-icon.fyg_tc").length>facheck){ battleCG("lose"); themeVoice("lose"); };
+        }
+        else{
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){ battleCG("win"); themeVoice("win"); };
+            if($(".alert.alert-info.with-icon.fyg_tc").length>0){ battleCG("lose"); themeVoice("lose"); };
+        };
+        ccard=false;++battlecheck;
     };
     if($("button[class*='fyg_colpz05bg'][style*='b4.gif']").length>0&&collecheck<1){
-        let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];++collecheck;
-        $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};
+        let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText;
+        ++collecheck; themeVoice("levelup",expcard[5]);
     };
 };
-function battleCg(battleCG){
-    if(nowTheme.spine!=true){$(".tpkanban").attr('src',battleCG); setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg);},3000);};
+function battleCG(type){
+    if(custom.showKanban&&nowTheme.nospine&&!nowTheme.nofgimg){
+        if(type=="win"){ $(".tpkanban").attr('src',nowTheme[yourcard][6]); }
+        else if(type=="lose"){ $(".tpkanban").attr('src',nowTheme[yourcard][7]); }
+        setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg);},3000);
+    }
+    else if(custom.showKanban&&!nowTheme.nospine){
+        if(type=="win"){ let spjoy=$("option[value*=joyResult]")[0].value.split(','); playAnimation([spjoy[0]]); }
+        else if(type=="lose"){ playAnimation(['damage','die','landing']); };
+    };
 };
-
-/* Kanban Drag & Resize */
 function dragfunc(obj){
     ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;
     let l,t,i,s;
@@ -851,8 +1107,8 @@ function dragfunc(obj){
             document.onmousemove = null; document.onmouseup = null;
             obj.releaseCapture && obj.releaseCapture(); i = obj.style.left; s = obj.style.top;
             if (l == i && t == s) {
-                if(custom.voiceO==true&&tempvo!=false){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();}
-                else if(custom.voiceO==true){$("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();}; playAnimation(['000000_dear_smile','idle']);
+                if(tempca){ themeVoice("click",tempca); }else{ themeVoice("click"); };
+                playAnimation(['000000_dear_smile','idle']);
             }
             else {
                 if (parseInt(i) < 0) { obj.style.left = '0px'; i = 0;}
@@ -861,7 +1117,8 @@ function dragfunc(obj){
                 if (parseInt(s) < 0) { obj.style.top ='0px'; s = 0;}
                 else if (parseInt(s) > wh-3*Math.floor(custom.kanbansize)) { s = 0.68; obj.style.top = wh-3*Math.floor(custom.kanbansize) + 'px';}
                 else if (parseInt(s) < wh-3*Math.floor(custom.kanbansize)) { s = parseInt(s) / wh;};
-                localStorage.setItem('imgmove', JSON.stringify([i, s]));playAnimation(['idle']);
+                localStorage.setItem('imgmove', JSON.stringify([i, s]));
+                playAnimation(['idle']);
             };
         }; return false;
     };
@@ -882,11 +1139,16 @@ function dragfunc(obj){
     },{ passive: false }); return false;
 };
 window.onresize = function(){
-    let temp = $('#divkanban'); ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;
-    if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove); };
-    if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-    if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
-    temp[0].style.left = kbw + 'px'; temp[0].style.top = kbh + 'px';
+    if(custom.showKanban&&nowTheme.nospine&&!nowTheme.nofgimg){
+        let temp = $('#divkanban');
+        ww = window.innerWidth || document.body.clientWidth;
+        wh = window.innerHeight|| document.body.clientHeight;
+        if(localStorage.imgmove){ imgmove=JSON.parse(localStorage.imgmove); };
+        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){ kbw=ww-3.6*Math.floor(custom.kanbansize ); }else{ kbw=imgmove[0]*ww; };
+        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){ kbh=wh-3*Math.floor(custom.kanbansize ); }else{ kbh=imgmove[1]*wh; };
+        temp[0].style.left=kbw+'px';
+        temp[0].style.top =kbh+'px';
+    };
 };
 
 /* Spine */
@@ -916,18 +1178,18 @@ function loadData(url, cb, loadType, progress) {
 function sliceCyspAnimation(buf) {
     let view = new DataView(buf), count = view.getInt32(12, true); return { count: count, data: buf.slice((count + 1) * 32)};
 };
-function spineinit() {
+function spineinit(act) {
     canvas = document.getElementById("tpkanban"); let config = { alpha: true ,backgroundColor: "#000000"};
     gl = canvas.getContext("webgl", config) || canvas.getContext("experimental-webgl", config);
-    if (!gl) { alert('WebGL is unavailable.');return; };
+    if (!gl) { alert('code:spine-001\n'+'WebGL is unavailable.');return; };
     shader = spine.webgl.Shader.newTwoColoredTextured(gl); batcher = new spine.webgl.PolygonBatcher(gl);
     mvp.ortho2d(0, 0, 512 - 1, 512 - 1); skeletonRenderer = new spine.webgl.SkeletonRenderer(gl); shapes = new spine.webgl.ShapeRenderer(gl);
-    if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
-    spineload(spineJson.name, pagetype);
+    if(!nowTheme.nospine)spineJson=nowTheme[yourcard+"spine"];
+    spineload(spineJson.name, pagetype,act);
 };
-function spineload(name, type) {
-    if (custom.showKanban != true||nowTheme.spine!=true||loading) return; loading = true;
-    if (activeSkeleton == name && currentClass == type) return; currentClass = type;
+function spineload(name, type,act) {
+    if (!custom.showKanban||nowTheme.nospine||loading) return; loading = true;
+    if (activeSkeleton == name && currentClass == type&&!act) return; currentClass = type;
     let baseUnitId = name | "wuu"; loadingSkeleton = { id: name , info: spineJson, baseId: '000000' };
     if (loadingSkeleton.info.hasSpecialBase){loadingSkeleton.baseId = baseUnitId; currentClass = baseUnitId;}; let baseId = loadingSkeleton.baseId;
     if (!generalBattleSkeletonData[baseId]){
@@ -1020,7 +1282,7 @@ function loadTexture() {
     })
 };
 function playAnimation(animation){
-  if(custom.showKanban==true&&nowTheme.spine==true){
+  if(custom&&custom.showKanban==true&&!nowTheme.nospine){
     animationState = skeleton.state;forceNoLoop = false;animationQueue = animation;
     if (animationQueue[0] == 'multi_standBy') { animationQueue.push('multi_idle_standBy');}
     else if (['multi_idle_standBy', 'multi_idle_noWeapon', 'idle', 'walk', 'run', 'run_gamestart'].indexOf(animationQueue[0]) == -1) { animationQueue.push('idle'); };
@@ -1076,8 +1338,14 @@ function resize() {
     if (canvas.width != w || canvas.height != h){ canvas.width = w;canvas.height = h;};
     /* magic */
     let centerX = bounds.offset.x + bounds.size.x / 2,centerY = bounds.offset.y + bounds.size.y / 2,scaleX = bounds.size.x / canvas.width,scaleY = bounds.size.y / canvas.height,scale = Math.max(scaleX, scaleY) * 1.2;
-    if (scale < 1) scale = 1;let width = 256 * scale,height = 256 * scale;
+    if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Phone') > -1){
+        if (scale < 1) scale = 1;let width = 512 * scale,height = 512 * scale;
+        mvp.ortho2d(spineJson.wi,spineJson.hi*2, width, height); gl.viewport(0, 0, 512*spineJson.re*2, 512*spineJson.re*2);
+    }
+    else{
+        if (scale < 1) scale = 1;let width = 256 * scale,height = 256 * scale;
     mvp.ortho2d(spineJson.wi,spineJson.hi, width, height); gl.viewport(0, 0, 512*spineJson.re, 512*spineJson.re);
+    };
 };
 
 /* Cloud Core */
@@ -1097,17 +1365,17 @@ function login(username,act,way) {
                 else if(act=="ctl"){ download(way); }
                 else if(act=="ltc"){ upload(way); };
             }
-            else if (temp.is_login == false) { alert('Oops!');return;}
+            else if (temp.is_login == false) { alert('code:login-001\nOops!');return;}
         }
         else if(data.ret == 400) { beforeCloud('Gupdater'); register(username); }
-        else{ alert('Oops!' + data.ret + data.msg);return; }
+        else{ alert('code:login-002\nOops!' + data.ret + data.msg);return; }
     })
         .fail(data => { console.log(data);return; });
 };
 function register(username) {
     $.ajax({ url: api+'Register&username=' + username + '&password=momoTown', type: 'POST', dataType: 'json' })
         .done(data => { if (data.ret == 200) { login(username,"ltc",'Gupdate');
-                                             } else { alert('Oops！' + data.ret + data.msg) }; })
+                                             } else { alert('code:reg-001\nOops！' + data.ret + data.msg) }; })
         .fail(data => { console.log(data) });
 };
 function upload(way) {
@@ -1129,15 +1397,15 @@ function upload(way) {
         if (data.ret == 200) {
             if(test)way="test";
             console.log(way+" uploading...");
-            if(data.data==null){ alert(way+' Date Length Too Long!'); return; }
-            else if(data.data.ret!=200){ console.log(data);alert(data.data.ret+' Error! '+data.data.msg); return; }
+            if(data.data==null){ alert('code:upload-001\n'+way+' Date Length Too Long!'); return; }
+            else if(data.data.ret!=200){ console.log(data);alert('code:upload-002\n'+data.data.ret+' Error! '+data.data.msg); return; }
             else{console.log(way+' successed!');};
             if(test){ download("test"); };
             if(way=="Gupdate"){localStorage.setItem('momoConf_'+User, JSON.stringify(momoConf));};
         }
-        else { alert(data.msg + data.ret);return; }
+        else { alert('code:upload-003\n'+data.msg + data.ret);localStorage.removeItem('momo_Cloud');localStorage.removeItem('Cloud_'+User);return; }
     })
-        .fail(data => { console.log(data);return; });
+        .fail(data => { console.log(data);localStorage.removeItem('momo_Cloud');localStorage.removeItem('Cloud_'+User);return; });
 };
 function download(way) {
     let user_id,token,test=false;
@@ -1162,9 +1430,9 @@ function download(way) {
                 console.log("Unzipping "+way+" Data...");tdt=unzip(tdt); console.log(way+" Data Unzipped!");
                 afterCloud(way,tdt);
             }
-            else { alert(data.msg + data.ret);return; };
+            else { alert('code:dl-001\n'+data.msg + data.ret);localStorage.removeItem('momo_Cloud');localStorage.removeItem('Cloud_'+User);return; };
         }
-        else{alert('Date Error!');return;}
+        else{alert('code:dl-002\nDate Error!');localStorage.removeItem('momo_Cloud');localStorage.removeItem('Cloud_'+User);return;}
     })
         .fail(data => { console.log(data);return;});
 };
@@ -1296,7 +1564,8 @@ function afterCloud(way,texts){
         };
 
         if(momoConf.guDAQConf&&momoConf.guDAQConf!={}){
-            let DAQConf=momoConf.guDAQConf,daqt=JSON.parse(localStorage.getItem(User));
+            let DAQConf=momoConf.guDAQConf,daqt={};
+            if(localStorage.getItem(User)){ daqt=JSON.parse(localStorage.getItem(User)); };
             if(DAQConf.config) { daqt.config =DAQConf.config; };
             if(DAQConf.dataBeachSift) { daqt.dataBeachSift = DAQConf.dataBeachSift; };
             if(DAQConf.calculatorTemplatePVE) { daqt.calculatorTemplatePVE =DAQConf.calculatorTemplatePVE; };
@@ -1448,16 +1717,33 @@ function testfunc(){
     uuid="testfunc";
     upload("test");
 };
+function isJSON(str) {
+	if (typeof str == 'string') {
+	    try {
+	        var obj=JSON.parse(str);
+	        if(typeof obj == 'object' && obj ){
+	            return true;
+	        }else{
+	            return false;
+	        }
+	    } catch(e) {
+	        console.log('error：'+str+'!!!'+e);
+	        return false;
+	    }
+	}
+    else{ return false;};
+};
 
 
 /**
  * Events.
  */
+function changeact(cardname){ ccard=false; themeVoice("change",cardname); playAnimation(['standBy']); };
+function clickact(cardname) { ccard=false; themeVoice("click", cardname); playAnimation(['standBy']); };
+function poweract(cardname) { ccard=false; themeVoice("power", cardname); playAnimation(['000000_eat_normal']); };
+function colleact(cardname) { ccard=false; themeVoice("colle", cardname); playAnimation(['joy_short','joy_short_return']); };
 $("a[href='fyg_index.php']").attr("href","fyg_index.php#");
-$(document).on('blur', "#btnAutoTask", function(){
-    playAnimation(['joy_long', 'hold','joy_long_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
+$(document).on('blur', "#btnAutoTask", function(){ playAnimation(['joy_long', 'hold','joy_long_return']); themeVoice("colle"); })
 .on('change', ".themepack-uuid", function(e){
     let temp=e.target.value,tst=/^[a-z0-9]*$/g;
     if(tst.test(temp)&&temp.length==8){
@@ -1469,142 +1755,64 @@ $(document).on('blur', "#btnAutoTask", function(){
     else if(temp=="test"){ e.target.value="Testing...";testfunc(); }
     else { e.target.value="Error!"; };
 })
-.on('click',"button", function(){
-    ccard=false;
+.on('click',"button",function(){ccard=false;})
+.on('click',"button[style*='float: right;']",function(e){ if(e.target.innerText=="装备"){ playAnimation(['000000_eat_normal']); }; })
+.on('click',"[onclick*='gx_cxjd(']",function(){ ccard=true; playAnimation(['standBy']); themeVoice("reset"); })
+.on('click',"[class*='g_colpz0'][onclick*='puto(']",function(){ playAnimation(['000000_eat_normal']); })
+.on('click',"#bigcardimg", function(){ if(!tempca)tempca=yourcard; themeVoice("click",tempca); })
+.on('click',"[onclick*='eqlip(1),eqbp(1)']", function(){ loading=false; ccard=true; changeact();})
+.on('click',"[onclick*='eqlip(2),eqbp(2)']", function(){ loading=false; ccard=true; clickact(); })
+.on('click',"[onclick*='eqlip(3),eqbp(3)']", function(){ loading=false; ccard=true; changeact();})
+.on('click',"[onclick*='eqlip(4),eqbp(4)']", function(){ loading=false; ccard=true; colleact(); })
+.on('click',"[onclick*='gox(']",function(){ colleact(); collecheck=0;battlecheck=1; })
+.on('click',"[onclick*='updstat(']",function(){ ccard=true; changeact(); })
+.on('click',"[onclick*='xxcard(']", function(){ ccard=false; })
+.on('click',"#binding_popup_link",function(){ changeact(tempca); })
+.on('click',"[onclick*='xyre(']" ,function(){ changeact(); })
+.on('click',"[onclick*='puton(']",function(){ changeact(); })
+.on('click',"[onclick*='osave(']",function(){ changeact(); })
+.on('click',"[onclick*='x_sxds']",function(){ poweract(); })
+.on('click',"[onclick*='gx_gt(']",function(){ colleact(); })
+.on('click',"[onclick*='giftop']",function(){ colleact(); })
+.on('click',"[onclick*='xyck(']" ,function(){ colleact(); })
+.on('click',"[onclick*='forge(']",function(){ colleact(); })
+.on('click',"[onclick*='forca(']",function(){ colleact(); })
+.on('click',"[onclick*='orcbs(']",function(){ colleact(); })
+.on('click',"#equip_one_key_link",function(){ clickact(); })
+.on('click',"[onclick*='xpcard(']",function(){
+    let spjoy=$("option[value*=joyResult]")[0].value.split(','); spjoy=spjoy[0]; playAnimation([spjoy]);
+    ccard=true; themeVoice("exp",tempca);
 })
-.on('click',"[onclick*='xxcard(']", function(){
-    ccard=false;
+.on('click',"[onclick*='cmaxup(']",function(){
+    let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];playAnimation([spjoy]);
+    ccard=true; themeVoice("levelup",tempca);
 })
-.on('click',"#bigcardimg", function(){
-    if(!tempvo)tempvo=cardvo;
-    if(custom.voiceO==true){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"#equip_one_key_link" , function(){
-    ccard=false; playAnimation(['standBy']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"#binding_popup_link" , function(){
-    ccard=false; playAnimation(['standBy']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"a[onclick*='gx_sxds']", function(){
-    playAnimation(['000000_eat_normal']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"a[onclick*='gx_gt(']" , function(){
-    playAnimation(['joy_short','joy_short_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='giftop']", function(){
-    playAnimation(['joy_short','joy_short_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='xyck(']", function(){
-    playAnimation(['joy_short','joy_short_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='gox(']" , function(){
-    playAnimation(['joy_short','joy_short_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-    collecheck=0;battlecheck=1;
-})
-.on('click',"button[onclick*='xyre(']", function(){
-    playAnimation(['standBy']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='puton(']",function(){
-    playAnimation(['standBy']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='halosave(']", function(){
-    playAnimation(['standBy']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='b_forge(']", function(){
-    playAnimation(['joy_short','joy_short_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='b_forca(']", function(){
-    playAnimation(['joy_short','joy_short_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='b_forcbs(']", function(){
-    playAnimation(['joy_short','joy_short_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='gx_cxjd(']", function(){
-    playAnimation(['standBy']); ccard=true;
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'reset'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[class*='g_colpz0'][onclick*='puto(']", function(){
-    playAnimation(['000000_eat_normal']);
-})
-.on('click',"button[style*='float: right;']", function(e){
-    if(e.target.innerText=="装备")playAnimation(['000000_eat_normal']);
-})
-.on('click',"button[onclick*='updstat(']", function(){
-    ccard=true;playAnimation(['standBy']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"a[onclick*='eqlip(1),eqbp(1)']", function(){
-    loading = false;ccard=true;playAnimation(['standBy']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"a[onclick*='eqlip(2),eqbp(2)']", function(){
-    loading = false;ccard=true;
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"a[onclick*='eqlip(3),eqbp(3)']", function(){
-    loading = false;ccard=true;playAnimation(['standBy']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"a[onclick*='eqlip(4),eqbp(4)']", function(){
-    loading = false;ccard=true;playAnimation(['joy_short','joy_short_return']);
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='expcard(']", function(){
-    let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];playAnimation([spjoy]);ccard=true;
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'exp'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='cmaxup(']" , function(){
-    let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];playAnimation([spjoy]);ccard=true;
-    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
-})
-.on('click',"button[onclick*='jgjg(']", function(){
-    battlecheck=0; if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
-    sucheck=$(".alert.alert-danger.with-icon.fyg_tc").length;facheck=$(".alert.alert-info.with-icon.fyg_tc").length;playAnimation(['attack','idle']);
-})
-.on('click',"button[onclick*='upcard(']", function(){
-    ccard=true; yourcard=tempca; custom.yourcard=yourcard;update();
-    cardvo=nowTheme[yourcard+"voice"]; kanbanimg=nowTheme[yourcard][2];
-    if(nowTheme.spine==true){ spineJson=nowTheme[yourcard+"spine"]; }else{ spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8}; };
-    $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);
+.on('click',"[onclick*='upcard(']",function(){
+    ccard=true; yourcard=tempca; custom.yourcard=yourcard; update();
+    cardvo=nowTheme[yourcard+"voice"]; kanbanimg=nowTheme[yourcard][2]; themeVoice("click");
+    if(!nowTheme.nospine){ spineJson=nowTheme[yourcard+"spine"]; };
     loading = false; spineload(spineJson.name, pagetype); playAnimation(['standBy']);
-    if(custom.showKanban==true&&nowTheme.spine!=true){ $(".tpkanban").attr('src', kanbanimg); };
-    if(custom.voiceO==true){ $("#themeSoundPlay")[0].play(); };
+    if(custom.showKanban==true&&nowTheme.nospine){ $(".tpkanban").attr('src', kanbanimg); };
 })
-.on('click',"#middlecardimg", function(){
+.on('click',"[onclick*='jgjg(']" , function(){
+    battlecheck=0; themeVoice("battle"); playAnimation(['attack','idle']);
+    sucheck=$(".alert.alert-danger.with-icon.fyg_tc").length;
+    facheck=$(".alert.alert-info.with-icon.fyg_tc").length;
+})
+.on('click',"#middlecardimg",function(){
     if($('#eqli2.active').length==1&&tempvo!=cardvo){ xxcard(nowTheme[yourcard][0]);}
-    else{ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};};
+    else{ themeVoice("click",tempca); };
 })
 .on('click',"#setAnimation", function(){
-    animationState = skeleton.state;forceNoLoop = false;animationQueue = $("#animationList")[0].value.split(',');
-    if (animationQueue[0] == 'multi_standBy') { animationQueue.push('multi_idle_standBy');}
-    else if (['multi_idle_standBy', 'multi_idle_noWeapon', 'idle', 'walk', 'run', 'run_gamestart'].indexOf(animationQueue[0]) == -1) { animationQueue.push('idle'); };
-    console.log(animationQueue); let nextAnim = animationQueue.shift();
+    animationState = skeleton.state; forceNoLoop = false;
+    animationQueue = $("#animationList")[0].value.split(',');
+    if (animationQueue[0] == 'multi_standBy'){ animationQueue.push('multi_idle_standBy'); }
+    else if (['multi_idle_standBy', 'multi_idle_noWeapon', 'idle', 'walk', 'run', 'run_gamestart'].indexOf(animationQueue[0]) == -1){ animationQueue.push('idle'); };
+    console.log(animationQueue);
+    let nextAnim = animationQueue.shift();
     if (!/^\d{6}/.test(nextAnim)) nextAnim = getClass(currentClassAnimData.type) + '_' + nextAnim;
-    console.log(nextAnim); animationState.setAnimation(0, nextAnim, !animationQueue.length && !forceNoLoop);
-})
-.on('click',".themelang", function(){
-    let ThemeLang = prompt('输入 zh 使用【简体中文】；\n輸入 zht 使用【繁體中文】；\nja を入力 表示言語【日本語】；\nInput en To show in 【English】.', "zh");
-    if (ThemeLang) {
-        localStorage.setItem('reload',"true");
-        if(ThemeLang=="zh"){ custom.language="zh"; update();location.reload();}
-        else if(ThemeLang=="zht"){ custom.language="zht"; update();location.reload();}
-        else if(ThemeLang=="ja"){ custom.language="ja"; update();location.reload();}
-        else if(ThemeLang=="en"){ custom.language="en"; update();location.reload();}
-        else{ custom.language="zh"; update();location.reload();};
-    };
+    console.log(nextAnim);
+    animationState.setAnimation(0, nextAnim, !animationQueue.length && !forceNoLoop);
 })
 .on('click',".themepack-ls", function(){
     localStorage.setItem('reload',"true");
@@ -1614,18 +1822,20 @@ $(document).on('blur', "#btnAutoTask", function(){
             if(ThemePack=="0"){ console.log('off');custom.ThemePack="off"; update();location.reload();}
             else if(ThemePack=="1"){ console.log('test');custom.ThemePack="test"; update();location.reload(); }
             else if(ThemePack=="2"){
-                if (localStorage.userTheme||momoConf.userTheme){
-                    if(localStorage.userTheme&&!momoConf.userTheme){momoConf.userTheme=JSON.parse(localStorage.userTheme);userTheme=momoConf.userTheme;}
-                    else{userTheme=momoConf.userTheme;};
-                    if(userTheme.w4!=null){
-                        console.log('user');custom.ThemePack="user";update();location.reload();nowTheme=userTheme;
-                        sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
-                        if(userTheme.舞==null){ alert(lang.initUFG) };
-                        if(userTheme.voice==null){ alert(lang.initUVO) };
+                if(localStorage.userTheme){
+                    if(custom.ver=="ver1.0"){
+                        let tempcheck=JSON.parse(localStorage.userTheme);
+                        if(tempcheck.nofgimg){ alert('code:usertheme-001\n'+lang.initUFG); };
+                        if(tempcheck.novoice){ alert('code:usertheme-002\n'+lang.initUVO); };
+                        if(tempcheck.nospine){ alert('code:usertheme-003\n'+lang.initUSP); };
+
+                        console.log('user');custom.ThemePack="test"; update();location.reload();
                     }
-                    else{ alert(lang.initUOT) };
+                    else{
+                        console.log('user');custom.ThemePack="test"; update();location.reload();
+                    };
                 }
-                else{ alert(lang.initUNU) };
+                else{ alert('code:init-001\n'+lang.initUNU); };
             }
             else{ console.log('classic');custom.ThemePack="classic";update();location.reload();};
         };
@@ -1636,17 +1846,30 @@ $(document).on('blur', "#btnAutoTask", function(){
         };
     };
 })
+.on('click',".themepack-usr",function(){
+    let userTheme = prompt(lang.menuUA+'\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21',`${localStorage.userTheme}`);
+    if (userTheme&&isJSON(userTheme)){ usTheme(userTheme,false); }
+    else if(userTheme){ alert('code:init-002\n'+lang.initUOT); }
+    else{ alert('code:init-003\n'+lang.initUNU); };
+})
+.on('click',".themelang" , function(){
+    let ThemeLang = prompt('输入 zh 使用【简体中文】；\n輸入 zht 使用【繁體中文】；\nja を入力 表示言語【日本語】；\nInput en To show in 【English】.', "zh");
+    if (ThemeLang) {
+        localStorage.setItem('reload',"true");
+        if(ThemeLang=="zh"){ custom.language="zh"; update();location.reload();}
+        else if(ThemeLang=="zht"){ custom.language="zht"; update();location.reload();}
+        else if(ThemeLang=="ja"){ custom.language="ja"; update();location.reload();}
+        else if(ThemeLang=="en"){ custom.language="en"; update();location.reload();}
+        else{ custom.language="zh"; update();location.reload();};
+    };
+})
 .on('click',".icons-size", function(){
     let IconSize = prompt(lang.iconUA, "50px");
     if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('reload',"true");update();location.reload();};
 })
-.on('click',".kanban-size", function(){
+.on('click',".kanban-size",function(){
     let KanbanSize = prompt(lang.kanbanUA, "100");
     if (KanbanSize) { custom.kanbansize = KanbanSize; localStorage.setItem('reload',"true");update();location.reload();};
-})
-.on('click',".themepack-usr", function(){
-    let userTheme = prompt(lang.menuUA+'\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21',`${localStorage.userTheme}`);
-    if (userTheme){ momoConf.userTheme=JSON.parse(userTheme); localStorage.setItem('userTheme',userTheme); update(); };
 })
 .on('click',".iconpack-switch", function(e){
     custom.useOldNames = e.target.checked;
@@ -1656,32 +1879,36 @@ $(document).on('blur', "#btnAutoTask", function(){
     custom.useThemeName = e.target.checked;
     localStorage.setItem('reload',"true");update(); location.reload();
 })
-.on('click',".themepack-showCG", function(e){
+.on('click',".themepack-showCG",function(e){
     custom.showCG = e.target.checked;
-    localStorage.setItem('reload',"true");update(); location.reload();
+    localStorage.setItem('reload',"true");update();
+    if(custom.showCG&&window.location.href.indexOf('fyg_equip.php')>-1){ getCardName();}
+    else{
+        if($('#bigcardimg').length>0){ $('#bigcardimg').remove(); $('#bigcardimg1').remove(); };
+        if($('#middlecardimg').length>0){ $('#middlecardimg').remove(); $('#middlecardimg1').remove(); $('#middlecardimg2').remove(); };
+        if($('#smallcardimg0').length>0){
+            for(let i=0;i<$(".col-sm-2.fyg_lh60").length;i++){
+                $(`#smallcardimg${i}`).remove(); $(`#smallcardimg1${i}`).remove();
+            };
+        };
+    };
 })
-.on('click',".themepack-showKB", function(e){
-    custom.showKanban = e.target.checked;
-    localStorage.setItem('reload',"true");update(); location.reload();
+.on('click',".themepack-showKB",function(e){
+    custom.showKanban = e.target.checked; localStorage.setItem('reload',"true");update(); showKanban();
 })
-.on('click',".themepack-voiceO", function(e){
-    custom.voiceO = e.target.checked;
-    update();
-    custom.voiceO?$("#themeSoundPlay").attr('src',nowTheme.voice[0]):$("#themeSoundPlay").attr('src',nowTheme.voice[1]);
-    $("#themeSoundPlay")[0].play();
+.on('click',".themepack-voiceO",function(e){
+    custom.voiceO = e.target.checked; update();
+    if(custom.voiceO){ themeVoice("on"); }else{ themeVoice("off"); };
 })
-.on('click',".themepack-cuuid", function(){
-    uuidfunc();
-})
-.on('click',".detaillogitem", function() {
-    themeIcon(); oldEqName();
-    if (custom.showCG == true) { themeFgimg(); };
-})
+.on('click',".themepack-cuuid",function(){ uuidfunc(); })
+.on('click',".detaillogitem" , function(){ themeIcon(); themePKimg(); })
 .ajaxSuccess(function(e,x){
     if(window.location.href.indexOf('fyg_index.php') != -1||window.location.href.indexOf('fyg_index.php#') == -1){
         if(!x.responseJSON){
-            themeIcon();++soundonce;
-            if(custom.showCG == true){ themeFgimg();}else if(custom.showKanban==true||custom.voiceO==true){ equipKBVO() };
+            ++soundonce;
+            if(window.location.href.indexOf('fyg_pk.php')>-1){ themePKimg(); themeIcon(); }
+            else if(window.location.href.indexOf('fyg_equip.php')>-1){ themeIcon(); getCardName(); }
+            else if(window.location.href.indexOf('fyg_beach.php')>-1){ themeIcon(); };
         }
     };
 });
@@ -1697,6 +1924,7 @@ $(document).on('change', ".stone-operation-options", function(){ beforeCloud("Gu
 .on('click',"#goxtipinfo>input[type*='checkbox']", function() { beforeCloud("Gupdater"); })
 .on('change',"#timetogoxcheckbox", function() { beforeCloud("Gupdater"); })
 .on('change',"#timetogoxtime", function() { beforeCloud("Gupdater"); })
+.on('click',"#goxtiptext", function() { localStorage.setItem('reload',"true");})
 .on('click',"#equipment_StoreExpand", function() { beforeCloud("Gupdater"); })
 .on('click',"#equipment_Expand", function() { beforeCloud("Gupdater"); })
 .on('click',"#equipment_BG", function() { beforeCloud("Gupdater"); })
